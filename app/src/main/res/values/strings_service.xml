@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="toaster_service">Toaster</string>
+    <string name="toaster_service_desc">Toaster records every toast message including package name and timestamp.</string>
+    <string name="toaster_service_header">Activate</string>
+    <string name="toaster_service_message">The app has to be activated as an accessibily service. Do you want to activate it now?</string>
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="demo_message">Das ist ein Toast.</string>
+    <string name="demo_package">org.mars3142.android.toaster</string>
+    <string name="card_background_color">Card Hintergrundfarbe</string>
+    <string name="package_icon">Package Icon</string>
+
+</resources>

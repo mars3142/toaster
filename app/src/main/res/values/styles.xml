@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionOverflowButtonStyle">@style/mars3142.ActionButton.Overflow</item>
+    </style>
+
+    <style name="mars3142.ActionButton.Overflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_action_overflow</item>
+    </style>
+
+</resources>

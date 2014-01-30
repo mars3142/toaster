@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Space
+        android:id="@+id/empty"
+        android:layout_width="40dp"
+        android:layout_height="@dimen/card_base_empty_height" />
+
+    <ImageView
+        android:id="@+id/color"
+        android:background="@drawable/card_color"
+        android:contentDescription="@string/card_background_color"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/card_base_empty_height"
+        android:focusable="false"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/empty" />
+
+    <ImageView
+        android:id="@+id/packageIcon"
+        android:contentDescription="@string/package_icon"
+        android:layout_width="@android:dimen/notification_large_icon_width"
+        android:layout_height="@android:dimen/notification_large_icon_height"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/message"
+        android:text="@string/demo_message"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/packageIcon"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/packageName"
+        android:layout_gravity="right"
+        android:text="@string/demo_package"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignBottom="@+id/color"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

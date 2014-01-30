@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <drawable name="card_color">@android:color/holo_orange_light</drawable>
+
+</resources>

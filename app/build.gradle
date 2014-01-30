@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.8.+'
+    }
+}
+apply plugin: 'android'
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.1"
+
+    signingConfigs {
+        release {
+            storeFile file(System.getenv("KEY_STORE"))
+            storePassword System.getenv("STORE_PW")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PW")
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 19
+        versionCode 3
+        versionName "0.2 Alpha"
+    }
+
+    buildTypes {
+        release {
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:appcompat-v7:19.0.1'
+    compile 'com.github.gabrielemariotti.cards:library:+'
+    compile 'se.emilsjolander:stickylistheaders:+'
+}
