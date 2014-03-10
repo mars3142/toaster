@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
     <drawable name="card_color">@android:color/holo_orange_light</drawable>
+
+    <drawable name="nav_row">#C8C8C8</drawable>
+
+    <drawable name="widget_header_background">#D4CFD3</drawable>
+    <drawable name="widget_row_background">#B7B7B7</drawable>
+
+    <drawable name="actionbar">#DDDDDD</drawable>
+    <drawable name="text_color_dark">#585858</drawable>
+    <drawable name="text_color_light">#777777</drawable>
+    <drawable name="text_color_toast">#FA6367</drawable>
+    <drawable name="text_color_time">#FFFFFF</drawable>
+
+    <drawable name="activity_background">#DDDDDD</drawable>
+    <drawable name="menu_background">#EFEFEF</drawable>
 
 </resources>

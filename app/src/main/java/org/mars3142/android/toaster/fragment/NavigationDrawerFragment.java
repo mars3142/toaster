@@ -23,15 +23,18 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import org.mars3142.android.toaster.R;
-import org.mars3142.android.toaster.adapter.NavigationDrawerArrayAdapter;
+import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
-import org.mars3142.android.toaster.helper.PackageHelper;
+import org.mars3142.android.toaster.comparator.ToastCardComparator;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class NavigationDrawerFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final String TAG = NavigationDrawerFragment.class.getSimpleName();
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
@@ -73,7 +76,8 @@ public class NavigationDrawerFragment extends ListFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        mDrawerListView = (ListView) inflater.inflate(R.layout.navigation_drawer, container, false);
+        getLoaderManager().restartLoader(DATA_LOADER, null, NavigationDrawerFragment.this);
         return mDrawerListView;
     }
 
@@ -86,7 +90,6 @@ public class NavigationDrawerFragment extends ListFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getLoaderManager().restartLoader(DATA_LOADER, null, this);
         selectItem(mCurrentSelectedPosition);
     }
 
@@ -154,18 +157,17 @@ public class NavigationDrawerFragment extends ListFragment
                 mNavList.add(emptyCard);
 
                 data.moveToFirst();
-                while (data.moveToNext()) {
+                do {
                     ToastCard packageCard = new ToastCard(getActionBar().getThemedContext());
                     packageCard.packageName = data.getString(data.getColumnIndex(ToasterTable.PACKAGE));
-                    packageCard.appName = PackageHelper.getAppName(getActionBar().getThemedContext(), packageCard.packageName);
-                    if (packageCard.appName == null || packageCard.appName.length() == 0) {
-                        packageCard.appName = packageCard.packageName;
+                    if (packageCard.packageName != null) {
+                        packageCard.loadData();
+                        mNavList.add(packageCard);
                     }
-                    packageCard.packageIcon = PackageHelper.getIconFromPackageName(getActionBar().getThemedContext(), packageCard.packageName);
-                    mNavList.add(packageCard);
-                }
+                } while (data.moveToNext());
+                Collections.sort(mNavList, new ToastCardComparator());
 
-                mDrawerListView.setAdapter(new NavigationDrawerArrayAdapter(getActionBar().getThemedContext(), mNavList));
+                mDrawerListView.setAdapter(new ToastArrayAdapter(getActionBar().getThemedContext(), R.layout.navigation_drawer_row, mNavList));
                 mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
                 break;
 
@@ -212,11 +214,11 @@ public class NavigationDrawerFragment extends ListFragment
         actionBar.setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
-                getActivity(),
-                mDrawerLayout,
-                R.drawable.ic_navigation_drawer,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
+            getActivity(),
+            mDrawerLayout,
+            R.drawable.ic_navigation_drawer,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         ) {
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -225,6 +227,7 @@ public class NavigationDrawerFragment extends ListFragment
                     return;
                 }
 
+                getLoaderManager().restartLoader(DATA_LOADER, null, NavigationDrawerFragment.this);
                 getActivity().invalidateOptionsMenu();
             }
 
@@ -242,7 +245,8 @@ public class NavigationDrawerFragment extends ListFragment
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
-                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getLoaderManager().restartLoader(DATA_LOADER, null, NavigationDrawerFragment.this);
+                getActivity().invalidateOptionsMenu();
             }
         };
 

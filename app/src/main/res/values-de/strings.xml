@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
     <string name="app_name">Toaster</string>
     <string name="all_data">Alle Apps</string>
-
     <string name="action_delete">Löschen</string>
     <string name="action_settings">Einstellungen</string>
-
     <string name="delete_question">Möchtest du alle sichtbaren Einträge löschen?</string>
 
 </resources>

@@ -8,6 +8,8 @@ import android.provider.Settings;
 public class AccessibilityServiceListener
         implements DialogInterface.OnClickListener {
 
+    private final static String TAG = AccessibilityServiceListener.class.getSimpleName();
+
     private Context context;
 
     public AccessibilityServiceListener(Context context) {

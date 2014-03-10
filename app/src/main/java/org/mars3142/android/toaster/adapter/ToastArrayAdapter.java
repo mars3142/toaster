@@ -13,13 +13,13 @@ import org.mars3142.android.toaster.card.ToastCard;
 
 import java.util.ArrayList;
 
-public class NavigationDrawerArrayAdapter extends ArrayAdapter<ToastCard> {
+public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {
 
     private final Context mContext;
     private final ArrayList<ToastCard> mCards;
 
-    public NavigationDrawerArrayAdapter(Context context, ArrayList<ToastCard> cards) {
-        super(context, R.layout.fragment_navigation_drawer_row, cards);
+    public ToastArrayAdapter(Context context, int resource, ArrayList<ToastCard> cards) {
+        super(context, resource, cards);
 
         mContext = context;
         mCards = cards;
@@ -28,13 +28,17 @@ public class NavigationDrawerArrayAdapter extends ArrayAdapter<ToastCard> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.fragment_navigation_drawer_row, parent, false);
+        View rowView = inflater.inflate(R.layout.navigation_drawer_row, parent, false);
 
         TextView packageName = (TextView) rowView.findViewById(R.id.packageName);
-        packageName.setText(mCards.get(position).appName);
+        if (packageName != null) {
+            packageName.setText(mCards.get(position).appName);
+        }
 
         ImageView packageIcon = (ImageView) rowView.findViewById(R.id.packageIcon);
-        packageIcon.setImageDrawable(mCards.get(position).packageIcon);
+        if (packageIcon != null) {
+            packageIcon.setImageDrawable(mCards.get(position).packageIcon);
+        }
 
         return rowView;
     }

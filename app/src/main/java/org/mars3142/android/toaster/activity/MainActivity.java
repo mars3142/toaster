@@ -2,9 +2,11 @@ package org.mars3142.android.toaster.activity;
 
 import android.app.ActionBar;
 import android.app.AlertDialog.Builder;
+import android.app.ApplicationErrorReport;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
@@ -14,18 +16,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.fragment.NavigationDrawerFragment;
 import org.mars3142.android.toaster.fragment.ToasterFragment;
 import org.mars3142.android.toaster.helper.PackageHelper;
+import org.mars3142.android.toaster.helper.StrictModeHelpter;
 import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
 import org.mars3142.android.toaster.listener.DeleteListener;
 import org.mars3142.android.toaster.table.ToasterTable;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    private final static String TAG = "MainActivity";
+    private final static String TAG = MainActivity.class.getSimpleName();
+
     private final static String PACKAGE_NAME = "packagename";
 
     private NavigationDrawerFragment mNavDrawerFragment;
@@ -35,6 +43,10 @@ public class MainActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (BuildConfig.DEBUG) {
+            StrictModeHelpter.setStrictMode();
+        }
 
         setContentView(R.layout.activity_main);
 
@@ -58,12 +70,15 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        int menuRes;
         if (!mNavDrawerFragment.isDrawerOpen()) {
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-            return true;
+            menuRes = R.menu.nav_drawer_closed;
+        } else {
+            menuRes = R.menu.nav_drawer_open;
         }
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(menuRes, menu);
+        restoreActionBar();
+        return true;
     }
 
     @Override
@@ -75,6 +90,7 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.action_delete:
                 DeleteListener deleteListener;
@@ -90,6 +106,14 @@ public class MainActivity extends FragmentActivity
                 builder.setPositiveButton(android.R.string.ok, deleteListener);
                 builder.setNegativeButton(android.R.string.cancel, null);
                 builder.create().show();
+                return true;
+
+            case R.id.action_settings:
+                intent = new Intent(this, FilterActivity.class);
+                //TODO: Fix me
+                if (BuildConfig.DEBUG) {
+                    startActivity(intent);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -131,13 +155,12 @@ public class MainActivity extends FragmentActivity
     private boolean isAccessibilitySettingsOn(Context mContext) {
         int accessibilityEnabled = 0;
         final String service = "org.mars3142.android.toaster/org.mars3142.android.toaster.service.ToasterService";
-        boolean accessibilityFound = false;
 
         try {
             accessibilityEnabled = Settings.Secure.getInt(mContext.getApplicationContext().getContentResolver(),
                     android.provider.Settings.Secure.ACCESSIBILITY_ENABLED);
-        } catch (Settings.SettingNotFoundException e) {
-            Log.e(TAG, "Error finding setting, default accessibility to not found: " + e.getMessage());
+        } catch (Settings.SettingNotFoundException ex) {
+            Log.e(TAG, "Error finding setting, default accessibility to not found: " + ex.getMessage());
         }
         TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
 
@@ -156,6 +179,6 @@ public class MainActivity extends FragmentActivity
             }
         }
 
-        return accessibilityFound;
+        return false;
     }
 }

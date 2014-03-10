@@ -8,6 +8,8 @@ import android.net.Uri;
 public class DeleteListener
         implements DialogInterface.OnClickListener {
 
+    private final static String TAG = DeleteListener.class.getSimpleName();
+
     private final Context mContext;
     private final Uri mUri;
     private final String mWhere;

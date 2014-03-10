@@ -4,16 +4,27 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.8.+'
+        classpath 'com.android.tools.build:gradle:0.9.+'
     }
 }
 apply plugin: 'android'
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+    maven {
+        url "https://github.com/novoda/public-mvn-repo/raw/master/releases"
+    }
 }
 
 android {
+    def versionMajor = 0
+    def versionMinor = 4
+    def versionPatch = 0
+    def versionBuild = 2
+
     compileSdkVersion 19
     buildToolsVersion "19.0.1"
 
@@ -29,8 +40,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 19
-        versionCode 3
-        versionName "0.2 Alpha"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
 
     buildTypes {
@@ -38,6 +49,10 @@ android {
             runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                def file = variant.outputFile
+                variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionCode + ".apk"))
+            }
         }
     }
 }
@@ -45,6 +60,6 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:19.0.1'
     compile 'com.android.support:appcompat-v7:19.0.1'
-    compile 'com.github.gabrielemariotti.cards:library:+'
-    compile 'se.emilsjolander:stickylistheaders:+'
+    compile 'com.github.gabrielemariotti.cards:library:1+'
+    compile 'com.novoda:sqliteprovider-core:1+'
 }

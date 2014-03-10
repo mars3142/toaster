@@ -1,11 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light">
-        <item name="android:actionOverflowButtonStyle">@style/mars3142.ActionButton.Overflow</item>
+        <!--item name="android:actionBarStyle">@style/mars3142.ActionBarStyle</item-->
+        <item name="android:actionOverflowButtonStyle">@style/mars3142.ActionOverflowButtonStyle
+        </item>
+        <!--item name="android:activatedBackgroundIndicator">@drawable/list_activated_background</item-->
     </style>
 
-    <style name="mars3142.ActionButton.Overflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
+    <style name="mars3142.ActionBarStyle" parent="android:Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/actionbar</item>
+        <item name="android:titleTextStyle">@style/mars3142.ActionBarStyle.TitleTextStyle</item>
+    </style>
+
+    <style name="mars3142.ActionBarStyle.TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@drawable/text_color_light</item>
+    </style>
+
+    <style name="mars3142.ActionOverflowButtonStyle" parent="android:style/Widget.Holo.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_action_overflow</item>
     </style>
 

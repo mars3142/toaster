@@ -1,33 +1,32 @@
 package org.mars3142.android.toaster.provider;
 
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
 import org.mars3142.android.toaster.BuildConfig;
+import org.mars3142.android.toaster.fragment.ToasterFragment;
+import org.mars3142.android.toaster.helper.DatabaseHelper;
 import org.mars3142.android.toaster.table.FilterTable;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.logging.Filter;
 
 public class ToasterProvider extends ContentProvider {
 
+    private final String TAG = ToasterProvider.class.getSimpleName();
+
     public static final String AUTHORITY = "org.mars3142.android.toaster.provider";
-
-    private final String TAG = this.getClass().getSimpleName();
-
-    private static final String DATABASE_NAME = "database.db3";
-    private static final int DATABASE_VERSION = 1;
 
     private static final int TOASTER = 1;
     private static final int TOASTER_ID = 2;
@@ -52,59 +51,29 @@ public class ToasterProvider extends ContentProvider {
         mUriMatcher.addURI(AUTHORITY, "filter/#", FILTER_ID);
 
         toasterMap = new HashMap<String, String>();
-        toasterMap.put(ToasterTable.ID, ToasterTable.ID);
+        toasterMap.put(ToasterTable._ID, ToasterTable._ID);
         toasterMap.put(ToasterTable.TIMESTAMP, ToasterTable.TIMESTAMP);
         toasterMap.put(ToasterTable.MESSAGE, ToasterTable.MESSAGE);
         toasterMap.put(ToasterTable.PACKAGE, ToasterTable.PACKAGE);
+        toasterMap.put(ToasterTable.VERSIONCODE, ToasterTable.VERSIONCODE);
+        toasterMap.put(ToasterTable.VERSIONNAME, ToasterTable.VERSIONNAME);
+        toasterMap.put(ToasterTable._COUNT, ToasterTable._COUNT);
 
         packageMap = new HashMap<String, String>();
         packageMap.put(ToasterTable.PACKAGE, ToasterTable.PACKAGE);
 
         filterMap = new HashMap<String, String>();
-        filterMap.put(FilterTable.ID, FilterTable.ID);
-        filterMap.put(FilterTable.FILTER, FilterTable.FILTER);
+        filterMap.put(FilterTable._ID, FilterTable._ID);
+        filterMap.put(FilterTable.PACKAGE, FilterTable.PACKAGE);
+        filterMap.put(FilterTable.EXCL_INCL, FilterTable.EXCL_INCL);
+        filterMap.put(FilterTable._COUNT, FilterTable._COUNT);
     }
 
-    private static class DatabaseHelper extends SQLiteOpenHelper {
-
-        private final String TAG = this.getClass().getSimpleName();
-
-        public DatabaseHelper(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE " + ToasterTable.TABLENAME +
-                    " (" +
-                    ToasterTable.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    ToasterTable.TIMESTAMP + " LONG, " +
-                    ToasterTable.PACKAGE + " TEXT, " +
-                    ToasterTable.MESSAGE + " TEXT" +
-                    ");");
-
-            db.execSQL("CREATE TABLE " + FilterTable.TABLENAME +
-                    " (" +
-                    FilterTable.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    FilterTable.FILTER + " TEXT" +
-                    ");");
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            if (BuildConfig.DEBUG) {
-                Log.w(TAG, String.format("Upgrading database from version %s to %s", oldVersion, newVersion));
-            }
-            db.execSQL("DROP TABLENAME IF EXISTS " + ToasterTable.TABLENAME);
-            db.execSQL("DROP TABLENAME IF EXISTS " + FilterTable.TABLENAME);
-            onCreate(db);
-        }
-    }
 
     @Override
     public boolean onCreate() {
         dbHelper = new DatabaseHelper(getContext());
-        return false;
+        return true;
     }
 
     @Override
@@ -130,7 +99,7 @@ public class ToasterProvider extends ContentProvider {
                 id = uri.getLastPathSegment();
                 queryBuilder.setTables(ToasterTable.TABLENAME);
                 queryBuilder.setProjectionMap(toasterMap);
-                queryBuilder.appendWhere(ToasterTable.ID + " = " + id);
+                queryBuilder.appendWhere(ToasterTable._ID + " = " + id);
                 break;
 
             case PACKAGE:
@@ -146,7 +115,7 @@ public class ToasterProvider extends ContentProvider {
                 queryBuilder.setTables(FilterTable.TABLENAME);
                 queryBuilder.setProjectionMap(filterMap);
                 if (sortOrder == null) {
-                    sortOrder = FilterTable.FILTER + " ASC ";
+                    sortOrder = FilterTable.PACKAGE + " ASC ";
                 }
                 break;
 
@@ -154,7 +123,7 @@ public class ToasterProvider extends ContentProvider {
                 id = uri.getLastPathSegment();
                 queryBuilder.setTables(FilterTable.TABLENAME);
                 queryBuilder.setProjectionMap(filterMap);
-                queryBuilder.appendWhere(FilterTable.ID + " = " + id);
+                queryBuilder.appendWhere(FilterTable._ID + " = " + id);
                 break;
 
             default:
@@ -230,9 +199,8 @@ public class ToasterProvider extends ContentProvider {
             rowId = database.insert(tableName, null, values);
         }
         if (rowId > 0) {
-            Uri lessonUri = ContentUris.withAppendedId(contentUri, rowId);
             getContext().getContentResolver().notifyChange(uri, null);
-            return lessonUri;
+            return ContentUris.withAppendedId(contentUri, rowId);
         }
         throw new SQLException("Failed to insert row into " + uri);
     }
@@ -255,7 +223,7 @@ public class ToasterProvider extends ContentProvider {
 
                 case TOASTER_ID:
                     id = uri.getLastPathSegment();
-                    finalWhere = ToasterTable.ID + " = " + id;
+                    finalWhere = ToasterTable._ID + " = " + id;
                     if (selection != null) {
                         finalWhere += " AND " + selection;
                     }
@@ -268,7 +236,7 @@ public class ToasterProvider extends ContentProvider {
 
                 case FILTER_ID:
                     id = uri.getLastPathSegment();
-                    finalWhere = FilterTable.ID + " = " + id;
+                    finalWhere = FilterTable._ID + " = " + id;
                     if (selection != null) {
                         finalWhere += " AND " + selection;
                     }
@@ -302,7 +270,7 @@ public class ToasterProvider extends ContentProvider {
 
                 case TOASTER_ID:
                     id = uri.getLastPathSegment();
-                    finalWhere = ToasterTable.ID + " = " + id;
+                    finalWhere = ToasterTable._ID + " = " + id;
                     if (selection != null) {
                         finalWhere += " AND " + selection;
                     }
@@ -315,7 +283,7 @@ public class ToasterProvider extends ContentProvider {
 
                 case FILTER_ID:
                     id = uri.getLastPathSegment();
-                    finalWhere = FilterTable.ID + " = " + id;
+                    finalWhere = FilterTable._ID + " = " + id;
                     if (selection != null) {
                         finalWhere += " AND " + selection;
                     }

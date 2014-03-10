@@ -5,11 +5,18 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
 
 public class PackageHelper {
+
+    private static String TAG = PackageHelper.class.getSimpleName();
+
     public static String getAppName(Context context, String packageName) {
         try {
             PackageManager pm = context.getPackageManager();
@@ -33,9 +40,9 @@ public class PackageHelper {
 
                 for (int displayMetric : displayMetrics) {
                     try {
-                        Drawable d = otherAppCtx.getResources().getDrawableForDensity(pi.applicationInfo.icon, displayMetric);
-                        if (d != null) {
-                            return d;
+                        Drawable drawable = otherAppCtx.getResources().getDrawableForDensity(pi.applicationInfo.icon, displayMetric);
+                        if (drawable != null) {
+                            return drawable;
                         }
                     } catch (Resources.NotFoundException e) {
                         continue;
@@ -46,12 +53,28 @@ public class PackageHelper {
             }
         }
 
-        ApplicationInfo appInfo = null;
+        ApplicationInfo appInfo;
         try {
             appInfo = pm.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
             return appInfo.loadIcon(pm);
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
+    }
+
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        if (drawable == null) {
+            return null;
+        }
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 }

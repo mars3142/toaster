@@ -21,7 +21,9 @@ import it.gmariotti.cardslib.library.view.CardListView;
 public class ToasterFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public static String PACKAGE_FILTER = "packageFilter";
+    private final static String TAG = ToasterFragment.class.getSimpleName();
+
+    public final static String PACKAGE_FILTER = "packageFilter";
 
     private final int DATA_LOADER_ALL = 0;
     private final int DATA_LOADER_FILTERED = 1;
@@ -41,7 +43,7 @@ public class ToasterFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_toaster, container, false);
+        return inflater.inflate(R.layout.toaster, container, false);
     }
 
     @Override

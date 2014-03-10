@@ -1,22 +1,65 @@
 package org.mars3142.android.toaster.table;
 
 import android.content.ContentResolver;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
 import org.mars3142.android.toaster.provider.ToasterProvider;
 
-public class ToasterTable {
+public class ToasterTable
+        implements BaseColumns {
+
+    private final static String TAG = ToasterTable.class.getSimpleName();
+
     public final static String TABLENAME = "toaster";
 
-    public final static String ID = BaseColumns._ID;
+    public final static String TIMESTAMP = "timestamp";
     public final static String PACKAGE = "package";
     public final static String MESSAGE = "message";
-    public final static String TIMESTAMP = "timestamp";
+    public final static String VERSIONCODE = "version_code";
+    public final static String VERSIONNAME = "version_name";
 
     public static final Uri TOASTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/toaster");
     public static final Uri PACKAGE_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/packages");
 
     public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.toaster";
     public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.toaster";
+
+    public static void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + TABLENAME +
+                " (" +
+                _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                TIMESTAMP + " LONG, " +
+                PACKAGE + " TEXT, " +
+                MESSAGE + " TEXT, " +
+                VERSIONCODE + " INTEGER, " +
+                VERSIONNAME + " TEXT " +
+                ");");
+    }
+
+    public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (newVersion > oldVersion) {
+            switch (oldVersion) {
+                case 1:
+                    try {
+                        db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + VERSIONCODE + " INTEGER;");
+                        db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + VERSIONNAME + " TEXT;");
+                    }
+                    catch (SQLException ex) {
+                        // upgrade already done
+                    }
+                    break;
+
+                default:
+                    db.execSQL("DROP TABLE IF EXISTS " + TABLENAME);
+                    onCreate(db);
+            }
+        }
+    }
+
+    public static void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // nothing
+    }
 }

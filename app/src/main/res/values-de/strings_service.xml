@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
     <string name="toaster_service">Toaster</string>
-    <string name="toaster_service_desc">Toaster speichert jede Toast Nachricht mit Packagename und Zeitstempel.</string>
+    <string name="toaster_service_desc">Toaster speichert jede Toast Nachricht mit App-Name und Zeitstempel.</string>
     <string name="toaster_service_header">Aktivieren</string>
     <string name="toaster_service_message">Die App muss als Bedienungshilfe aktiviert werden. Möchtest du es jetzt aktivieren?</string>
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="mars3142.ActionBarStyle.TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@drawable/text_color_light</item>
+    </style>
+
+</resources>
