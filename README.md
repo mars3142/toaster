@@ -7,5 +7,5 @@ It has to be activated as accessibility service.
 Builds
 ======
 
-[![Build Status master](https://travis-ci.org/mars3142/toaster.svg?branch=master)](https://travis-ci.org/mars3142/master)
+[![Build Status master](https://travis-ci.org/mars3142/toaster.svg?branch=master)](https://travis-ci.org/mars3142/toaster)
 [![Build Status develop](https://travis-ci.org/mars3142/toaster.svg?branch=develop)](https://travis-ci.org/mars3142/toaster)
