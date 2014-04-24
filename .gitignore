@@ -4,6 +4,7 @@
 .DS_Store
 build/
 /.project
+gradle-app.setting
 keystore.properties
 *.iml
 *.cmd
