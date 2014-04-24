@@ -22,9 +22,7 @@ public class ToasterFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final static String TAG = ToasterFragment.class.getSimpleName();
-
-    public final static String PACKAGE_FILTER = "packageFilter";
-
+    private final static String PACKAGE_FILTER = "packageFilter";
     private final int DATA_LOADER_ALL = 0;
     private final int DATA_LOADER_FILTERED = 1;
 
@@ -71,7 +69,7 @@ public class ToasterFragment extends Fragment
                 return new CursorLoader(getActivity(), ToasterTable.TOASTER_URI, null, null, null, null);
 
             case DATA_LOADER_FILTERED:
-                return new CursorLoader(getActivity(), ToasterTable.TOASTER_URI, null, ToasterTable.PACKAGE + " = ?", new String[]{getArguments().getString(PACKAGE_FILTER)}, null);
+                return new CursorLoader(getActivity(), ToasterTable.TOASTER_URI, null, ToasterTable.PACKAGE + " = ?", new String[]{ getArguments().getString(PACKAGE_FILTER) }, null);
 
             default:
                 throw new IllegalArgumentException();

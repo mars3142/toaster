@@ -10,7 +10,7 @@ public class AccessibilityServiceListener
 
     private final static String TAG = AccessibilityServiceListener.class.getSimpleName();
 
-    private Context context;
+    private final Context context;
 
     public AccessibilityServiceListener(Context context) {
         this.context = context;

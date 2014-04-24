@@ -18,6 +18,9 @@ public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {
     private final Context mContext;
     private final ArrayList<ToastCard> mCards;
 
+    public ToastArrayAdapter(Context context, ArrayList<ToastCard> cards) {
+        this(context, R.layout.navigation_drawer_row, cards);
+    }
     public ToastArrayAdapter(Context context, int resource, ArrayList<ToastCard> cards) {
         super(context, resource, cards);
 

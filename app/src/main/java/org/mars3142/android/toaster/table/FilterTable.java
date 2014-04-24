@@ -8,22 +8,17 @@ import android.provider.BaseColumns;
 
 import org.mars3142.android.toaster.provider.ToasterProvider;
 
-import java.io.FileFilter;
-
 public class FilterTable
         implements BaseColumns {
 
     private final static String TAG = FilterTable.class.getSimpleName();
 
     public final static String TABLENAME = "filter";
-
     public final static String PACKAGE = "package";
     public final static String EXCL_INCL = "excl_incl";
-
-    public static final Uri FILTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/filter");
-
-    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.filter";
-    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.filter";
+    public final static Uri FILTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/filter");
+    public final static String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.filter";
+    public final static String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.filter";
 
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLENAME +
@@ -41,8 +36,7 @@ public class FilterTable
                     try {
                         db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + PACKAGE + " TEXT;");
                         db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + EXCL_INCL + " INTEGER;");
-                    }
-                    catch (SQLException ex) {
+                    } catch (SQLException ex) {
                         // upgrade already gone
                     }
                     break;

@@ -1,7 +1,6 @@
 package org.mars3142.android.toaster.service;
 
 import android.accessibilityservice.AccessibilityService;
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Notification;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -10,19 +9,19 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
+import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.table.ToasterTable;
-import org.mars3142.android.toaster.widget.Widget;
 
 import java.util.Calendar;
 
 public class ToasterService extends AccessibilityService {
 
-    private static String TAG = ToasterService.class.getSimpleName();
+    private final static String TAG = ToasterService.class.getSimpleName();
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
        if (event.getEventType() != AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
-           Log.d("ToasterService", "Unexpected event type");
+           Log.d(TAG, "Unexpected event type");
            return; // event is not a notification
        }
 
@@ -30,7 +29,7 @@ public class ToasterService extends AccessibilityService {
         long timestamp = calendar.getTimeInMillis();
         String sourcePackageName = (String) event.getPackageName();
         String message = "";
-        for (CharSequence text: event.getText()) {
+        for (CharSequence text : event.getText()) {
             message += text + "\n";
         }
         if (message.length() > 0) {

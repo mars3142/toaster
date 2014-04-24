@@ -2,7 +2,6 @@ package org.mars3142.android.toaster.activity;
 
 import android.app.ActionBar;
 import android.app.AlertDialog.Builder;
-import android.app.ApplicationErrorReport;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -25,9 +24,6 @@ import org.mars3142.android.toaster.helper.StrictModeHelpter;
 import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
 import org.mars3142.android.toaster.listener.DeleteListener;
 import org.mars3142.android.toaster.table.ToasterTable;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -92,12 +88,17 @@ public class MainActivity extends FragmentActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
+            case R.id.action_blacklist:
+                intent = new Intent(this, FilterActivity.class);
+                startActivity(intent);
+                return true;
+
             case R.id.action_delete:
                 DeleteListener deleteListener;
                 if (mPackageName.length() == 0) {
-                    deleteListener = new DeleteListener(this, ToasterTable.TOASTER_URI);
+                    deleteListener = new DeleteListener(this);
                 } else {
-                    deleteListener = new DeleteListener(this, ToasterTable.TOASTER_URI, ToasterTable.PACKAGE + " = ?", new String[]{mPackageName});
+                    deleteListener = new DeleteListener(this, ToasterTable.PACKAGE + " = ?", new String[]{mPackageName});
                 }
                 Builder builder = new Builder(this);
                 builder.setTitle(R.string.action_delete);
@@ -109,11 +110,6 @@ public class MainActivity extends FragmentActivity
                 return true;
 
             case R.id.action_settings:
-                intent = new Intent(this, FilterActivity.class);
-                //TODO: Fix me
-                if (BuildConfig.DEBUG) {
-                    startActivity(intent);
-                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -168,10 +164,9 @@ public class MainActivity extends FragmentActivity
             String settingValue = Settings.Secure.getString(mContext.getApplicationContext().getContentResolver(),
                     Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
             if (settingValue != null) {
-                TextUtils.SimpleStringSplitter splitter = mStringColonSplitter;
-                splitter.setString(settingValue);
-                while (splitter.hasNext()) {
-                    String serviceName = splitter.next();
+                mStringColonSplitter.setString(settingValue);
+                while (mStringColonSplitter.hasNext()) {
+                    String serviceName = mStringColonSplitter.next();
                     if (serviceName.equalsIgnoreCase(service)) {
                         return true;
                     }

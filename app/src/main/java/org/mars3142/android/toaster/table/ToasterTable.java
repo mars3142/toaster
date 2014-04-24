@@ -14,18 +14,15 @@ public class ToasterTable
     private final static String TAG = ToasterTable.class.getSimpleName();
 
     public final static String TABLENAME = "toaster";
-
     public final static String TIMESTAMP = "timestamp";
     public final static String PACKAGE = "package";
     public final static String MESSAGE = "message";
     public final static String VERSIONCODE = "version_code";
     public final static String VERSIONNAME = "version_name";
-
-    public static final Uri TOASTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/toaster");
-    public static final Uri PACKAGE_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/packages");
-
-    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.toaster";
-    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.toaster";
+    public final static Uri TOASTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/toaster");
+    public final static Uri PACKAGE_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/packages");
+    public final static String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.toaster";
+    public final static String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.toaster";
 
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLENAME +
@@ -46,8 +43,7 @@ public class ToasterTable
                     try {
                         db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + VERSIONCODE + " INTEGER;");
                         db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + VERSIONNAME + " TEXT;");
-                    }
-                    catch (SQLException ex) {
+                    } catch (SQLException ex) {
                         // upgrade already done
                     }
                     break;

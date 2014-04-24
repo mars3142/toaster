@@ -14,10 +14,10 @@
 
     <fragment
         android:id="@+id/navigation_drawer"
+        android:name="org.mars3142.android.toaster.fragment.NavigationDrawerFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:name="org.mars3142.android.toaster.fragment.NavigationDrawerFragment"
         tools:layout="@layout/navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

@@ -15,7 +15,7 @@ import android.util.DisplayMetrics;
 
 public class PackageHelper {
 
-    private static String TAG = PackageHelper.class.getSimpleName();
+    private final static String TAG = PackageHelper.class.getSimpleName();
 
     public static String getAppName(Context context, String packageName) {
         try {

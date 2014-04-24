@@ -1,23 +1,4 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
-    }
-}
 apply plugin: 'android'
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-    }
-    maven {
-        url "https://github.com/novoda/public-mvn-repo/raw/master/releases"
-    }
-}
 
 android {
     def versionMajor = 0
@@ -26,14 +7,19 @@ android {
     def versionBuild = 2
 
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.0.3"
 
     signingConfigs {
-        release {
-            storeFile file(System.getenv("KEY_STORE"))
-            storePassword System.getenv("STORE_PW")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PW")
+        mars3142 {
+            def Properties localProps = new Properties()
+            localProps.load(new FileInputStream(file('../local.properties')))
+            def Properties keyProps = new Properties()
+            assert localProps['keystore.props.file'];
+            keyProps.load(new FileInputStream(file(localProps['keystore.props.file'])))
+            storeFile file(keyProps["store"])
+            keyAlias keyProps["alias"]
+            storePassword keyProps["storePass"]
+            keyPassword keyProps["pass"]
         }
     }
 
@@ -45,21 +31,24 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.mars3142
+        }
         release {
             runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.release
-            applicationVariants.all { variant ->
-                def file = variant.outputFile
-                variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionCode + ".apk"))
-            }
+            signingConfig signingConfigs.mars3142
         }
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.1'
-    compile 'com.android.support:appcompat-v7:19.0.1'
-    compile 'com.github.gabrielemariotti.cards:library:1+'
-    compile 'com.novoda:sqliteprovider-core:1+'
+    // from google
+    // compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:appcompat-v7:+'
+    // compile 'com.google.android.gms:play-services:+'
+
+    // card library
+    compile 'com.github.gabrielemariotti.cards:library:+'
+    compile 'com.github.gabrielemariotti.cards:library-extra:+'
 }

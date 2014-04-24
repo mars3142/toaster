@@ -3,8 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/widget_margin"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/widget_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +16,15 @@
             android:layout_width="@dimen/icon_size_small"
             android:layout_height="@dimen/icon_size_small"
             android:layout_margin="10dp"
+            android:contentDescription="@string/app_icon"
             android:src="@drawable/ic_launcher" />
 
         <TextView
-            android:text="@string/latest_toasts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/latest_toasts"
             android:textColor="@drawable/text_color_dark" />
 
     </LinearLayout>

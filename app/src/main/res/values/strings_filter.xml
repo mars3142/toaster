@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="filter_activity">Package filter</string>
     <string name="package_hint">org.company.appname</string>
+    <string name="button_new">New</string>
 
 </resources>

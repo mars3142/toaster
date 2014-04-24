@@ -13,8 +13,8 @@ public class PackageArrayAdapter extends ArrayAdapter<String> {
 
     private final static String TAG = PackageArrayAdapter.class.getSimpleName();
 
-    private Context mContext;
-    private String[] mPackages;
+    private final Context mContext;
+    private final String[] mPackages;
 
     public PackageArrayAdapter(Context context, int resource, String[] packages) {
         super(context, resource, packages);

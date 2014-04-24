@@ -1,7 +1,6 @@
 package org.mars3142.android.toaster.provider;
 
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -13,32 +12,27 @@ import android.net.Uri;
 import android.util.Log;
 
 import org.mars3142.android.toaster.BuildConfig;
-import org.mars3142.android.toaster.fragment.ToasterFragment;
 import org.mars3142.android.toaster.helper.DatabaseHelper;
 import org.mars3142.android.toaster.table.FilterTable;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.logging.Filter;
 
 public class ToasterProvider extends ContentProvider {
 
-    private final String TAG = ToasterProvider.class.getSimpleName();
+    public final static String AUTHORITY = "org.mars3142.android.toaster.provider";
 
-    public static final String AUTHORITY = "org.mars3142.android.toaster.provider";
-
-    private static final int TOASTER = 1;
-    private static final int TOASTER_ID = 2;
-    private static final int PACKAGE = 3;
-    private static final int FILTER = 4;
-    private static final int FILTER_ID = 5;
-
-    private static final HashMap<String, String> toasterMap;
-    private static final HashMap<String, String> packageMap;
-    private static final HashMap<String, String> filterMap;
-
-    private static final UriMatcher mUriMatcher;
+    private final static String TAG = ToasterProvider.class.getSimpleName();
+    private final static int TOASTER = 1;
+    private final static int TOASTER_ID = 2;
+    private final static int PACKAGE = 3;
+    private final static int FILTER = 4;
+    private final static int FILTER_ID = 5;
+    private final static HashMap<String, String> toasterMap;
+    private final static HashMap<String, String> packageMap;
+    private final static HashMap<String, String> filterMap;
+    private final static UriMatcher mUriMatcher;
 
     private DatabaseHelper dbHelper;
 

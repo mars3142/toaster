@@ -34,10 +34,10 @@ import java.util.Collections;
 public class NavigationDrawerFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final String TAG = NavigationDrawerFragment.class.getSimpleName();
+    private final static String TAG = NavigationDrawerFragment.class.getSimpleName();
 
-    private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-    private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
+    private final static String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
+    private final static String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
     private static final int DATA_LOADER = 0;
 
@@ -156,18 +156,20 @@ public class NavigationDrawerFragment extends ListFragment
                 emptyCard.appName = getString(R.string.all_data);
                 mNavList.add(emptyCard);
 
-                data.moveToFirst();
-                do {
-                    ToastCard packageCard = new ToastCard(getActionBar().getThemedContext());
-                    packageCard.packageName = data.getString(data.getColumnIndex(ToasterTable.PACKAGE));
-                    if (packageCard.packageName != null) {
-                        packageCard.loadData();
-                        mNavList.add(packageCard);
-                    }
-                } while (data.moveToNext());
+                if (data.moveToFirst()) {
+                    do {
+                        ToastCard packageCard = new ToastCard(getActionBar().getThemedContext());
+                        packageCard.packageName = data.getString(data.getColumnIndex(ToasterTable.PACKAGE));
+                        if (packageCard.packageName != null) {
+                            packageCard.loadData();
+                            mNavList.add(packageCard);
+                        }
+                    } while (data.moveToNext());
+                }
                 Collections.sort(mNavList, new ToastCardComparator());
+                Collections.swap(mNavList, mNavList.indexOf(emptyCard), 0);
 
-                mDrawerListView.setAdapter(new ToastArrayAdapter(getActionBar().getThemedContext(), R.layout.navigation_drawer_row, mNavList));
+                mDrawerListView.setAdapter(new ToastArrayAdapter(getActionBar().getThemedContext(), mNavList));
                 mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
                 break;
 
@@ -214,11 +216,11 @@ public class NavigationDrawerFragment extends ListFragment
         actionBar.setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
-            getActivity(),
-            mDrawerLayout,
-            R.drawable.ic_navigation_drawer,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
+                getActivity(),
+                mDrawerLayout,
+                R.drawable.ic_navigation_drawer,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
         ) {
             @Override
             public void onDrawerClosed(View drawerView) {

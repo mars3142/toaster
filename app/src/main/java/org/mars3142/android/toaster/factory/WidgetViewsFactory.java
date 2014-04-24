@@ -1,6 +1,5 @@
 package org.mars3142.android.toaster.factory;
 
-import android.appwidget.AppWidgetManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,12 +19,12 @@ import java.util.ArrayList;
 public class WidgetViewsFactory
         implements RemoteViewsService.RemoteViewsFactory {
 
-    private final String TAG = WidgetViewsFactory.class.getSimpleName();
+    private final static String TAG = WidgetViewsFactory.class.getSimpleName();
 
-    private Context context = null;
-    private ArrayList<String> packages = new ArrayList<String>();
+    private final Context context;
+    private final ArrayList<String> packages = new ArrayList<String>();
 
-    public WidgetViewsFactory(Context context, Intent intent) {
+    public WidgetViewsFactory(Context context) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "ctr");
         }
