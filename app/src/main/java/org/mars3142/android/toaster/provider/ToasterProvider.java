@@ -178,7 +178,7 @@ public class ToasterProvider extends ContentProvider {
     }
 
     @Override
-    public synchronized Uri insert(Uri uri, ContentValues initialValues) {
+    public Uri insert(Uri uri, ContentValues initialValues) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "insert: uri=" + uri + " initialValues=[" + initialValues.toString() + "]");
         }
@@ -219,7 +219,7 @@ public class ToasterProvider extends ContentProvider {
     }
 
     @Override
-    public synchronized int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "delete: uri=" + uri + " selection=[" + selection + "]  args=" + Arrays.toString(selectionArgs));
         }
@@ -265,7 +265,7 @@ public class ToasterProvider extends ContentProvider {
     }
 
     @Override
-    public synchronized int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "update: uri=" + uri + " values=[" + values.toString() + "] selection=[" + selection + "]" +
                     " args=" + Arrays.toString(selectionArgs));

@@ -90,6 +90,7 @@ public class NavigationDrawerFragment extends ListFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         setHasOptionsMenu(true);
     }
 
@@ -97,6 +98,7 @@ public class NavigationDrawerFragment extends ListFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(R.layout.navigation_drawer, container, false);
         getLoaderManager().restartLoader(DATA_LOADER, null, NavigationDrawerFragment.this);
+
         return mDrawerListView;
     }
 
@@ -126,18 +128,21 @@ public class NavigationDrawerFragment extends ListFragment
     @Override
     public void onDetach() {
         super.onDetach();
+
         mCallbacks = null;
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
         outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
@@ -281,7 +286,6 @@ public class NavigationDrawerFragment extends ListFragment
                 mDrawerToggle.syncState();
             }
         });
-
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 

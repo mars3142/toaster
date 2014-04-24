@@ -38,8 +38,6 @@ public class Widget extends AppWidgetProvider {
 
     private final static String TAG = Widget.class.getSimpleName();
 
-    private static int[] mWidgetIds;
-
     public static void updateWidget(Context context, AppWidgetManager appWidgetManager) {
         Intent intent = new Intent(context, WidgetService.class);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));

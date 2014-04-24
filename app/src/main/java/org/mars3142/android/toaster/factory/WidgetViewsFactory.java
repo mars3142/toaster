@@ -21,7 +21,6 @@ package org.mars3142.android.toaster.factory;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
 import android.widget.RemoteViews;

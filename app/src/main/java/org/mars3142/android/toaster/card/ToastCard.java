@@ -41,12 +41,16 @@ public class ToastCard extends Card {
     public String timestamp;
     public Drawable packageIcon;
 
+    private TextView messageTextView;
+    private TextView packageNameTextView;
+    private ImageView packageIconView;
+
     public ToastCard(Context context) {
         super(context, R.layout.toaster_card);
     }
 
     public void loadData() {
-        if (packageName != null && packageName != "") {
+        if (packageName != null && packageName.length() != 0) {
             appName = PackageHelper.getAppName(super.getContext(), packageName);
             appName = (appName == null) ? packageName : appName;
             packageIcon = PackageHelper.getIconFromPackageName(super.getContext(), packageName);
@@ -55,9 +59,17 @@ public class ToastCard extends Card {
 
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
-        TextView messageTextView = (TextView) parent.findViewById(R.id.message);
-        TextView packageNameTextView = (TextView) parent.findViewById(R.id.packageName);
-        ImageView packageIconView = (ImageView) parent.findViewById(R.id.packageIcon);
+        if (messageTextView == null) {
+            messageTextView = (TextView) parent.findViewById(R.id.message);
+        }
+
+        if (packageNameTextView == null) {
+            packageNameTextView = (TextView) parent.findViewById(R.id.packageName);
+        }
+
+        if (packageIconView == null) {
+            packageIconView = (ImageView) parent.findViewById(R.id.packageIcon);
+        }
 
         if (messageTextView != null) {
             messageTextView.setText(message);

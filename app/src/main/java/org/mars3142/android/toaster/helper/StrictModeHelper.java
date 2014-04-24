@@ -22,9 +22,9 @@ package org.mars3142.android.toaster.helper;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 
-public class StrictModeHelpter {
+public class StrictModeHelper {
 
-    private final static String TAG = StrictModeHelpter.class.getSimpleName();
+    private final static String TAG = StrictModeHelper.class.getSimpleName();
 
     public static void setStrictMode() {
         ThreadPolicy threadPolicy = new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build();

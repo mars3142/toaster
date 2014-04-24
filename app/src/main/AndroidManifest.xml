@@ -67,7 +67,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/toaster_widget_info" />
+                android:resource="@xml/toaster_widget" />
         </receiver>
     </application>
 </manifest>

@@ -30,9 +30,9 @@ import org.mars3142.android.toaster.table.ToasterTable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    private final String TAG = DatabaseHelper.class.getSimpleName();
     private final static String DATABASE_NAME = "database.db3";
     private final static int DATABASE_VERSION = 2;
-    private final String TAG = DatabaseHelper.class.getSimpleName();
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -43,6 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, String.format("create database"));
         }
+
         ToasterTable.onCreate(db);
         FilterTable.onCreate(db);
     }
