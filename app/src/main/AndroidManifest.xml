@@ -25,13 +25,11 @@
             </intent-filter>
         </activity>
 
-        <!--
         <activity android:name=".activity.WidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
-        -->
 
         <service
             android:name=".service.ToasterService"
