@@ -61,6 +61,6 @@ before_install:
 
 
 # Let's try to build...
-install: gradle clean assemble lint
+install: gradle clean build
 
 script: gradle check
