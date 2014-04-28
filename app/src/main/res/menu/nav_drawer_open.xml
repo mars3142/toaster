@@ -2,6 +2,7 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:visible="false"
         android:id="@+id/action_blacklist"
         android:orderInCategory="99"
         android:showAsAction="never"
