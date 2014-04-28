@@ -3,8 +3,8 @@ apply plugin: 'android'
 android {
     def versionMajor = 0
     def versionMinor = 4
-    def versionPatch = 0
-    def versionBuild = 2
+    def versionPatch = 1
+    def versionBuild = 0
 
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
