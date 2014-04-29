@@ -32,6 +32,7 @@ android {
 
     buildTypes {
         debug {
+            versionNameSuffix "-debug"
             signingConfig signingConfigs.mars3142
         }
         release {
@@ -44,11 +45,11 @@ android {
 
 dependencies {
     // from google
-    // compile 'com.android.support:support-v4:+'
+//    compile 'com.android.support:support-v4:+'
     compile 'com.android.support:appcompat-v7:+'
-    // compile 'com.google.android.gms:play-services:+'
+//    compile 'com.google.android.gms:play-services:+'
 
     // card library
     compile 'com.github.gabrielemariotti.cards:library:+'
-    compile 'com.github.gabrielemariotti.cards:library-extra:+'
+//    compile 'com.github.gabrielemariotti.cards:library-extra:+'
 }
