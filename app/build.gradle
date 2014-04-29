@@ -3,23 +3,25 @@ apply plugin: 'android'
 android {
     def versionMajor = 0
     def versionMinor = 4
-    def versionPatch = 0
-    def versionBuild = 2
+    def versionPatch = 1
+    def versionBuild = 1
 
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
 
+    def Properties localProps = new Properties()
+    localProps.load(new FileInputStream(file('../local.properties')))
+    def Properties keyProps = new Properties()
+
     signingConfigs {
         mars3142 {
-            def Properties localProps = new Properties()
-            localProps.load(new FileInputStream(file('../local.properties')))
-            def Properties keyProps = new Properties()
-            assert localProps['keystore.props.file'];
-            keyProps.load(new FileInputStream(file(localProps['keystore.props.file'])))
-            storeFile file(keyProps["store"])
-            keyAlias keyProps["alias"]
-            storePassword keyProps["storePass"]
-            keyPassword keyProps["pass"]
+            if (localProps['keystore.props.file']) {
+                keyProps.load(new FileInputStream(file(localProps['keystore.props.file'])))
+                storeFile file(keyProps["store"])
+                keyAlias keyProps["alias"]
+                storePassword keyProps["storePass"]
+                keyPassword keyProps["pass"]
+            }
         }
     }
 
@@ -32,24 +34,25 @@ android {
 
     buildTypes {
         debug {
-            versionNameSuffix "-debug"
-            signingConfig signingConfigs.mars3142
+            versionNameSuffix ".debug"
+            if (localProps['keystore.props.file']) {
+                signingConfig signingConfigs.mars3142
+            }
         }
         release {
             runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.mars3142
+            if (localProps['keystore.props.file']) {
+                signingConfig signingConfigs.mars3142
+            }
         }
     }
 }
 
 dependencies {
-    // from google
-//    compile 'com.android.support:support-v4:+'
+      /* from google */
     compile 'com.android.support:appcompat-v7:+'
-//    compile 'com.google.android.gms:play-services:+'
 
-    // card library
+    /* card library */
     compile 'com.github.gabrielemariotti.cards:library:+'
-//    compile 'com.github.gabrielemariotti.cards:library-extra:+'
 }
