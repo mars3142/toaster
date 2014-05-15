@@ -31,6 +31,9 @@ import org.mars3142.android.toaster.helper.PackageHelper;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
+/**
+ * @author mars3142
+ */
 public class ToastCard extends Card {
 
     private final static String TAG = ToastCard.class.getSimpleName();

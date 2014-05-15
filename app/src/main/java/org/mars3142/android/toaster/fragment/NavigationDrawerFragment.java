@@ -50,6 +50,9 @@ import org.mars3142.android.toaster.table.ToasterTable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * @author mars3142
+ */
 public class NavigationDrawerFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 

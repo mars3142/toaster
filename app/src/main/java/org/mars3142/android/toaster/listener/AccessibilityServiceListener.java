@@ -24,6 +24,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
 
+/**
+ * @author mars3142
+ */
 public class AccessibilityServiceListener
         implements DialogInterface.OnClickListener {
 

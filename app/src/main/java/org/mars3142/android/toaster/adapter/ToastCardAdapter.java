@@ -40,6 +40,9 @@ import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
 
+/**
+ * @author mars3142
+ */
 public class ToastCardAdapter extends CardCursorAdapter {
 
     public ToastCardAdapter(Context context) {

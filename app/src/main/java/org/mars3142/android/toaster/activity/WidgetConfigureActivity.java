@@ -30,6 +30,9 @@ import android.widget.EditText;
 
 import org.mars3142.android.toaster.R;
 
+/**
+ * @author mars3142
+ */
 public class WidgetConfigureActivity extends Activity {
 
     private final static String TAG = WidgetConfigureActivity.class.getSimpleName();

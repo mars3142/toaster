@@ -30,6 +30,9 @@ import android.widget.AutoCompleteTextView;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.table.FilterTable;
 
+/**
+ * @author mars3142
+ */
 public class FilterActivity extends Activity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
