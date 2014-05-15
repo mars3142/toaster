@@ -32,6 +32,9 @@ import org.mars3142.android.toaster.card.ToastCard;
 
 import java.util.ArrayList;
 
+/**
+ * @author mars3142
+ */
 public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {
 
     private final Context mContext;

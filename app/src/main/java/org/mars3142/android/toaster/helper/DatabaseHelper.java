@@ -28,6 +28,9 @@ import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.table.FilterTable;
 import org.mars3142.android.toaster.table.ToasterTable;
 
+/**
+ * @author mars3142
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final String TAG = DatabaseHelper.class.getSimpleName();

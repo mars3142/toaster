@@ -34,6 +34,9 @@ import org.mars3142.android.toaster.table.ToasterTable;
 
 import java.util.ArrayList;
 
+/**
+ * @author mars3142
+ */
 public class WidgetViewsFactory
         implements RemoteViewsService.RemoteViewsFactory {
 

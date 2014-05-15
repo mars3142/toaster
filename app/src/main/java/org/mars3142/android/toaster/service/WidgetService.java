@@ -24,6 +24,9 @@ import android.widget.RemoteViewsService;
 
 import org.mars3142.android.toaster.factory.WidgetViewsFactory;
 
+/**
+ * @author mars3142
+ */
 public class WidgetService extends RemoteViewsService {
 
     private final static String TAG = WidgetService.class.getSimpleName();

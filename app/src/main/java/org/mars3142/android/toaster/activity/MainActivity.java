@@ -44,6 +44,9 @@ import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
 import org.mars3142.android.toaster.listener.DeleteListener;
 import org.mars3142.android.toaster.table.ToasterTable;
 
+/**
+ * @author mars3142
+ */
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
