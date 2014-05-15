@@ -34,6 +34,9 @@ import org.mars3142.android.toaster.service.WidgetService;
 
 import java.util.Arrays;
 
+/**
+ * @author mars3142
+ */
 public class Widget extends AppWidgetProvider {
 
     private final static String TAG = Widget.class.getSimpleName();

@@ -1,31 +1,10 @@
-/*
- * Copyright (c) 2014.
- *
- * This file is part of Toaster.
- *
- * Foobar is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Foobar is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-
-
 apply plugin: 'android'
 
 android {
     def versionMajor = 0
     def versionMinor = 4
     def versionPatch = 1
-    def versionBuild = 1
+    def versionBuild = 0
 
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
@@ -71,9 +50,41 @@ android {
 }
 
 dependencies {
-      /* from google */
+    /* from google */
     compile 'com.android.support:appcompat-v7:+'
 
     /* card library */
     compile 'com.github.gabrielemariotti.cards:library:+'
+    compile 'com.github.gabrielemariotti.cards:library-extra:+'
+}
+
+android.applicationVariants.all { variant ->
+
+    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+        title = "Toaster for Android (Version $android.defaultConfig.versionName, VersionCode $android.defaultConfig.versionCode)"
+        destinationDir = new File("${project.getProjectDir()}/doc/${android.defaultConfig.versionName}/", variant.baseName)
+        source = variant.javaCompile.source
+
+        def localProperties = new File(project.rootDir, "local.properties")
+        if (localProperties.exists()) {
+            Properties properties = new Properties()
+            localProperties.withInputStream { instr ->
+                properties.load(instr)
+            }
+            def sdkDirProp = properties.getProperty('sdk.dir')
+
+            if (sdkDirProp != null) {
+                ext.androidJar = "${sdkDirProp}/platforms/${android.compileSdkVersion}/android.jar"
+                classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+
+                description "Generates Javadoc for $variant.name."
+
+                options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PRIVATE
+                options.links("http://docs.oracle.com/javase/7/docs/api/");
+                options.links("http://developer.android.com/reference/reference/");
+                exclude '**/BuildConfig.java'
+                exclude '**/R.java'
+            }
+        }
+    }
 }

@@ -32,6 +32,9 @@ import org.mars3142.android.toaster.table.ToasterTable;
 
 import java.util.Calendar;
 
+/**
+ * @author mars3142
+ */
 public class ToasterService extends AccessibilityService {
 
     private final static String TAG = ToasterService.class.getSimpleName();

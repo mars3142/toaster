@@ -27,6 +27,9 @@ import android.provider.BaseColumns;
 
 import org.mars3142.android.toaster.provider.ToasterProvider;
 
+/**
+ * @author mars3142
+ */
 public class FilterTable
         implements BaseColumns {
 

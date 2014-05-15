@@ -22,6 +22,12 @@ package org.mars3142.android.toaster.helper;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 
+<<<<<<< HEAD
+=======
+/**
+ * @author mars3142
+ */
+>>>>>>> feature/javadoc
 public class StrictModeHelper {
 
     private final static String TAG = StrictModeHelper.class.getSimpleName();

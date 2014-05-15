@@ -32,6 +32,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
 
+/**
+ * @author mars3142
+ */
 public class PackageHelper {
 
     private final static String TAG = PackageHelper.class.getSimpleName();
