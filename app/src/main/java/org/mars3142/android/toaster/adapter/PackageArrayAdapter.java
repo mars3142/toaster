@@ -28,6 +28,9 @@ import android.widget.TextView;
 
 import org.mars3142.android.toaster.R;
 
+/**
+ * @author mars3142
+ */
 public class PackageArrayAdapter extends ArrayAdapter<String> {
 
     private final static String TAG = PackageArrayAdapter.class.getSimpleName();

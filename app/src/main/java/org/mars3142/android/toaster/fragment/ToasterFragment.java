@@ -37,6 +37,9 @@ import org.mars3142.android.toaster.table.ToasterTable;
 
 import it.gmariotti.cardslib.library.view.CardListView;
 
+/**
+ * @author mars3142
+ */
 public class ToasterFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 

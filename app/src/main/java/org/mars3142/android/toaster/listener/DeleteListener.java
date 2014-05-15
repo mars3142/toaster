@@ -26,6 +26,9 @@ import android.net.Uri;
 
 import org.mars3142.android.toaster.table.ToasterTable;
 
+/**
+ * @author mars3142
+ */
 public class DeleteListener
         implements DialogInterface.OnClickListener {
 

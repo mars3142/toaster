@@ -38,6 +38,9 @@ import org.mars3142.android.toaster.table.ToasterTable;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * @author mars3142
+ */
 public class ToasterProvider extends ContentProvider {
 
     public final static String AUTHORITY = "org.mars3142.android.toaster.provider";

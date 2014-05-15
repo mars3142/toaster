@@ -23,6 +23,9 @@ import org.mars3142.android.toaster.card.ToastCard;
 
 import java.util.Comparator;
 
+/**
+ * @author mars3142
+ */
 public class ToastCardComparator implements Comparator<ToastCard> {
 
     private final static String TAG = ToastCardComparator.class.getSimpleName();

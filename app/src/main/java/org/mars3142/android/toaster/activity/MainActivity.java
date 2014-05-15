@@ -39,11 +39,14 @@ import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.fragment.NavigationDrawerFragment;
 import org.mars3142.android.toaster.fragment.ToasterFragment;
 import org.mars3142.android.toaster.helper.PackageHelper;
-import org.mars3142.android.toaster.helper.StrictModeHelpter;
+import org.mars3142.android.toaster.helper.StrictModeHelper;
 import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
 import org.mars3142.android.toaster.listener.DeleteListener;
 import org.mars3142.android.toaster.table.ToasterTable;
 
+/**
+ * @author mars3142
+ */
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -60,7 +63,7 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
 
         if (BuildConfig.DEBUG) {
-            StrictModeHelpter.setStrictMode();
+            StrictModeHelper.setStrictMode();
         }
 
         setContentView(R.layout.activity_main);
