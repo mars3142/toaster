@@ -52,19 +52,21 @@ public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.navigation_drawer_row, parent, false);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.navigation_drawer_row, parent, false);
+        }
 
-        TextView packageName = (TextView) rowView.findViewById(R.id.packageName);
+        TextView packageName = (TextView) convertView.findViewById(R.id.packageName);
         if (packageName != null) {
             packageName.setText(mCards.get(position).appName);
         }
 
-        ImageView packageIcon = (ImageView) rowView.findViewById(R.id.packageIcon);
+        ImageView packageIcon = (ImageView) convertView.findViewById(R.id.packageIcon);
         if (packageIcon != null) {
             packageIcon.setImageDrawable(mCards.get(position).packageIcon);
         }
 
-        return rowView;
+        return convertView;
     }
 }
