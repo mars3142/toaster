@@ -7,7 +7,7 @@ android {
     def versionBuild = 0
 
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "19.1.0"
 
     def Properties localProps = new Properties()
     localProps.load(new FileInputStream(file('../local.properties')))
