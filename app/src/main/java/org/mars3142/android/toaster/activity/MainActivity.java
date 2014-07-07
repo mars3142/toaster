@@ -34,12 +34,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.fragment.NavigationDrawerFragment;
 import org.mars3142.android.toaster.fragment.ToasterFragment;
 import org.mars3142.android.toaster.helper.PackageHelper;
-import org.mars3142.android.toaster.helper.StrictModeHelper;
 import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
 import org.mars3142.android.toaster.listener.DeleteListener;
 import org.mars3142.android.toaster.table.ToasterTable;
@@ -61,10 +59,6 @@ public class MainActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (BuildConfig.DEBUG) {
-            StrictModeHelper.setStrictMode();
-        }
 
         setContentView(R.layout.activity_main);
 
