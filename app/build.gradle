@@ -1,4 +1,4 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
     def versionMajor = 0
@@ -34,6 +34,7 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix ".dev"
             versionNameSuffix ".debug"
             if (localProps['keystore.props.file']) {
                 signingConfig signingConfigs.mars3142
@@ -50,7 +51,6 @@ android {
 }
 
 dependencies {
-    /* from google */
     compile 'com.android.support:appcompat-v7:20+'
 
     /* card library */

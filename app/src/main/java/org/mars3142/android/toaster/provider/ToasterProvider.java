@@ -43,7 +43,7 @@ import java.util.HashMap;
  */
 public class ToasterProvider extends ContentProvider {
 
-    public final static String AUTHORITY = "org.mars3142.android.toaster.provider";
+    public final static String AUTHORITY = BuildConfig.PACKAGE_NAME + ".provider";
 
     private final static String TAG = ToasterProvider.class.getSimpleName();
     private final static int TOASTER = 1;
