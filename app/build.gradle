@@ -6,7 +6,7 @@ android {
     def versionPatch = 1
     def versionBuild = 0
 
-    buildToolsVersion "20"
+    buildToolsVersion '20'
     compileSdkVersion 20
 
     def Properties localProps = new Properties()
@@ -15,8 +15,8 @@ android {
 
     signingConfigs {
         mars3142 {
-            if (localProps['keystore.props.file']) {
-                keyProps.load(new FileInputStream(file(localProps['keystore.props.file'])))
+            if (localProps['keystore.properties']) {
+                keyProps.load(new FileInputStream(file(localProps['keystore.properties'])))
                 storeFile file(keyProps["store"])
                 keyAlias keyProps["alias"]
                 storePassword keyProps["storePass"]
@@ -36,14 +36,14 @@ android {
         debug {
             applicationIdSuffix ".dev"
             versionNameSuffix ".debug"
-            if (localProps['keystore.props.file']) {
+            if (localProps['keystore.properties']) {
                 signingConfig signingConfigs.mars3142
             }
         }
         release {
             runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            if (localProps['keystore.props.file']) {
+            if (localProps['keystore.properties']) {
                 signingConfig signingConfigs.mars3142
             }
         }
@@ -51,40 +51,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:20+'
+    compile 'com.android.support:appcompat-v7:20.0.0'
 
     /* card library */
-    compile 'com.github.gabrielemariotti.cards:library:+'
-//    compile 'com.github.gabrielemariotti.cards:library-extra:+'
-}
-
-android.applicationVariants.all { variant ->
-
-    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-        title = "Toaster for Android (Version $android.defaultConfig.versionName, VersionCode $android.defaultConfig.versionCode)"
-        destinationDir = new File("${project.getProjectDir()}/doc/${android.defaultConfig.versionName}/", variant.baseName)
-        source = variant.javaCompile.source
-
-        def localProperties = new File(project.rootDir, "local.properties")
-        if (localProperties.exists()) {
-            Properties properties = new Properties()
-            localProperties.withInputStream { instr ->
-                properties.load(instr)
-            }
-            def sdkDirProp = properties.getProperty('sdk.dir')
-
-            if (sdkDirProp != null) {
-                ext.androidJar = "${sdkDirProp}/platforms/${android.compileSdkVersion}/android.jar"
-                classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
-
-                description "Generates Javadoc for $variant.name."
-
-                options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PRIVATE
-                options.links("http://docs.oracle.com/javase/7/docs/api/");
-                options.links("http://developer.android.com/reference/reference/");
-                exclude '**/BuildConfig.java'
-                exclude '**/R.java'
-            }
-        }
-    }
+    compile 'com.github.gabrielemariotti.cards:library:1.9.1'
+    compile 'com.github.gabrielemariotti.cards:library-extra:1.9.1'
 }

@@ -96,7 +96,7 @@ public class ToasterProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "query: uri=" + uri + " projection=" + Arrays.toString(projection) +
-                    " selection=[" + selection + "]  args=" + Arrays.toString(selectionArgs) +
+                    " selection=[" + selection + "] args=" + Arrays.toString(selectionArgs) +
                     " order=[" + sortOrder + "]");
         }
 
@@ -224,7 +224,7 @@ public class ToasterProvider extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         if (BuildConfig.DEBUG) {
-            Log.v(TAG, "delete: uri=" + uri + " selection=[" + selection + "]  args=" + Arrays.toString(selectionArgs));
+            Log.v(TAG, "delete: uri=" + uri + " selection=[" + selection + "] args=" + Arrays.toString(selectionArgs));
         }
 
         int count = 0;

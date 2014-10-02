@@ -19,7 +19,8 @@
   ~ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -35,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_weight="1"
-            android:hint="@string/package_hint" />
+            android:hint="@string/package_hint"/>
 
         <ImageButton
             android:id="@+id/newButton"
@@ -43,11 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="@drawable/ic_action_new"
-            android:contentDescription="@string/button_new" />
+            android:contentDescription="@string/button_new"/>
     </LinearLayout>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -19,25 +19,28 @@
   ~ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_delete"
         android:icon="@drawable/ic_action_discard"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_delete" />
+        app:showAsAction="ifRoom"
+        android:title="@string/action_delete"/>
 
     <item
         android:visible="false"
         android:id="@+id/action_blacklist"
         android:orderInCategory="99"
-        android:showAsAction="never"
-        android:title="@string/action_blacklist" />
+        app:showAsAction="never"
+        android:title="@string/action_blacklist"/>
 
     <item
         android:visible="false"
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings" />
+        app:showAsAction="never"
+        android:title="@string/action_settings"/>
 
 </menu>

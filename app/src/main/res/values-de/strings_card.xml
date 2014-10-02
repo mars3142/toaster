@@ -21,9 +21,6 @@
 
 <resources>
 
-    <string name="demo_message">Das ist ein Toast.</string>
-    <string name="demo_package">org.mars3142.android.toaster</string>
-    <string name="card_background_color">Karten Hintergrundfarbe</string>
     <string name="package_icon">Package Icon</string>
     <string name="app_info">App-Info</string>
     <string name="share_card">Teilen</string>

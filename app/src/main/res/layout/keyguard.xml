@@ -19,7 +19,8 @@
   ~ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -36,7 +37,7 @@
             android:layout_height="@dimen/icon_size_small"
             android:layout_margin="10dp"
             android:contentDescription="@string/app_icon"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_launcher"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +45,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
             android:text="@string/latest_toasts"
-            android:textColor="@drawable/text_color_dark" />
+            android:textColor="@drawable/text_color_dark"/>
 
     </LinearLayout>
 
@@ -52,6 +53,6 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/widget_row_background" />
+        android:background="@drawable/widget_row_background"/>
 
 </LinearLayout>
