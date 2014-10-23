@@ -3,18 +3,18 @@
  *
  * This file is part of Toaster.
  *
- * Foobar is free software: you can redistribute it and/or modify
+ * Toaster is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * Toaster is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.mars3142.android.toaster.adapter;
@@ -27,18 +27,16 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
-
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
+import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.base.BaseCard;
 
 /**
  * @author mars3142

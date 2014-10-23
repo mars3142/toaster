@@ -3,18 +3,18 @@
  *
  * This file is part of Toaster.
  *
- * Foobar is free software: you can redistribute it and/or modify
+ * Toaster is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * Toaster is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.mars3142.android.toaster.fragment;
@@ -25,22 +25,14 @@ import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ListView;
-
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
@@ -59,7 +51,6 @@ public class NavigationDrawerFragment extends ListFragment
     private final static String TAG = NavigationDrawerFragment.class.getSimpleName();
 
     private final static String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-    private final static String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
     private static final int DATA_LOADER = 0;
 
@@ -71,8 +62,6 @@ public class NavigationDrawerFragment extends ListFragment
     private ArrayList<ToastCard> mNavList;
 
     private int mCurrentSelectedPosition = 0;
-    private boolean mFromSavedInstanceState;
-    private boolean mUserLearnedDrawer;
 
     public NavigationDrawerFragment() {
     }
@@ -81,12 +70,8 @@ public class NavigationDrawerFragment extends ListFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
-
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
-            mFromSavedInstanceState = true;
         }
     }
 
@@ -154,6 +139,7 @@ public class NavigationDrawerFragment extends ListFragment
         if (mDrawerLayout != null && isDrawerOpen()) {
             showGlobalContextActionBar();
         }
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -267,21 +253,10 @@ public class NavigationDrawerFragment extends ListFragment
                     return;
                 }
 
-                if (!mUserLearnedDrawer) {
-                    mUserLearnedDrawer = true;
-                    SharedPreferences sp = PreferenceManager
-                            .getDefaultSharedPreferences(getActivity());
-                    sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
-                }
-
                 getLoaderManager().restartLoader(DATA_LOADER, null, NavigationDrawerFragment.this);
                 getActivity().invalidateOptionsMenu();
             }
         };
-
-        if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
-            mDrawerLayout.openDrawer(mFragmentContainerView);
-        }
 
         mDrawerLayout.post(new Runnable() {
             @Override

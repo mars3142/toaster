@@ -5,18 +5,18 @@
   ~
   ~ This file is part of Toaster.
   ~
-  ~ Foobar is free software: you can redistribute it and/or modify
+  ~ Toaster is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ Foobar is distributed in the hope that it will be useful,
+  ~ Toaster is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <RelativeLayout
@@ -26,7 +26,40 @@
     android:layout_height="match_parent"
     android:minHeight="@dimen/card_base_empty_height"
     android:clickable="false"
-    android:background="@drawable/card_color">
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/card_color"
+        android:minHeight="@dimen/card_base_empty_height"
+        android:layout_marginLeft="45dp"
+        android:id="@+id/backgroundColor">
+
+        <TextView
+            android:id="@+id/packageName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/demo_package"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingBottom="10dp"
+            android:layout_marginRight="15dp"
+            />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            tools:text="@string/demo_message"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="30dp"
+            />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/packageIcon"
@@ -39,29 +72,5 @@
         android:layout_marginTop="15dp"
         android:contentDescription="@string/package_icon"
         tools:src="@drawable/ic_launcher"/>
-
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/packageIcon"
-        tools:text="@string/demo_message"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="20dp"/>
-
-    <TextView
-        android:id="@+id/packageName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@string/demo_package"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingBottom="10dp"
-        android:layout_marginRight="15dp"
-        />
 
 </RelativeLayout>

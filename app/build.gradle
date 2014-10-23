@@ -7,27 +7,22 @@ android {
     def versionBuild = 0
 
     buildToolsVersion '20'
-    compileSdkVersion 20
-
-    def Properties localProps = new Properties()
-    localProps.load(new FileInputStream(file('../local.properties')))
-    def Properties keyProps = new Properties()
+    compileSdkVersion 21
 
     signingConfigs {
         mars3142 {
-            if (localProps['keystore.properties']) {
-                keyProps.load(new FileInputStream(file(localProps['keystore.properties'])))
-                storeFile file(keyProps["store"])
-                keyAlias keyProps["alias"]
-                storePassword keyProps["storePass"]
-                keyPassword keyProps["pass"]
-            }
+            def Properties keyProps = new Properties()
+            keyProps.load(new FileInputStream(file('keystore.properties')))
+            storeFile file(keyProps["store"])
+            keyAlias keyProps["alias"]
+            storePassword keyProps["storePass"]
+            keyPassword keyProps["pass"]
         }
     }
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 20
+        targetSdkVersion 21
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
@@ -36,24 +31,20 @@ android {
         debug {
             applicationIdSuffix ".dev"
             versionNameSuffix ".debug"
-            if (localProps['keystore.properties']) {
-                signingConfig signingConfigs.mars3142
-            }
+            signingConfig signingConfigs.mars3142
         }
         release {
             runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            if (localProps['keystore.properties']) {
-                signingConfig signingConfigs.mars3142
-            }
+            signingConfig signingConfigs.mars3142
         }
     }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.0'
 
     /* card library */
-    compile 'com.github.gabrielemariotti.cards:library:1.9.1'
-    compile 'com.github.gabrielemariotti.cards:library-extra:1.9.1'
+    compile 'com.github.gabrielemariotti.cards:library:1.9.0'
+//    compile 'com.github.gabrielemariotti.cards:library-extra:1.9.0'
 }

@@ -3,18 +3,18 @@
  *
  * This file is part of Toaster.
  *
- * Foobar is free software: you can redistribute it and/or modify
+ * Toaster is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * Toaster is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.mars3142.android.toaster.table;
@@ -24,7 +24,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
-
 import org.mars3142.android.toaster.provider.ToasterProvider;
 
 /**
@@ -33,14 +32,13 @@ import org.mars3142.android.toaster.provider.ToasterProvider;
 public class FilterTable
         implements BaseColumns {
 
-    private final static String TAG = FilterTable.class.getSimpleName();
-
     public final static String TABLENAME = "filter";
     public final static String PACKAGE = "package";
     public final static String EXCL_INCL = "excl_incl";
     public final static Uri FILTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/filter");
     public final static String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.filter";
     public final static String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.filter";
+    private final static String TAG = FilterTable.class.getSimpleName();
 
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLENAME +
