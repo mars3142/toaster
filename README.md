@@ -1,3 +1,5 @@
+[![Stories in Ready](https://badge.waffle.io/mars3142/toaster.svg?label=ready&title=Ready)](http://waffle.io/mars3142/toaster)
+
 Toaster
 =======
 
