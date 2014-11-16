@@ -47,7 +47,7 @@ public class PackageHelper {
         } catch (Exception e) {
             // Nothing
         }
-        return null;
+        return packageName;
     }
 
     public static Drawable getIconFromPackageName(Context context, String packageName) {
@@ -80,8 +80,9 @@ public class PackageHelper {
             appInfo = pm.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
             return appInfo.loadIcon(pm);
         } catch (PackageManager.NameNotFoundException e) {
-            return null;
+            // Nothing
         }
+        return null;
     }
 
     public static Bitmap drawableToBitmap(Drawable drawable) {

@@ -40,6 +40,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="15dp"
         android:text="@string/demo_package"
-        android:textColor="@drawable/text_color_light"/>
+        android:textColor="@color/text_color_light"/>
 
 </LinearLayout>

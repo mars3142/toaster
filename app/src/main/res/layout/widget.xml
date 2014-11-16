@@ -29,7 +29,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/widget_header_background"
         android:weightSum="1">
 
         <ImageView
@@ -44,15 +43,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
-            android:text="@string/latest_toasts"
-            android:textColor="@drawable/text_color_dark"/>
+            android:text="@string/latest_toasts"/>
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/widget_row_background"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

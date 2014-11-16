@@ -21,18 +21,23 @@
 
 <resources>
 
-    <drawable name="nav_row">#C8C8C8</drawable>
+    <color name="colorPrimary">#ffdddddd</color>
+    <color name="colorPrimaryDark">#ffc8c8c8</color>
+    <color name="colorAccent">#ff56bcff</color>
 
-    <drawable name="widget_header_background">#D4CFD3</drawable>
-    <drawable name="widget_row_background">#B7B7B7</drawable>
+    <color name="nav_row">#ffc8c8c8</color>
+    <color name="nav_background">#B7B7B7</color>
 
-    <drawable name="actionbar">#DDDDDD</drawable>
-    <drawable name="text_color_dark">#585858</drawable>
-    <drawable name="text_color_light">#777777</drawable>
-    <drawable name="text_color_toast">#FA6367</drawable>
-    <drawable name="text_color_time">#FFFFFF</drawable>
+    <color name="widget_header_background">#ffd4cfd3</color>
+    <color name="widget_row_background">#B7B7B7</color>
 
-    <drawable name="activity_background">#DDDDDD</drawable>
-    <drawable name="menu_background">#EFEFEF</drawable>
+    <color name="actionbar">#ffdddddd</color>
+    <color name="text_color_dark">#ff585858</color>
+    <color name="text_color_light">#ff777777</color>
+    <color name="text_color_toast">#fffa6367</color>
+    <color name="text_color_time">#ffffffff</color>
+
+    <color name="activity_background">#ffdddddd</color>
+    <color name="menu_background">#ffefefef</color>
 
 </resources>

@@ -19,20 +19,21 @@
 
 package org.mars3142.android.toaster.activity;
 
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.AutoCompleteTextView;
+
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.table.FilterTable;
 
 /**
  * @author mars3142
  */
-public class FilterActivity extends Activity
+public class FilterActivity extends ActionBarActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final static String TAG = FilterActivity.class.getSimpleName();

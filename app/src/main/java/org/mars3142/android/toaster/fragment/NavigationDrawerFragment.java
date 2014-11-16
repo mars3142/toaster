@@ -19,7 +19,6 @@
 
 package org.mars3142.android.toaster.fragment;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.app.LoaderManager;
@@ -28,9 +27,12 @@ import android.content.Loader;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.ListView;
 import org.mars3142.android.toaster.R;
@@ -206,12 +208,11 @@ public class NavigationDrawerFragment extends ListFragment
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
     }
 
     private ActionBar getActionBar() {
-        return getActivity().getActionBar();
+        return ((ActionBarActivity)getActivity()).getSupportActionBar();
     }
 
     public boolean isDrawerOpen() {
@@ -231,7 +232,7 @@ public class NavigationDrawerFragment extends ListFragment
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),
                 mDrawerLayout,
-                R.drawable.ic_navigation_drawer,
+                (Toolbar) getActivity().findViewById(R.id.toolbar),
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
         ) {

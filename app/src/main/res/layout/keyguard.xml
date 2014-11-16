@@ -29,7 +29,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/widget_header_background"
+        android:background="@color/widget_header_background"
         android:weightSum="1">
 
         <ImageView
@@ -45,7 +45,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
             android:text="@string/latest_toasts"
-            android:textColor="@drawable/text_color_dark"/>
+            android:textColor="@color/text_color_dark"/>
 
     </LinearLayout>
 
@@ -53,6 +53,6 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/widget_row_background"/>
+        android:background="@color/widget_row_background"/>
 
 </LinearLayout>

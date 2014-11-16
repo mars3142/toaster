@@ -23,7 +23,7 @@
           package="org.mars3142.android.toaster"
           android:installLocation="auto">
 
-    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"/>
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -31,63 +31,61 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.FilterActivity"
+            android:name="org.mars3142.android.toaster.activity.FilterActivity"
             android:exported="false"
-            android:label="@string/action_blacklist"/>
+            android:label="@string/action_blacklist" />
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name="org.mars3142.android.toaster.activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.WidgetConfigureActivity">
+        <activity android:name="org.mars3142.android.toaster.activity.WidgetConfigureActivity">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
 
         <service
-            android:name=".service.ToasterService"
+            android:name="org.mars3142.android.toaster.service.ToasterService"
             android:enabled="true"
             android:label="@string/toaster_service"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService"/>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
 
             <meta-data
                 android:name="android.accessibilityservice"
-                android:resource="@xml/toaster_service"/>
+                android:resource="@xml/toaster_service" />
         </service>
 
         <service
-            android:name=".service.WidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+            android:name="org.mars3142.android.toaster.service.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <provider
-            android:name=".provider.ToasterProvider"
+            android:name="org.mars3142.android.toaster.provider.ToasterProvider"
             android:authorities="${applicationId}.provider"
-            android:exported="false"/>
+            android:exported="false" />
 
         <receiver
-            android:name=".widget.Widget"
+            android:name="org.mars3142.android.toaster.widget.Widget"
             android:icon="@drawable/ic_launcher"
             android:label="@string/toaster_widget">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="org.mars3142.android.toaster.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="${applicationId}.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/toaster_widget"/>
+                android:resource="@xml/toaster_widget" />
         </receiver>
     </application>
 </manifest>

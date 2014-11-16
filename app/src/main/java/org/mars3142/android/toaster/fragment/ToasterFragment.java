@@ -19,16 +19,22 @@
 
 package org.mars3142.android.toaster.fragment;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+
 import it.gmariotti.cardslib.library.view.CardListView;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.activity.MainActivity;

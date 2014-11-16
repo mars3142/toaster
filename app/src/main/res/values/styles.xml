@@ -21,24 +21,23 @@
 
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Holo.Light">
-        <!--item name="android:actionBarStyle">@style/mars3142.ActionBarStyle</item-->
-        <item name="android:actionOverflowButtonStyle">@style/mars3142.ActionOverflowButtonStyle
-        </item>
-        <!--item name="android:activatedBackgroundIndicator">@drawable/list_activated_background</item-->
-    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base" />
 
-    <style name="mars3142.ActionBarStyle" parent="android:Widget.Holo.Light.ActionBar">
-        <item name="android:background">@drawable/actionbar</item>
-        <item name="android:titleTextStyle">@style/mars3142.ActionBarStyle.TitleTextStyle</item>
-    </style>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
 
-    <style name="mars3142.ActionBarStyle.TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@drawable/text_color_light</item>
-    </style>
+        <item name="windowActionBar">false</item>
 
-    <style name="mars3142.ActionOverflowButtonStyle" parent="android:style/Widget.Holo.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_action_overflow</item>
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated which is used to tint widgets -->
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- You can also set colorControlNormal, colorControlActivated colorControlHighlight & colorSwitchThumbNormal. -->
     </style>
 
 </resources>

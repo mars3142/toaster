@@ -24,6 +24,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
+
 import org.mars3142.android.toaster.provider.ToasterProvider;
 
 /**

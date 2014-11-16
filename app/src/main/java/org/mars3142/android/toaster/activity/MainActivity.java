@@ -19,7 +19,6 @@
 
 package org.mars3142.android.toaster.activity;
 
-import android.app.ActionBar;
 import android.app.AlertDialog.Builder;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -27,12 +26,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.fragment.NavigationDrawerFragment;
@@ -40,12 +42,13 @@ import org.mars3142.android.toaster.fragment.ToasterFragment;
 import org.mars3142.android.toaster.helper.PackageHelper;
 import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
 import org.mars3142.android.toaster.listener.DeleteListener;
+import org.mars3142.android.toaster.service.ToasterService;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 /**
  * @author mars3142
  */
-public class MainActivity extends FragmentActivity
+public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private final static String TAG = MainActivity.class.getSimpleName();
@@ -64,6 +67,15 @@ public class MainActivity extends FragmentActivity
 
         mTitle = getTitle();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+            getSupportActionBar().setElevation(getResources().getInteger(R.integer.elevation_toolbar));
+        }
+
         mNavDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
@@ -77,16 +89,17 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
         outState.putString(PACKAGE_NAME, mPackageName);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        int menuRes;
-        if (!mNavDrawerFragment.isDrawerOpen()) {
-            menuRes = R.menu.nav_drawer_closed;
-        } else {
-            menuRes = R.menu.nav_drawer_open;
+        int menuRes = R.menu.nav_drawer_closed;
+        if (mNavDrawerFragment != null) {
+            if (!mNavDrawerFragment.isDrawerOpen()) {
+                menuRes = R.menu.nav_drawer_closed;
+            }
         }
         getMenuInflater().inflate(menuRes, menu);
         restoreActionBar();
@@ -95,9 +108,7 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public void onNavigationDrawerItemSelected(String packageFilter) {
-        FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragmentView = ToasterFragment.newInstance(packageFilter);
-        fragmentManager.beginTransaction().replace(R.id.container, fragmentView).commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, ToasterFragment.newInstance(packageFilter)).commit();
     }
 
     @Override
@@ -116,13 +127,13 @@ public class MainActivity extends FragmentActivity
                 } else {
                     deleteListener = new DeleteListener(this, ToasterTable.PACKAGE + " = ?", new String[]{mPackageName});
                 }
-                Builder builder = new Builder(this);
-                builder.setTitle(R.string.action_delete);
-                builder.setMessage(R.string.delete_question);
-                builder.setCancelable(true);
-                builder.setPositiveButton(android.R.string.ok, deleteListener);
-                builder.setNegativeButton(android.R.string.cancel, null);
-                builder.create().show();
+                new Builder(this)
+                        .setTitle(R.string.action_delete)
+                        .setMessage(R.string.delete_question)
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, deleteListener)
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show();
                 return true;
 
             case R.id.action_settings:
@@ -136,13 +147,13 @@ public class MainActivity extends FragmentActivity
         super.onResume();
 
         if (!isAccessibilitySettingsOn(getApplicationContext())) {
-            Builder builder = new Builder(this);
-            builder.setTitle(R.string.toaster_service_header);
-            builder.setMessage(R.string.toaster_service_message);
-            builder.setCancelable(true);
-            builder.setPositiveButton(android.R.string.ok, new AccessibilityServiceListener(this));
-            builder.setNegativeButton(android.R.string.cancel, null);
-            builder.create().show();
+            new Builder(this)
+                    .setTitle(R.string.toaster_service_header)
+                    .setMessage(R.string.toaster_service_message)
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok, new AccessibilityServiceListener(this))
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
         }
     }
 
@@ -156,9 +167,8 @@ public class MainActivity extends FragmentActivity
     }
 
     private void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(mTitle);
         }
@@ -166,7 +176,7 @@ public class MainActivity extends FragmentActivity
 
     private boolean isAccessibilitySettingsOn(Context mContext) {
         int accessibilityEnabled = 0;
-        final String service = BuildConfig.APPLICATION_ID + "/org.mars3142.android.toaster.service.ToasterService";
+        final String service = BuildConfig.APPLICATION_ID + "/" + ToasterService.class.getName();
 
         try {
             accessibilityEnabled = Settings.Secure.getInt(mContext.getApplicationContext().getContentResolver(),
