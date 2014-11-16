@@ -20,8 +20,8 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.mars3142.android.toaster"
-          android:installLocation="auto">
+    package="org.mars3142.android.toaster"
+    android:installLocation="auto">
 
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
 

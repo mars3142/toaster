@@ -23,7 +23,13 @@
 
     <color name="colorPrimary">#ffdddddd</color>
     <color name="colorPrimaryDark">#ffc8c8c8</color>
+    <color name="colorBackground">#ffffffff</color>
     <color name="colorAccent">#ff56bcff</color>
+    <color name="colorControlHighlight">#ff2fb5ff</color>
+
+    <color name="color_text">#ff000000</color>
+
+    <color name="color_card">#ffffbc36</color>
 
     <color name="nav_row">#ffc8c8c8</color>
     <color name="nav_background">#B7B7B7</color>

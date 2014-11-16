@@ -27,16 +27,18 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.base.BaseCard;
+
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
+import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.base.BaseCard;
 
 /**
  * @author mars3142

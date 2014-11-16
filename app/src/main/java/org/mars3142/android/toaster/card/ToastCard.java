@@ -20,14 +20,19 @@
 package org.mars3142.android.toaster.card;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.support.v7.graphics.Palette;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import it.gmariotti.cardslib.library.internal.Card;
+
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.helper.PackageHelper;
+
+import it.gmariotti.cardslib.library.internal.Card;
 
 /**
  * @author mars3142
@@ -45,9 +50,13 @@ public class ToastCard extends Card {
     private TextView messageTextView;
     private TextView packageNameTextView;
     private ImageView packageIconView;
+    private RelativeLayout cardBackgroundView;
+    private Resources resources;
 
     public ToastCard(Context context) {
         super(context, R.layout.toaster_card);
+
+        resources = getContext().getResources();
     }
 
     public void loadData() {
@@ -60,6 +69,10 @@ public class ToastCard extends Card {
 
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
+        if (cardBackgroundView == null) {
+            cardBackgroundView = (RelativeLayout) parent.findViewById(R.id.backgroundColor);
+        }
+
         if (messageTextView == null) {
             messageTextView = (TextView) parent.findViewById(R.id.message);
         }
@@ -70,6 +83,15 @@ public class ToastCard extends Card {
 
         if (packageIconView == null) {
             packageIconView = (ImageView) parent.findViewById(R.id.packageIcon);
+        }
+
+        if (cardBackgroundView != null) {
+            int color = getContext().getResources().getColor(R.color.color_card);
+            if (packageIcon != null) {
+                Palette palette = Palette.generate(PackageHelper.drawableToBitmap(packageIcon));
+                color = palette.getMutedColor(resources.getColor(R.color.color_card));
+            }
+            cardBackgroundView.setBackgroundColor(color);
         }
 
         if (messageTextView != null) {

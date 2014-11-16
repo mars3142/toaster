@@ -21,6 +21,7 @@ package org.mars3142.android.toaster.service;
 
 import android.content.Intent;
 import android.widget.RemoteViewsService;
+
 import org.mars3142.android.toaster.factory.WidgetViewsFactory;
 
 /**

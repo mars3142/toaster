@@ -19,8 +19,7 @@
   ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
@@ -31,7 +30,7 @@
         android:layout_height="@dimen/icon_size_small"
         android:layout_margin="10dp"
         android:contentDescription="@string/package_icon"
-        android:src="@drawable/ic_launcher"/>
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/packageName"
@@ -40,6 +39,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="15dp"
         android:text="@string/demo_package"
-        android:textColor="@color/text_color_light"/>
+        android:textColor="@color/text_color_light" />
 
 </LinearLayout>

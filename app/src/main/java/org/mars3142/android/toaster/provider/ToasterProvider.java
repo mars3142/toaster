@@ -29,6 +29,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
+
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.helper.DatabaseHelper;
 import org.mars3142.android.toaster.table.FilterTable;

@@ -20,8 +20,6 @@
 package org.mars3142.android.toaster.activity;
 
 import android.app.AlertDialog.Builder;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -73,7 +71,7 @@ public class MainActivity extends ActionBarActivity
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
-            getSupportActionBar().setElevation(getResources().getInteger(R.integer.elevation_toolbar));
+            getSupportActionBar().setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
         }
 
         mNavDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);

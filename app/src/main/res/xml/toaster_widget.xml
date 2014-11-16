@@ -20,13 +20,13 @@
   -->
 
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:initialKeyguardLayout="@layout/keyguard"
-                    android:initialLayout="@layout/widget"
-                    android:minHeight="110dp"
-                    android:minWidth="180dp"
-                    android:previewImage="@drawable/toaster_widget_preview"
-                    android:resizeMode="horizontal|vertical"
-                    android:updatePeriodMillis="1800000"
-                    android:widgetCategory="home_screen|keyguard"/><!--
+    android:initialKeyguardLayout="@layout/keyguard"
+    android:initialLayout="@layout/widget"
+    android:minHeight="110dp"
+    android:minWidth="180dp"
+    android:previewImage="@drawable/toaster_widget_preview"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen|keyguard" /><!--
     android:configure="org.mars3142.android.toaster.activity.WidgetConfigureActivity"
 -->

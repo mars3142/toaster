@@ -19,8 +19,7 @@
   ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/activatedBackgroundIndicator"
@@ -31,7 +30,7 @@
         android:layout_width="@dimen/icon_size_small"
         android:layout_height="@dimen/icon_size_small"
         android:layout_margin="5dp"
-        android:contentDescription="@string/package_icon"/>
+        android:contentDescription="@string/package_icon" />
 
     <TextView
         android:id="@+id/packageName"
@@ -41,6 +40,6 @@
         android:layout_margin="5dp"
         android:layout_toRightOf="@+id/packageIcon"
         android:gravity="center"
-        android:text="@string/demo_package"/>
+        android:text="@string/demo_package" />
 
 </RelativeLayout>

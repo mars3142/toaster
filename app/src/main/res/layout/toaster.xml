@@ -19,8 +19,7 @@
   ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<it.gmariotti.cardslib.library.view.CardListView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<it.gmariotti.cardslib.library.view.CardListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toast_card_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,4 +29,4 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:scrollbarStyle="outsideOverlay"/>
+    android:scrollbarStyle="outsideOverlay" />
