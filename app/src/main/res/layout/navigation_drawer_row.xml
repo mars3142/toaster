@@ -39,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
-        android:layout_toRightOf="@id/packageIcon"
         android:layout_toEndOf="@id/packageIcon"
+        android:layout_toRightOf="@id/packageIcon"
         android:gravity="center"
         android:singleLine="true"
         tools:text="@string/demo_package" />

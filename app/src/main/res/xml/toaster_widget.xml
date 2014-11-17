@@ -28,6 +28,6 @@
     android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen" />
 
-<!--
-    android:configure="org.mars3142.android.toaster.activity.WidgetConfigureActivity"
--->
+    <!--
+        android:configure="org.mars3142.android.toaster.activity.WidgetConfigureActivity"
+    -->

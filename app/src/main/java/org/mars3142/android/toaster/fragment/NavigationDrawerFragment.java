@@ -28,7 +28,6 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -42,7 +41,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
