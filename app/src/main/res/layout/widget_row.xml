@@ -20,9 +20,13 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/colorPrimary"
+    tools:ignore="UseCompoundDrawables">
 
     <ImageView
         android:id="@+id/packageIcon"
@@ -30,7 +34,7 @@
         android:layout_height="@dimen/icon_size_small"
         android:layout_margin="10dp"
         android:contentDescription="@string/package_icon"
-        android:src="@drawable/ic_launcher" />
+        tools:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/packageName"
@@ -38,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="15dp"
-        android:text="@string/demo_package"
-        android:textColor="@color/text_color_light" />
+        android:textColor="@color/widget_text_color"
+        tools:text="@string/demo_package" />
 
 </LinearLayout>

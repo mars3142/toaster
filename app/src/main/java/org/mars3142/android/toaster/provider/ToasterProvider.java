@@ -22,6 +22,7 @@ package org.mars3142.android.toaster.provider;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -215,6 +216,7 @@ public class ToasterProvider extends ContentProvider {
             rowId = database.insert(tableName, null, values);
         }
         if (rowId > 0) {
+            refreshWidget();
             getContext().getContentResolver().notifyChange(uri, null);
             return ContentUris.withAppendedId(contentUri, rowId);
         }
@@ -263,6 +265,7 @@ public class ToasterProvider extends ContentProvider {
                     throw new IllegalArgumentException("Unknown URI: " + uri);
             }
         }
+        refreshWidget();
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }
@@ -310,7 +313,13 @@ public class ToasterProvider extends ContentProvider {
                     throw new IllegalArgumentException("Unknown URI: " + uri);
             }
         }
+        refreshWidget();
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
+    }
+
+    private void refreshWidget() {
+        Intent intent = new Intent(String.format("%s.APPWIDGET_UPDATE", BuildConfig.APPLICATION_ID));
+        getContext().sendBroadcast(intent);
     }
 }

@@ -20,6 +20,7 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/activatedBackgroundIndicator"
@@ -37,9 +38,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_margin="5dp"
-        android:layout_toRightOf="@+id/packageIcon"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@id/packageIcon"
+        android:layout_toEndOf="@id/packageIcon"
         android:gravity="center"
-        android:text="@string/demo_package" />
+        android:singleLine="true"
+        tools:text="@string/demo_package" />
 
 </RelativeLayout>

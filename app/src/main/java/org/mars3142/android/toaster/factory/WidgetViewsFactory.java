@@ -23,6 +23,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -42,23 +43,21 @@ public class WidgetViewsFactory
 
     private final static String TAG = WidgetViewsFactory.class.getSimpleName();
 
-    private final Context context;
-    private final ArrayList<String> packages = new ArrayList<String>();
+    private Context mContext;
+    private ArrayList<String> mPackages = new ArrayList<String>();
 
     public WidgetViewsFactory(Context context) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "ctr");
-        }
-
-        this.context = context;
+        mContext = context;
 
         ContentResolver cr = context.getContentResolver();
-        Cursor data = cr.query(ToasterTable.TOASTER_URI, null, null, null, ToasterTable._ID + " DESC LIMIT 5");
+        Cursor data = cr.query(ToasterTable.TOASTER_URI, new String[]{ToasterTable.PACKAGE}, null, null, ToasterTable._ID + " DESC LIMIT 5");
         if (data != null) {
-            packages.clear();
+            mPackages.clear();
             data.moveToFirst();
             do {
-                packages.add(data.getString(data.getColumnIndex(ToasterTable.PACKAGE)));
+                if (!data.isAfterLast()) {
+                    mPackages.add(data.getString(data.getColumnIndex(ToasterTable.PACKAGE)));
+                }
             } while (data.moveToNext());
         }
     }
@@ -75,12 +74,12 @@ public class WidgetViewsFactory
 
     @Override
     public void onDestroy() {
-        // no-op
+        mContext = null;
     }
 
     @Override
     public int getCount() {
-        return packages.size();
+        return mPackages.size();
     }
 
     @Override
@@ -89,20 +88,30 @@ public class WidgetViewsFactory
             Log.v(TAG, "getViewAt( " + position + " )");
         }
 
-        RemoteViews row = new RemoteViews(context.getPackageName(), R.layout.widget_row);
-        ToastCard toastCard = new ToastCard(context);
-        toastCard.packageName = packages.get(position);
+        RemoteViews row = new RemoteViews(mContext.getPackageName(), R.layout.widget_row);
+        ToastCard toastCard = new ToastCard(mContext);
+        toastCard.packageName = mPackages.get(position);
         toastCard.loadData();
 
         row.setTextViewText(R.id.packageName, toastCard.appName);
         row.setImageViewBitmap(R.id.packageIcon, PackageHelper.drawableToBitmap(toastCard.packageIcon));
+
+        int color = mContext.getResources().getColor(R.color.colorPrimary);
+        if (toastCard.palette != null) {
+            color = toastCard.palette.getMutedColor(color);
+        }
+        row.setInt(R.id.row, "setBackgroundColor", color);
 
         return (row);
     }
 
     @Override
     public RemoteViews getLoadingView() {
-        return null;
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "getLoadingView");
+        }
+
+        return new RemoteViews(mContext.getPackageName(), R.layout.widget_loading);
     }
 
     @Override

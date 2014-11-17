@@ -20,8 +20,10 @@
 package org.mars3142.android.toaster.service;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViewsService;
 
+import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.factory.WidgetViewsFactory;
 
 /**
@@ -33,6 +35,10 @@ public class WidgetService extends RemoteViewsService {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "onGetViewFactory");
+        }
+
         return (new WidgetViewsFactory(this.getApplicationContext()));
     }
 }

@@ -21,29 +21,13 @@
 
 <resources>
 
-    <color name="colorPrimary">#ffdddddd</color>
-    <color name="colorPrimaryDark">#ffc8c8c8</color>
-    <color name="colorBackground">#ffffffff</color>
+    <color name="colorPrimary">#ffffbc36</color>
+    <color name="colorPrimaryDark">#ffff9f2f</color>
     <color name="colorAccent">#ff56bcff</color>
-    <color name="colorControlHighlight">#ff2fb5ff</color>
-
-    <color name="color_text">#ff000000</color>
-
-    <color name="color_card">#ffffbc36</color>
 
     <color name="nav_row">#ffc8c8c8</color>
     <color name="nav_background">#B7B7B7</color>
 
-    <color name="widget_header_background">#ffd4cfd3</color>
-    <color name="widget_row_background">#B7B7B7</color>
-
-    <color name="actionbar">#ffdddddd</color>
-    <color name="text_color_dark">#ff585858</color>
-    <color name="text_color_light">#ff777777</color>
-    <color name="text_color_toast">#fffa6367</color>
-    <color name="text_color_time">#ffffffff</color>
-
-    <color name="activity_background">#ffdddddd</color>
-    <color name="menu_background">#ffefefef</color>
+    <color name="widget_text_color">#ff000000</color>
 
 </resources>
