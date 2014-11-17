@@ -46,6 +46,7 @@ public class ToastCard extends Card {
     public String packageName;
     public String timestamp;
     public Drawable packageIcon;
+    public Palette palette;
 
     private TextView messageTextView;
     private TextView packageNameTextView;
@@ -64,6 +65,9 @@ public class ToastCard extends Card {
             appName = PackageHelper.getAppName(super.getContext(), packageName);
             appName = (appName == null) ? packageName : appName;
             packageIcon = PackageHelper.getIconFromPackageName(super.getContext(), packageName);
+            if (packageIcon != null) {
+                palette = Palette.generate(PackageHelper.drawableToBitmap(packageIcon));
+            }
         }
     }
 
@@ -86,10 +90,9 @@ public class ToastCard extends Card {
         }
 
         if (cardBackgroundView != null) {
-            int color = getContext().getResources().getColor(R.color.color_card);
-            if (packageIcon != null) {
-                Palette palette = Palette.generate(PackageHelper.drawableToBitmap(packageIcon));
-                color = palette.getMutedColor(resources.getColor(R.color.color_card));
+            int color = resources.getColor(R.color.colorPrimary);
+            if (palette != null) {
+                color = palette.getMutedColor(color);
             }
             cardBackgroundView.setBackgroundColor(color);
         }
