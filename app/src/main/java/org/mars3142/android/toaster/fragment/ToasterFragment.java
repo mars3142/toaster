@@ -26,6 +26,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,10 @@ import org.mars3142.android.toaster.table.ToasterTable;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
+ * Fragment showing all toasts entries
+ *
+ * <p>The fragment showed every toast message, depending on the current filter.</p>
+ *
  * @author mars3142
  */
 public class ToasterFragment extends Fragment
@@ -77,7 +82,7 @@ public class ToasterFragment extends Fragment
         }
 
         String packageFilter = getArguments().getString(PACKAGE_FILTER);
-        if (packageFilter == null || packageFilter.length() == 0) {
+        if (TextUtils.isEmpty(packageFilter)) {
             getLoaderManager().restartLoader(DATA_LOADER_ALL, null, this);
         } else {
             getLoaderManager().restartLoader(DATA_LOADER_FILTERED, null, this);
@@ -131,6 +136,7 @@ public class ToasterFragment extends Fragment
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         try {
             String packageFilter = getArguments().getString(PACKAGE_FILTER);
             if (packageFilter == null) {

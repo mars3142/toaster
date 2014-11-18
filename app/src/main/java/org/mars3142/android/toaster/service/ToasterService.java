@@ -33,6 +33,10 @@ import org.mars3142.android.toaster.table.ToasterTable;
 import java.util.Calendar;
 
 /**
+ * Accessibility service who fetches the notification
+ *
+ * <p>Sends the data to the database provider and informs every widget to update</p>
+ *
  * @author mars3142
  */
 public class ToasterService extends AccessibilityService {
@@ -42,7 +46,7 @@ public class ToasterService extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         if (event.getEventType() != AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
-            Log.d(TAG, "Unexpected event type");
+            Log.d(TAG, "Unexpected event type - ignoring");
             return; // event is not a notification
         }
 

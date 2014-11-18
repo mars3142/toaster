@@ -89,8 +89,7 @@ public class WidgetViewsFactory
 
         RemoteViews row = new RemoteViews(mContext.getPackageName(), R.layout.widget_row);
         ToastCard toastCard = new ToastCard(mContext);
-        toastCard.packageName = mPackages.get(position);
-        toastCard.loadData();
+        toastCard.loadData(mPackages.get(position));
 
         row.setTextViewText(R.id.packageName, toastCard.appName);
         row.setImageViewBitmap(R.id.packageIcon, PackageHelper.drawableToBitmap(toastCard.packageIcon));

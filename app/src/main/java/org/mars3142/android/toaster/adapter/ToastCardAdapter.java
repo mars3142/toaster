@@ -41,6 +41,8 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
 
 /**
+ * CursorAdapter for the main view
+ *
  * @author mars3142
  */
 public class ToastCardAdapter extends CardCursorAdapter {
@@ -56,8 +58,7 @@ public class ToastCardAdapter extends CardCursorAdapter {
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
         card.timestamp = dateFormat.format(Long.parseLong(cursor.getString(cursor.getColumnIndex(ToasterTable.TIMESTAMP))));
         card.message = cursor.getString(cursor.getColumnIndex(ToasterTable.MESSAGE));
-        card.packageName = cursor.getString(cursor.getColumnIndex(ToasterTable.PACKAGE));
-        card.loadData();
+        card.loadData(cursor.getString(cursor.getColumnIndex(ToasterTable.PACKAGE)));
 
         card.setId(cursor.getString(cursor.getColumnIndex(ToasterTable._ID)));
 
@@ -96,20 +97,12 @@ public class ToastCardAdapter extends CardCursorAdapter {
                             context.startActivity(intent);
                         }
                         break;
-
-                    case R.id.share:
-                        intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("image/*");
-                        intent.putExtra(Intent.EXTRA_STREAM, baseCard.getCardView().createBitmap());
-                        context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_card_title)));
-                        break;
                 }
             }
         });
         header.setPopupMenuPrepareListener(new CardHeader.OnPrepareCardHeaderPopupMenuListener() {
             @Override
             public boolean onPreparePopupMenu(BaseCard baseCard, PopupMenu popupMenu) {
-                popupMenu.getMenu().removeItem(R.id.share);
                 if (((ToastCard) baseCard).packageIcon == null) {
                     popupMenu.getMenu().removeItem(R.id.app_info);
                 }

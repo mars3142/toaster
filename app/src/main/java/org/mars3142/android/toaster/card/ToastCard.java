@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v7.graphics.Palette;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,6 +36,8 @@ import org.mars3142.android.toaster.helper.PackageHelper;
 import it.gmariotti.cardslib.library.internal.Card;
 
 /**
+ * Representation of a toast card
+ *
  * @author mars3142
  */
 public class ToastCard extends Card {
@@ -48,20 +51,26 @@ public class ToastCard extends Card {
     public Drawable packageIcon;
     public Palette palette;
 
-    private TextView messageTextView;
-    private TextView packageNameTextView;
-    private ImageView packageIconView;
-    private RelativeLayout cardBackgroundView;
-    private Resources resources;
+    private TextView mMessageTextView;
+    private TextView mPackageNameTextView;
+    private ImageView mPackageIconView;
+    private RelativeLayout mCardBackgroundView;
+    private Resources mResources;
 
     public ToastCard(Context context) {
         super(context, R.layout.toaster_card);
 
-        resources = getContext().getResources();
+        mResources = getContext().getResources();
     }
 
-    public void loadData() {
-        if (packageName != null && packageName.length() != 0) {
+    /**
+     * Loads the data for the given package name
+     *
+     * @param packageName package name to load data from
+     */
+    public void loadData(String packageName) {
+        if (!TextUtils.isEmpty(packageName)) {
+            this.packageName = packageName;
             appName = PackageHelper.getAppName(super.getContext(), packageName);
             appName = (appName == null) ? packageName : appName;
             packageIcon = PackageHelper.getIconFromPackageName(super.getContext(), packageName);
@@ -73,40 +82,40 @@ public class ToastCard extends Card {
 
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
-        if (cardBackgroundView == null) {
-            cardBackgroundView = (RelativeLayout) parent.findViewById(R.id.backgroundColor);
+        if (mCardBackgroundView == null) {
+            mCardBackgroundView = (RelativeLayout) parent.findViewById(R.id.backgroundColor);
         }
 
-        if (messageTextView == null) {
-            messageTextView = (TextView) parent.findViewById(R.id.message);
+        if (mMessageTextView == null) {
+            mMessageTextView = (TextView) parent.findViewById(R.id.message);
         }
 
-        if (packageNameTextView == null) {
-            packageNameTextView = (TextView) parent.findViewById(R.id.packageName);
+        if (mPackageNameTextView == null) {
+            mPackageNameTextView = (TextView) parent.findViewById(R.id.packageName);
         }
 
-        if (packageIconView == null) {
-            packageIconView = (ImageView) parent.findViewById(R.id.packageIcon);
+        if (mPackageIconView == null) {
+            mPackageIconView = (ImageView) parent.findViewById(R.id.packageIcon);
         }
 
-        if (cardBackgroundView != null) {
-            int color = resources.getColor(R.color.colorPrimary);
+        if (mCardBackgroundView != null) {
+            int color = mResources.getColor(R.color.colorPrimary);
             if (palette != null) {
                 color = palette.getMutedColor(color);
             }
-            cardBackgroundView.setBackgroundColor(color);
+            mCardBackgroundView.setBackgroundColor(color);
         }
 
-        if (messageTextView != null) {
-            messageTextView.setText(message);
+        if (mMessageTextView != null) {
+            mMessageTextView.setText(message);
         }
 
-        if (packageNameTextView != null) {
-            packageNameTextView.setText(appName == null ? packageName : appName);
+        if (mPackageNameTextView != null) {
+            mPackageNameTextView.setText(appName == null ? packageName : appName);
         }
 
-        if (packageIconView != null) {
-            packageIconView.setImageDrawable(packageIcon);
+        if (mPackageIconView != null) {
+            mPackageIconView.setImageDrawable(packageIcon);
         }
     }
 }

@@ -33,6 +33,8 @@ import org.mars3142.android.toaster.card.ToastCard;
 import java.util.ArrayList;
 
 /**
+ * ArrayAdapter for the Navigation Drawer
+ *
  * @author mars3142
  */
 public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {

@@ -24,6 +24,8 @@ import org.mars3142.android.toaster.card.ToastCard;
 import java.util.Comparator;
 
 /**
+ * Compares two TwoCards app names (case insensitive)
+ *
  * @author mars3142
  */
 public class ToastCardComparator implements Comparator<ToastCard> {

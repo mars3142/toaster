@@ -44,6 +44,10 @@ import org.mars3142.android.toaster.service.ToasterService;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 /**
+ * MainActivity of Toaster
+ *
+ * <p>It's the main entry point for the app</p>
+ *
  * @author mars3142
  */
 public class MainActivity extends ActionBarActivity
@@ -121,9 +125,9 @@ public class MainActivity extends ActionBarActivity
             case R.id.action_delete:
                 DeleteListener deleteListener;
                 if (mPackageName.length() == 0) {
-                    deleteListener = new DeleteListener(this);
+                    deleteListener = new DeleteListener(this, ToasterTable.TOASTER_URI);
                 } else {
-                    deleteListener = new DeleteListener(this, ToasterTable.PACKAGE + " = ?", new String[]{mPackageName});
+                    deleteListener = new DeleteListener(this, ToasterTable.TOASTER_URI, ToasterTable.PACKAGE + " = ?", new String[]{mPackageName});
                 }
                 new Builder(this)
                         .setTitle(R.string.action_delete)
@@ -155,6 +159,11 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    /**
+     * Changes member variables depending on the given package name
+     *
+     * @param packageName new package name
+     */
     public void onSectionAttached(String packageName) {
         if (packageName.length() != 0) {
             mTitle = PackageHelper.getAppName(getApplicationContext(), packageName);
@@ -172,12 +181,18 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    private boolean isAccessibilitySettingsOn(Context mContext) {
+    /**
+     * Checks if the app is set as accessibility
+     *
+     * @param context current context
+     * @return true, if set
+     */
+    private boolean isAccessibilitySettingsOn(Context context) {
         int accessibilityEnabled = 0;
         final String service = BuildConfig.APPLICATION_ID + "/" + ToasterService.class.getName();
 
         try {
-            accessibilityEnabled = Settings.Secure.getInt(mContext.getApplicationContext().getContentResolver(),
+            accessibilityEnabled = Settings.Secure.getInt(context.getApplicationContext().getContentResolver(),
                     android.provider.Settings.Secure.ACCESSIBILITY_ENABLED);
         } catch (Settings.SettingNotFoundException ex) {
             Log.e(TAG, "Error finding setting, default accessibility to not found: " + ex.getMessage());
@@ -185,7 +200,7 @@ public class MainActivity extends ActionBarActivity
         TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
 
         if (accessibilityEnabled == 1) {
-            String settingValue = Settings.Secure.getString(mContext.getApplicationContext().getContentResolver(),
+            String settingValue = Settings.Secure.getString(context.getApplicationContext().getContentResolver(),
                     Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
             if (settingValue != null) {
                 mStringColonSplitter.setString(settingValue);

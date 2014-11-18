@@ -27,6 +27,8 @@ import android.net.Uri;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 /**
+ * Listener for calling a delete on the database provider
+ *
  * @author mars3142
  */
 public class DeleteListener
@@ -39,16 +41,8 @@ public class DeleteListener
     private final String mWhere;
     private final String[] mSelectionArgs;
 
-    public DeleteListener(Context context) {
-        this(context, ToasterTable.TOASTER_URI, null, null);
-    }
-
     public DeleteListener(Context context, Uri uri) {
         this(context, uri, null, null);
-    }
-
-    public DeleteListener(Context context, String where, String[] selectionArgs) {
-        this(context, ToasterTable.TOASTER_URI, where, selectionArgs);
     }
 
     public DeleteListener(Context context, Uri uri, String where, String[] selectionArgs) {

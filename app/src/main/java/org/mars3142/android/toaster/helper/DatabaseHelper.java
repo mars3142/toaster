@@ -29,6 +29,10 @@ import org.mars3142.android.toaster.table.FilterTable;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 /**
+ * Helper class for database request
+ *
+ * <p>It calls create/update/downgrade for every table in the database.</p>
+ *
  * @author mars3142
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -44,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         if (BuildConfig.DEBUG) {
-            Log.v(TAG, String.format("create database"));
+            Log.v(TAG, String.format("Create database"));
         }
 
         ToasterTable.onCreate(db);
@@ -54,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (BuildConfig.DEBUG) {
-            Log.w(TAG, String.format("Upgrading database from version %s to %s", oldVersion, newVersion));
+            Log.v(TAG, String.format("Upgrading database from version %s to %s", oldVersion, newVersion));
         }
 
         ToasterTable.onUpgrade(db, oldVersion, newVersion);

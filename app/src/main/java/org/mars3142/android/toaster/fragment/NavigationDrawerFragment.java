@@ -180,9 +180,8 @@ public class NavigationDrawerFragment extends ListFragment
                 if (data.moveToFirst()) {
                     do {
                         ToastCard packageCard = new ToastCard(getActionBar().getThemedContext());
-                        packageCard.packageName = data.getString(data.getColumnIndex(ToasterTable.PACKAGE));
+                        packageCard.loadData(data.getString(data.getColumnIndex(ToasterTable.PACKAGE)));
                         if (packageCard.packageName != null) {
-                            packageCard.loadData();
                             mNavList.add(packageCard);
                         }
                     } while (data.moveToNext());

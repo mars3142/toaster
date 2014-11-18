@@ -68,7 +68,7 @@ public class WidgetConfigureActivity extends Activity {
     public static void saveTitlePref(Context context, int appWidgetId, String text) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.putString(PREF_PREFIX_KEY + appWidgetId, text);
-        prefs.commit();
+        prefs.apply();
     }
 
     // Read the prefix from the SharedPreferences object for this widget.
@@ -86,7 +86,7 @@ public class WidgetConfigureActivity extends Activity {
     public static void deleteTitlePref(Context context, int appWidgetId) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.remove(PREF_PREFIX_KEY + appWidgetId);
-        prefs.commit();
+        prefs.apply();
     }
 
     @Override
