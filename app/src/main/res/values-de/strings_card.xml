@@ -23,8 +23,6 @@
 
     <string name="package_icon">Package Icon</string>
     <string name="app_info">App-Info</string>
-    <string name="share_card">Teilen</string>
-    <string name="share_card_title">Teile Eintrag mit</string>
     <string name="play_store">PlayStore</string>
 
 </resources>

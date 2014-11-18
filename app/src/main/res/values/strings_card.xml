@@ -26,8 +26,6 @@
 
     <string name="package_icon">Package icon</string>
     <string name="app_info">App Info</string>
-    <string name="share_card">Share</string>
-    <string name="share_card_title">Share entry using</string>
     <string name="play_store">PlayStore</string>
 
 </resources>

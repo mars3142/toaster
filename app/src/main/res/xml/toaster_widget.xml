@@ -25,9 +25,6 @@
     android:minWidth="180dp"
     android:previewImage="@drawable/toaster_widget_preview"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="1800000"
-    android:widgetCategory="home_screen" />
+    android:updatePeriodMillis="1800000" />
 
-    <!--
-        android:configure="org.mars3142.android.toaster.activity.WidgetConfigureActivity"
-    -->
+    <!--android:configure="org.mars3142.android.toaster.activity.WidgetConfigureActivity"-->

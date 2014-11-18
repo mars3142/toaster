@@ -35,16 +35,16 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
-        android:id="@+id/discard"
+        android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_action_discard"
+        android:background="@drawable/ic_action_delete"
         tools:ignore="ContentDescription" />
 
     <ImageButton
-        android:id="@+id/edit"
+        android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_action_edit"
+        android:background="@drawable/ic_action_create"
         tools:ignore="ContentDescription" />
 </LinearLayout>

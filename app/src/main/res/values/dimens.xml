@@ -33,6 +33,6 @@
     <dimen name="icon_size_small">32dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
 
-    <dimen name="elevation_toolbar">2dp</dimen>
+    <dimen name="elevation_toolbar">5dp</dimen>
 
 </resources>
