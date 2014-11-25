@@ -60,12 +60,12 @@ public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {
             convertView = inflater.inflate(R.layout.navigation_drawer_row, parent, false);
         }
 
-        TextView packageName = (TextView) convertView.findViewById(R.id.packageName);
+        TextView packageName = (TextView) convertView.findViewById(R.id.package_name);
         if (packageName != null) {
             packageName.setText(mCards.get(position).appName);
         }
 
-        ImageView packageIcon = (ImageView) convertView.findViewById(R.id.packageIcon);
+        ImageView packageIcon = (ImageView) convertView.findViewById(R.id.package_icon);
         if (packageIcon != null) {
             packageIcon.setImageDrawable(mCards.get(position).packageIcon);
         }

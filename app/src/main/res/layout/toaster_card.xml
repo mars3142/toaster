@@ -35,7 +35,7 @@
         android:minHeight="@dimen/card_base_empty_height">
 
         <TextView
-            android:id="@+id/packageName"
+            android:id="@+id/package_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -58,7 +58,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/packageIcon"
+        android:id="@+id/package_icon"
         android:layout_width="@android:dimen/notification_large_icon_width"
         android:layout_height="@android:dimen/notification_large_icon_height"
         android:layout_alignParentLeft="true"

@@ -34,5 +34,6 @@
     <dimen name="widget_margin">8dp</dimen>
 
     <dimen name="elevation_toolbar">5dp</dimen>
+    <dimen name="card_empty_height">96dp</dimen>
 
 </resources>

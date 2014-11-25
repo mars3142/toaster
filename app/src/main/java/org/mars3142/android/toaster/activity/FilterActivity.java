@@ -47,7 +47,7 @@ public class FilterActivity extends ActionBarActivity
 
         setContentView(R.layout.filter);
         getLoaderManager().initLoader(DATA_LOADER, null, this);
-        packageName = (AutoCompleteTextView) findViewById(R.id.packageName);
+        packageName = (AutoCompleteTextView) findViewById(R.id.package_name);
     }
 
     @Override

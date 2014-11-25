@@ -29,7 +29,7 @@
     tools:ignore="UseCompoundDrawables">
 
     <ImageView
-        android:id="@+id/packageIcon"
+        android:id="@+id/package_icon"
         android:layout_width="@dimen/icon_size_small"
         android:layout_height="@dimen/icon_size_small"
         android:layout_margin="10dp"
@@ -37,7 +37,7 @@
         tools:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/packageName"
+        android:id="@+id/package_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"

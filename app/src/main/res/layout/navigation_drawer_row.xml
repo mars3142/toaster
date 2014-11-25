@@ -27,20 +27,20 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/packageIcon"
+        android:id="@+id/package_icon"
         android:layout_width="@dimen/icon_size_small"
         android:layout_height="@dimen/icon_size_small"
         android:layout_margin="5dp"
         android:contentDescription="@string/package_icon" />
 
     <TextView
-        android:id="@+id/packageName"
+        android:id="@+id/package_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
-        android:layout_toEndOf="@id/packageIcon"
-        android:layout_toRightOf="@id/packageIcon"
+        android:layout_toEndOf="@id/package_icon"
+        android:layout_toRightOf="@id/package_icon"
         android:gravity="center"
         android:singleLine="true"
         tools:text="@string/demo_package" />

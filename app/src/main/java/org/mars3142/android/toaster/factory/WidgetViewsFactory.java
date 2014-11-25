@@ -91,8 +91,8 @@ public class WidgetViewsFactory
         ToastCard toastCard = new ToastCard(mContext);
         toastCard.loadData(mPackages.get(position));
 
-        row.setTextViewText(R.id.packageName, toastCard.appName);
-        row.setImageViewBitmap(R.id.packageIcon, PackageHelper.drawableToBitmap(toastCard.packageIcon));
+        row.setTextViewText(R.id.package_name, toastCard.appName);
+        row.setImageViewBitmap(R.id.package_icon, PackageHelper.drawableToBitmap(toastCard.packageIcon));
 
         int color = mContext.getResources().getColor(R.color.colorPrimary);
         if (toastCard.palette != null) {

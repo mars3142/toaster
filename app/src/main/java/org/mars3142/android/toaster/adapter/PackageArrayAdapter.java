@@ -52,7 +52,7 @@ public class PackageArrayAdapter extends ArrayAdapter<String> {
             convertView = inflater.inflate(R.layout.filter_row, parent, false);
         }
 
-        TextView packageName = (TextView) convertView.findViewById(R.id.packageName);
+        TextView packageName = (TextView) convertView.findViewById(R.id.package_name);
         if (packageName != null) {
             packageName.setText(mPackages[position]);
         }

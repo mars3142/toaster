@@ -91,11 +91,11 @@ public class ToastCard extends Card {
         }
 
         if (mPackageNameTextView == null) {
-            mPackageNameTextView = (TextView) parent.findViewById(R.id.packageName);
+            mPackageNameTextView = (TextView) parent.findViewById(R.id.package_name);
         }
 
         if (mPackageIconView == null) {
-            mPackageIconView = (ImageView) parent.findViewById(R.id.packageIcon);
+            mPackageIconView = (ImageView) parent.findViewById(R.id.package_icon);
         }
 
         if (mCardBackgroundView != null) {
