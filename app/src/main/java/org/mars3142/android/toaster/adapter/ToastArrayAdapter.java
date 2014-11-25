@@ -43,7 +43,7 @@ public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {
     private final ArrayList<ToastCard> mCards;
 
     public ToastArrayAdapter(Context context, ArrayList<ToastCard> cards) {
-        this(context, R.layout.navigation_drawer_row, cards);
+        this(context, R.layout.packages_row, cards);
     }
 
     public ToastArrayAdapter(Context context, int resource, ArrayList<ToastCard> cards) {
@@ -57,7 +57,7 @@ public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.navigation_drawer_row, parent, false);
+            convertView = inflater.inflate(R.layout.packages_row, parent, false);
         }
 
         TextView packageName = (TextView) convertView.findViewById(R.id.package_name);
