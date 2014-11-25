@@ -40,7 +40,7 @@ import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
  * Fragment showing all toasts entries
- *
+ * <p/>
  * <p>The fragment showed every toast message, depending on the current filter.</p>
  *
  * @author mars3142
@@ -81,7 +81,10 @@ public class ToasterFragment extends Fragment
             mListView.setAdapter(mAdapter);
         }
 
-        String packageFilter = getArguments().getString(PACKAGE_FILTER);
+        String packageFilter = null;
+        if (getArguments() != null) {
+            packageFilter = getArguments().getString(PACKAGE_FILTER);
+        }
         if (TextUtils.isEmpty(packageFilter)) {
             getLoaderManager().restartLoader(DATA_LOADER_ALL, null, this);
         } else {
@@ -138,8 +141,11 @@ public class ToasterFragment extends Fragment
         super.onAttach(activity);
 
         try {
-            String packageFilter = getArguments().getString(PACKAGE_FILTER);
-            if (packageFilter == null) {
+            String packageFilter = null;
+            if (getArguments() != null) {
+                packageFilter = getArguments().getString(PACKAGE_FILTER);
+            }
+            if (TextUtils.isEmpty(packageFilter)) {
                 packageFilter = "";
             }
             ((MainActivity) activity).onSectionAttached(packageFilter);

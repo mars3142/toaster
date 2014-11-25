@@ -19,11 +19,10 @@
   ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/nav_background"
-    android:choiceMode="singleChoice"
-    android:clickable="true"
-    android:divider="@android:color/darker_gray"
-    android:dividerHeight="1px" />
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:minHeight="?attr/actionBarSize" />
+

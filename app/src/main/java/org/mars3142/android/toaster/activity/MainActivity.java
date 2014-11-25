@@ -35,7 +35,7 @@ import android.view.MenuItem;
 
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
-import org.mars3142.android.toaster.fragment.NavigationDrawerFragment;
+import org.mars3142.android.toaster.fragment.PackagesFragment;
 import org.mars3142.android.toaster.fragment.ToasterFragment;
 import org.mars3142.android.toaster.helper.PackageHelper;
 import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
@@ -45,19 +45,19 @@ import org.mars3142.android.toaster.table.ToasterTable;
 
 /**
  * MainActivity of Toaster
- *
- * <p>It's the main entry point for the app</p>
+ * <p/>
+ * It's the main entry point for the app
  *
  * @author mars3142
  */
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements PackagesFragment.PackagesCallbacks {
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
-    private final static String PACKAGE_NAME = "packagename";
+    private final static String PACKAGE_NAME = "packageName";
 
-    private NavigationDrawerFragment mNavDrawerFragment;
+    private PackagesFragment mPackagesFragment;
     private CharSequence mTitle;
     private String mPackageName;
 
@@ -78,14 +78,17 @@ public class MainActivity extends ActionBarActivity
             getSupportActionBar().setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
         }
 
-        mNavDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mNavDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawerLayout != null) {
+            mPackagesFragment = (PackagesFragment) getFragmentManager().findFragmentById(R.id.packages);
+            mPackagesFragment.setUp(R.id.packages, drawerLayout);
+        }
 
         if (savedInstanceState != null) {
             mPackageName = savedInstanceState.getString(PACKAGE_NAME);
         }
 
-        onNavigationDrawerItemSelected(mPackageName);
+        onPackagesItemSelected(mPackageName);
     }
 
     @Override
@@ -98,8 +101,8 @@ public class MainActivity extends ActionBarActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         int menuRes = R.menu.nav_drawer_closed;
-        if (mNavDrawerFragment != null) {
-            if (!mNavDrawerFragment.isDrawerOpen()) {
+        if (mPackagesFragment != null) {
+            if (!mPackagesFragment.isDrawerOpen()) {
                 menuRes = R.menu.nav_drawer_closed;
             }
         }
@@ -109,7 +112,7 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(String packageFilter) {
+    public void onPackagesItemSelected(String packageFilter) {
         getFragmentManager().beginTransaction().replace(R.id.container, ToasterFragment.newInstance(packageFilter)).commit();
     }
 
@@ -165,10 +168,12 @@ public class MainActivity extends ActionBarActivity
      * @param packageName new package name
      */
     public void onSectionAttached(String packageName) {
-        if (packageName.length() != 0) {
-            mTitle = PackageHelper.getAppName(getApplicationContext(), packageName);
-        } else {
-            mTitle = getString(R.string.all_data);
+        if (mPackagesFragment != null) {
+            if (!TextUtils.isEmpty(packageName)) {
+                mTitle = PackageHelper.getAppName(getApplicationContext(), packageName);
+            } else {
+                mTitle = getString(R.string.all_data);
+            }
         }
         mPackageName = packageName;
     }

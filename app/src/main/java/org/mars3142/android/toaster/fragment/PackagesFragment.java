@@ -20,7 +20,7 @@
 package org.mars3142.android.toaster.fragment;
 
 import android.app.Activity;
-import android.app.ListFragment;
+import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -32,6 +32,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+//import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,7 +40,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
@@ -53,25 +57,29 @@ import java.util.Collections;
 /**
  * @author mars3142
  */
-public class NavigationDrawerFragment extends ListFragment
-        implements LoaderManager.LoaderCallbacks<Cursor> {
+public class PackagesFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
 
-    private final static String TAG = NavigationDrawerFragment.class.getSimpleName();
+    private final static String TAG = PackagesFragment.class.getSimpleName();
 
-    private final static String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
+    private final static String STATE_SELECTED_POSITION = "selected_packages_position";
 
     private static final int DATA_LOADER = 0;
 
-    private NavigationDrawerCallbacks mCallbacks;
+    private PackagesCallbacks mCallbacks;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
     private ArrayList<ToastCard> mNavList;
 
+//    private RecyclerView mDrawerRecyclerView;
+//    private RecyclerView.Adapter mRecyclerAdapter;
+//    private RecyclerView.LayoutManager mRecyclerManager;
+
     private int mCurrentSelectedPosition = 0;
 
-    public NavigationDrawerFragment() {
+    public PackagesFragment() {
     }
 
     @Override
@@ -92,15 +100,19 @@ public class NavigationDrawerFragment extends ListFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(R.layout.navigation_drawer, container, false);
-        getLoaderManager().restartLoader(DATA_LOADER, null, NavigationDrawerFragment.this);
+        RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.packages, container, false);
+        mDrawerListView = (ListView) layout.findViewById(R.id.list_view);
+        mDrawerListView.setOnItemClickListener(this);
+        mDrawerListView.setOnScrollListener(this);
 
-        return mDrawerListView;
-    }
+//        mDrawerRecyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
+//        mRecyclerManager = new LinearLayoutManager(getActivity());
+//        mDrawerRecyclerView.setLayoutManager(mRecyclerManager);
+//        mRecyclerAdapter = new PackagesRecyclerAdapter(mNavList);
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        selectItem(position);
+        getLoaderManager().restartLoader(DATA_LOADER, null, PackagesFragment.this);
+
+        return layout;
     }
 
     @Override
@@ -115,9 +127,9 @@ public class NavigationDrawerFragment extends ListFragment
         super.onAttach(activity);
 
         try {
-            mCallbacks = (NavigationDrawerCallbacks) activity;
+            mCallbacks = (PackagesCallbacks) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException("Activity must implement NavigationDrawerCallbacks.");
+            throw new ClassCastException("Activity must implement PackagesCallbacks.");
         }
     }
 
@@ -234,7 +246,7 @@ public class NavigationDrawerFragment extends ListFragment
             actionBar.setHomeButtonEnabled(true);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mDrawerLayout.setElevation(actionBar.getElevation());
+                mDrawerListView.setElevation(actionBar.getElevation());
             }
         }
 
@@ -252,7 +264,7 @@ public class NavigationDrawerFragment extends ListFragment
                     return;
                 }
 
-                getLoaderManager().restartLoader(DATA_LOADER, null, NavigationDrawerFragment.this);
+                getLoaderManager().restartLoader(DATA_LOADER, null, PackagesFragment.this);
                 getActivity().invalidateOptionsMenu();
             }
 
@@ -263,7 +275,7 @@ public class NavigationDrawerFragment extends ListFragment
                     return;
                 }
 
-                getLoaderManager().restartLoader(DATA_LOADER, null, NavigationDrawerFragment.this);
+                getLoaderManager().restartLoader(DATA_LOADER, null, PackagesFragment.this);
                 getActivity().invalidateOptionsMenu();
             }
         };
@@ -286,11 +298,35 @@ public class NavigationDrawerFragment extends ListFragment
         }
         mCurrentSelectedPosition = position;
         if (mCallbacks != null && mNavList != null && position < mNavList.size()) {
-            mCallbacks.onNavigationDrawerItemSelected(mNavList.get(position).packageName);
+            mCallbacks.onPackagesItemSelected(mNavList.get(position).packageName);
         }
     }
 
-    public static interface NavigationDrawerCallbacks {
-        void onNavigationDrawerItemSelected(String packageName);
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        selectItem(position);
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            switch (scrollState) {
+                case SCROLL_STATE_FLING:
+                case SCROLL_STATE_TOUCH_SCROLL:
+                    mDrawerListView.setTranslationZ(getResources().getDimension(R.dimen.elevation_toolbar));
+
+                default:
+                    mDrawerListView.setTranslationZ(0);
+            }
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+    }
+
+    public static interface PackagesCallbacks {
+        void onPackagesItemSelected(String packageName);
     }
 }
