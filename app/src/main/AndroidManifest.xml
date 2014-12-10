@@ -74,6 +74,12 @@
             android:authorities="${applicationId}.provider"
             android:exported="false" />
 
+        <receiver android:name="org.mars3142.android.toaster.receiver.PackageReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
         <receiver
             android:name="org.mars3142.android.toaster.widget.Widget"
             android:icon="@drawable/ic_launcher"
