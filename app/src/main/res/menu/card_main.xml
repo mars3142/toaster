@@ -27,7 +27,7 @@
     <item
         android:id="@+id/app_info"
         android:title="@string/app_info" />
-     <item
+    <item
         android:id="@+id/play_store"
         android:title="@string/play_store"
         android:visible="false" />

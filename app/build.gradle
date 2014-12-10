@@ -4,7 +4,7 @@ android {
     def versionMajor = 0
     def versionMinor = 4
     def versionPatch = 9
-    def versionBuild = 0
+    def versionBuild = 2
 
     buildToolsVersion '21.1.1'
     compileSdkVersion 21

@@ -30,7 +30,7 @@ import org.mars3142.android.toaster.table.ToasterTable;
 
 /**
  * Helper class for database request
- *
+ * <p/>
  * <p>It calls create/update/downgrade for every table in the database.</p>
  *
  * @author mars3142

@@ -34,7 +34,7 @@ import java.util.Calendar;
 
 /**
  * Accessibility service who fetches the notification
- *
+ * <p/>
  * <p>Sends the data to the database provider and informs every widget to update</p>
  *
  * @author mars3142

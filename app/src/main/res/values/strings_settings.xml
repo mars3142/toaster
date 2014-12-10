@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2014.
   ~
@@ -20,11 +19,10 @@
   -->
 
 <resources>
-    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
-         (such as screen margins) for screens with more than 820dp of available width. This
-         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
 
-    <dimen name="preference_horizontal_margin">64dp</dimen>
+    <string name="section_default">General</string>
+    <string name="delete_key" translatable="false">delete_on_uninstall</string>
+    <string name="delete_title">Auto delete entries</string>
+    <string name="delete_summary">Deletes automatically toasts of apps, after the app is uninstalled.</string>
 
 </resources>

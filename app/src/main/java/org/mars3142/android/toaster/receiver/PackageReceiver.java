@@ -22,9 +22,12 @@ package org.mars3142.android.toaster.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.mars3142.android.toaster.BuildConfig;
+import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.table.ToasterTable;
 
 /**
@@ -37,12 +40,26 @@ public class PackageReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (BuildConfig.DEBUG) {
-            Log.v(TAG, "onReceive");
+            Log.d(TAG, "onReceive");
         }
 
-        if (intent.getBooleanExtra(Intent.EXTRA_DATA_REMOVED, false)) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if (preferences.getBoolean(context.getString(R.string.delete_key), false)) {
             String packageName = intent.getData().getSchemeSpecificPart();
-            context.getContentResolver().delete(ToasterTable.TOASTER_URI, ToasterTable.PACKAGE + " = ?", new String[]{packageName});
+            if (intent.getBooleanExtra(Intent.EXTRA_DATA_REMOVED, false)) {
+                int rows = context.getContentResolver().delete(ToasterTable.TOASTER_URI, ToasterTable.PACKAGE + " = ?", new String[]{packageName});
+                if (BuildConfig.DEBUG) {
+                    Log.v(TAG, "Removed " + rows + " entries for package " + packageName);
+                }
+            } else {
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "Package " + packageName + " is not removed completely");
+                }
+            }
+        } else {
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, context.getString(R.string.delete_key) + " is false");
+            }
         }
     }
 }

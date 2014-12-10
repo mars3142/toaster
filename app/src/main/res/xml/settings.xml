@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2014.
   ~
@@ -19,12 +18,16 @@
   ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
-         (such as screen margins) for screens with more than 820dp of available width. This
-         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <dimen name="preference_horizontal_margin">64dp</dimen>
+    <PreferenceCategory android:title="@string/section_default">
 
-</resources>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/delete_key"
+            android:summary="@string/delete_summary"
+            android:title="@string/delete_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

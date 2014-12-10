@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -43,10 +44,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import org.mars3142.android.toaster.R;
+import org.mars3142.android.toaster.activity.SettingsActivity;
 import org.mars3142.android.toaster.adapter.PackagesRecyclerAdapter;
 import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
@@ -60,12 +63,10 @@ import java.util.Collections;
  * @author mars3142
  */
 public class PackagesFragment extends Fragment
-        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AbsListView.OnScrollListener, View.OnClickListener {
 
-    private final static String TAG = PackagesFragment.class.getSimpleName();
-
-    private final static String STATE_SELECTED_POSITION = "selected_packages_position";
-
+    private static final String TAG = PackagesFragment.class.getSimpleName();
+    private static final String STATE_SELECTED_POSITION = "selected_packages_position";
     private static final int DATA_LOADER = 0;
 
     private PackagesCallbacks mCallbacks;
@@ -74,6 +75,7 @@ public class PackagesFragment extends Fragment
     private ListView mDrawerListView;
     private View mFragmentContainerView;
     private ArrayList<ToastCard> mNavList;
+    private LinearLayout mSettings;
 
     private RecyclerView mDrawerRecyclerView;
 
@@ -101,14 +103,20 @@ public class PackagesFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.packages, container, false);
+
         mDrawerListView = (ListView) layout.findViewById(R.id.list_view);
         mDrawerListView.setOnItemClickListener(this);
         mDrawerListView.setOnScrollListener(this);
 
-        mDrawerRecyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
-        mDrawerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mSettings = (LinearLayout) layout.findViewById(R.id.setting);
+        mSettings.setOnClickListener(this);
 
-        getLoaderManager().restartLoader(DATA_LOADER, null, PackagesFragment.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mDrawerRecyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
+        mDrawerRecyclerView.setLayoutManager(layoutManager);
+
+        getLoaderManager().restartLoader(DATA_LOADER, null, this);
 
         return layout;
     }
@@ -324,7 +332,20 @@ public class PackagesFragment extends Fragment
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        // nothing
+    }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.setting:
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                getActivity().startActivity(intent);
+                break;
+
+            default:
+                break;
+        }
     }
 
     public static interface PackagesCallbacks {
