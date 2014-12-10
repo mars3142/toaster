@@ -28,6 +28,7 @@ import org.mars3142.android.toaster.R;
 
 /**
  * RecyclerViewHolder for the Navigation Drawer
+ *
  * @author mars3142
  */
 public class PackagesRecyclerViewHolder extends RecyclerView.ViewHolder {

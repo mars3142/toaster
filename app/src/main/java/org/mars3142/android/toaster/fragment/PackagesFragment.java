@@ -32,7 +32,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-//import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,6 +47,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import org.mars3142.android.toaster.R;
+import org.mars3142.android.toaster.adapter.PackagesRecyclerAdapter;
 import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.comparator.ToastCardComparator;
@@ -73,9 +75,7 @@ public class PackagesFragment extends Fragment
     private View mFragmentContainerView;
     private ArrayList<ToastCard> mNavList;
 
-//    private RecyclerView mDrawerRecyclerView;
-//    private RecyclerView.Adapter mRecyclerAdapter;
-//    private RecyclerView.LayoutManager mRecyclerManager;
+    private RecyclerView mDrawerRecyclerView;
 
     private int mCurrentSelectedPosition = 0;
 
@@ -105,10 +105,8 @@ public class PackagesFragment extends Fragment
         mDrawerListView.setOnItemClickListener(this);
         mDrawerListView.setOnScrollListener(this);
 
-//        mDrawerRecyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
-//        mRecyclerManager = new LinearLayoutManager(getActivity());
-//        mDrawerRecyclerView.setLayoutManager(mRecyclerManager);
-//        mRecyclerAdapter = new PackagesRecyclerAdapter(mNavList);
+        mDrawerRecyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
+        mDrawerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         getLoaderManager().restartLoader(DATA_LOADER, null, PackagesFragment.this);
 
@@ -201,6 +199,8 @@ public class PackagesFragment extends Fragment
                 Collections.sort(mNavList, new ToastCardComparator());
                 Collections.swap(mNavList, mNavList.indexOf(emptyCard), 0);
 
+                mDrawerRecyclerView.setAdapter(new PackagesRecyclerAdapter(mNavList));
+
                 mDrawerListView.setAdapter(new ToastArrayAdapter(getActionBar().getThemedContext(), mNavList));
                 mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
                 break;
@@ -214,6 +214,7 @@ public class PackagesFragment extends Fragment
     public void onLoaderReset(Loader<Cursor> loader) {
         switch (loader.getId()) {
             case DATA_LOADER:
+                mDrawerRecyclerView.setAdapter(null);
                 mDrawerListView.setAdapter(null);
                 break;
 
