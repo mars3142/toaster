@@ -20,6 +20,7 @@
 package org.mars3142.android.toaster.adapter;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class ToastArrayAdapter extends ArrayAdapter<ToastCard> {
         this(context, R.layout.packages_row, cards);
     }
 
-    public ToastArrayAdapter(Context context, int resource, ArrayList<ToastCard> cards) {
+    public ToastArrayAdapter(Context context, @LayoutRes int resource, ArrayList<ToastCard> cards) {
         super(context, resource, cards);
 
         mContext = context;

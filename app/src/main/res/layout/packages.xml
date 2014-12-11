@@ -52,10 +52,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/setting_icon"
                 android:layout_toRightOf="@id/setting_icon"
-                android:layout_centerVertical="true"
                 android:singleLine="true"
                 android:text="@string/action_settings" />
         </RelativeLayout>
@@ -78,10 +78,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/help_icon"
                 android:layout_toRightOf="@id/help_icon"
-                android:layout_centerVertical="true"
                 android:singleLine="true"
                 android:text="@string/action_help" />
         </RelativeLayout>

@@ -39,7 +39,6 @@ public class FilterActivity extends ActionBarActivity
     private final static String TAG = FilterActivity.class.getSimpleName();
 
     private final static int DATA_LOADER = 0;
-    private AutoCompleteTextView packageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,7 @@ public class FilterActivity extends ActionBarActivity
 
         setContentView(R.layout.filter);
         getLoaderManager().initLoader(DATA_LOADER, null, this);
-        packageName = (AutoCompleteTextView) findViewById(R.id.package_name);
+        AutoCompleteTextView packageName = (AutoCompleteTextView) findViewById(R.id.package_name);
     }
 
     @Override
