@@ -36,13 +36,13 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/setting"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/setting_icon"
                 android:layout_width="@dimen/icon_size_small"
                 android:layout_height="@dimen/icon_size_small"
                 android:layout_margin="5dp"
@@ -53,18 +53,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:gravity="center_vertical"
+                android:layout_toEndOf="@id/setting_icon"
+                android:layout_toRightOf="@id/setting_icon"
+                android:layout_centerVertical="true"
                 android:singleLine="true"
                 android:text="@string/action_settings" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/help_icon"
                 android:layout_width="@dimen/icon_size_small"
                 android:layout_height="@dimen/icon_size_small"
                 android:layout_margin="5dp"
@@ -75,10 +78,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:gravity="center_vertical"
+                android:layout_toEndOf="@id/help_icon"
+                android:layout_toRightOf="@id/help_icon"
+                android:layout_centerVertical="true"
                 android:singleLine="true"
                 android:text="@string/action_help" />
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

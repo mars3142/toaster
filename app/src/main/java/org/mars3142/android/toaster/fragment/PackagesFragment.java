@@ -75,7 +75,7 @@ public class PackagesFragment extends Fragment
     private ListView mDrawerListView;
     private View mFragmentContainerView;
     private ArrayList<ToastCard> mNavList;
-    private LinearLayout mSettings;
+    private RelativeLayout mSettings;
 
     private RecyclerView mDrawerRecyclerView;
 
@@ -108,7 +108,7 @@ public class PackagesFragment extends Fragment
         mDrawerListView.setOnItemClickListener(this);
         mDrawerListView.setOnScrollListener(this);
 
-        mSettings = (LinearLayout) layout.findViewById(R.id.setting);
+        mSettings = (RelativeLayout) layout.findViewById(R.id.setting);
         mSettings.setOnClickListener(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
