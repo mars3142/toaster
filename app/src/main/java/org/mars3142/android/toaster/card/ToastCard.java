@@ -99,7 +99,7 @@ public class ToastCard extends Card {
         }
 
         if (mCardBackgroundView != null) {
-            int color = mResources.getColor(R.color.colorPrimary);
+            int color = mResources.getColor(R.color.colorPrimaryDark);
             if (palette != null) {
                 color = palette.getMutedColor(color);
             }

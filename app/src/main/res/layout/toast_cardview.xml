@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="45dp"
             android:layout_marginStart="45dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:minHeight="@dimen/card_empty_height">
 
             <TextView

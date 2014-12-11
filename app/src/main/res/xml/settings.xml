@@ -23,7 +23,7 @@
 
     <PreferenceCategory android:title="@string/section_default">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="@string/delete_key"
             android:summary="@string/delete_summary"

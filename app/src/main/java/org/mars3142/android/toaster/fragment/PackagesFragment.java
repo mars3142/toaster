@@ -44,7 +44,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -75,7 +74,6 @@ public class PackagesFragment extends Fragment
     private ListView mDrawerListView;
     private View mFragmentContainerView;
     private ArrayList<ToastCard> mNavList;
-    private RelativeLayout mSettings;
 
     private RecyclerView mDrawerRecyclerView;
 
@@ -108,8 +106,8 @@ public class PackagesFragment extends Fragment
         mDrawerListView.setOnItemClickListener(this);
         mDrawerListView.setOnScrollListener(this);
 
-        mSettings = (RelativeLayout) layout.findViewById(R.id.setting);
-        mSettings.setOnClickListener(this);
+        RelativeLayout settings = (RelativeLayout) layout.findViewById(R.id.setting);
+        settings.setOnClickListener(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

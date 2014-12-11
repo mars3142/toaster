@@ -19,20 +19,46 @@
 
 package org.mars3142.android.toaster.fragment;
 
+import android.content.ComponentName;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
+import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
+import org.mars3142.android.toaster.receiver.PackageReceiver;
 
 /**
  * @author mars3142
  */
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    @Override
+    private static final String TAG = SettingsFragment.class.getSimpleName();
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.settings);
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "onSharedPreferenceChanged key: " + key);
+        }
+
+        if (key.equals(getString(R.string.delete_key))) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            boolean enabled = preferences.getBoolean(getString(R.string.delete_key), false);
+            int flag = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+
+            ComponentName component = new ComponentName(getActivity(), PackageReceiver.class);
+            getActivity().getPackageManager().setComponentEnabledSetting(component, flag, PackageManager.DONT_KILL_APP);
+        }
     }
 }
