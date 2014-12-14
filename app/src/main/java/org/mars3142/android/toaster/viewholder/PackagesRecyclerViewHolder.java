@@ -33,6 +33,8 @@ import org.mars3142.android.toaster.R;
  */
 public class PackagesRecyclerViewHolder extends RecyclerView.ViewHolder {
 
+    private static final String TAG = PackagesRecyclerViewHolder.class.getSimpleName();
+
     private ImageView mPackageIcon;
     private TextView mPackageName;
 

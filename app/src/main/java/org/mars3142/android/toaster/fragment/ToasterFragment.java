@@ -48,10 +48,10 @@ import it.gmariotti.cardslib.library.view.CardListView;
 public class ToasterFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private final static String TAG = ToasterFragment.class.getSimpleName();
-    private final static String PACKAGE_FILTER = "packageFilter";
-    private final int DATA_LOADER_ALL = 0;
-    private final int DATA_LOADER_FILTERED = 1;
+    private static final String TAG = ToasterFragment.class.getSimpleName();
+    private static final String PACKAGE_FILTER = "packageFilter";
+    private static final int DATA_LOADER_ALL = 0;
+    private static final int DATA_LOADER_FILTERED = 1;
 
     private ToastCardAdapter mAdapter;
 

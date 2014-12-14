@@ -31,7 +31,7 @@ import org.mars3142.android.toaster.factory.WidgetViewsFactory;
  */
 public class WidgetService extends RemoteViewsService {
 
-    private final static String TAG = WidgetService.class.getSimpleName();
+    private static final String TAG = WidgetService.class.getSimpleName();
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {

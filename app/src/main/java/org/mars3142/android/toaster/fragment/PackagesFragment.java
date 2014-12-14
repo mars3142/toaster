@@ -74,9 +74,7 @@ public class PackagesFragment extends Fragment
     private ListView mDrawerListView;
     private View mFragmentContainerView;
     private ArrayList<ToastCard> mNavList;
-
     private RecyclerView mDrawerRecyclerView;
-
     private int mCurrentSelectedPosition = 0;
 
     public PackagesFragment() {

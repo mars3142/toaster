@@ -36,9 +36,8 @@ import org.mars3142.android.toaster.table.FilterTable;
 public class FilterActivity extends ActionBarActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private final static String TAG = FilterActivity.class.getSimpleName();
-
-    private final static int DATA_LOADER = 0;
+    private static final String TAG = FilterActivity.class.getSimpleName();
+    private static final int DATA_LOADER = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,6 +23,6 @@
 
     <string name="section_default">Allgemein</string>
     <string name="delete_title">Einträge automatisch löschen</string>
-    <string name="delete_summary">Löscht die Toast Einträge automatisch, wenn die App deinstalliert wird.</string>
+    <string name="delete_summary">Löscht die Toast Einträge automatisch, nachdem die App deinstalliert wurde.</string>
 
 </resources>

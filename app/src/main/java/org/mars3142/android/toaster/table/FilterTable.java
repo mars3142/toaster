@@ -33,13 +33,14 @@ import org.mars3142.android.toaster.provider.ToasterProvider;
 public class FilterTable
         implements BaseColumns {
 
-    public final static String TABLENAME = "filter";
-    public final static String PACKAGE = "package";
-    public final static String EXCL_INCL = "excl_incl";
-    public final static Uri FILTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/filter");
-    public final static String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.filter";
-    public final static String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.filter";
-    private final static String TAG = FilterTable.class.getSimpleName();
+    private static final String TAG = FilterTable.class.getSimpleName();
+
+    public static final String TABLENAME = "filter";
+    public static final String PACKAGE = "package";
+    public static final String EXCL_INCL = "excl_incl";
+    public static final Uri FILTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/filter");
+    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.filter";
+    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.filter";
 
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLENAME +

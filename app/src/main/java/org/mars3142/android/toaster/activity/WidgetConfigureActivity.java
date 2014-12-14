@@ -35,10 +35,12 @@ import org.mars3142.android.toaster.R;
  */
 public class WidgetConfigureActivity extends Activity {
 
-    private final static String TAG = WidgetConfigureActivity.class.getSimpleName();
+    private static final String TAG = WidgetConfigureActivity.class.getSimpleName();
     private static final String PREFS_NAME = "org.mars3142.android.toaster_preferences";
     private static final String PREF_PREFIX_KEY = "appwidget_";
+
     private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             final Context context = WidgetConfigureActivity.this;
@@ -58,6 +60,7 @@ public class WidgetConfigureActivity extends Activity {
             finish();
         }
     };
+
     private EditText mAppWidgetText;
 
     public WidgetConfigureActivity() {

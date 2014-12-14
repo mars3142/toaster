@@ -33,17 +33,18 @@ import org.mars3142.android.toaster.provider.ToasterProvider;
 public class ToasterTable
         implements BaseColumns {
 
-    public final static String TABLENAME = "toaster";
-    public final static String TIMESTAMP = "timestamp";
-    public final static String PACKAGE = "package";
-    public final static String MESSAGE = "message";
-    public final static String VERSIONCODE = "version_code";
-    public final static String VERSIONNAME = "version_name";
-    public final static Uri TOASTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/toaster");
-    public final static Uri PACKAGE_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/packages");
-    public final static String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.toaster";
-    public final static String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.toaster";
-    private final static String TAG = ToasterTable.class.getSimpleName();
+    private static final String TAG = ToasterTable.class.getSimpleName();
+    
+    public static final String TABLENAME = "toaster";
+    public static final String TIMESTAMP = "timestamp";
+    public static final String PACKAGE = "package";
+    public static final String MESSAGE = "message";
+    public static final String VERSIONCODE = "version_code";
+    public static final String VERSIONNAME = "version_name";
+    public static final Uri TOASTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/toaster");
+    public static final Uri PACKAGE_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/packages");
+    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.toaster";
+    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.toaster";
 
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLENAME +

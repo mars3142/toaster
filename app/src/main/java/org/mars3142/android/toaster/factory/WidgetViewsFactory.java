@@ -40,7 +40,7 @@ import java.util.ArrayList;
 public class WidgetViewsFactory
         implements RemoteViewsService.RemoteViewsFactory {
 
-    private final static String TAG = WidgetViewsFactory.class.getSimpleName();
+    private static final String TAG = WidgetViewsFactory.class.getSimpleName();
 
     private Context mContext;
     private ArrayList<String> mPackages = new ArrayList<String>();

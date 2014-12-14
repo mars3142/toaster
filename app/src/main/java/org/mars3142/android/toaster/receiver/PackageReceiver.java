@@ -35,7 +35,7 @@ import org.mars3142.android.toaster.table.ToasterTable;
  */
 public class PackageReceiver extends BroadcastReceiver {
 
-    private final static String TAG = PackageReceiver.class.getSimpleName();
+    private static final String TAG = PackageReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {

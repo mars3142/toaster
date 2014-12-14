@@ -35,7 +35,7 @@ import org.mars3142.android.toaster.BuildConfig;
 public class AccessibilityServiceListener
         implements DialogInterface.OnClickListener {
 
-    private final static String TAG = AccessibilityServiceListener.class.getSimpleName();
+    private static final String TAG = AccessibilityServiceListener.class.getSimpleName();
 
     private final Context mContext;
 

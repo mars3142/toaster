@@ -42,7 +42,7 @@ import it.gmariotti.cardslib.library.internal.Card;
  */
 public class ToastCard extends Card {
 
-    private final static String TAG = ToastCard.class.getSimpleName();
+    private static final String TAG = ToastCard.class.getSimpleName();
 
     public String message;
     public String appName;

@@ -44,18 +44,18 @@ import java.util.HashMap;
  */
 public class ToasterProvider extends ContentProvider {
 
-    public final static String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider";
+    public static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider";
 
-    private final static String TAG = ToasterProvider.class.getSimpleName();
-    private final static int TOASTER = 1;
-    private final static int TOASTER_ID = 2;
-    private final static int PACKAGE = 3;
-    private final static int FILTER = 4;
-    private final static int FILTER_ID = 5;
-    private final static HashMap<String, String> toasterMap;
-    private final static HashMap<String, String> packageMap;
-    private final static HashMap<String, String> filterMap;
-    private final static UriMatcher mUriMatcher;
+    private static final String TAG = ToasterProvider.class.getSimpleName();
+    private static final int TOASTER = 1;
+    private static final int TOASTER_ID = 2;
+    private static final int PACKAGE = 3;
+    private static final int FILTER = 4;
+    private static final int FILTER_ID = 5;
+    private static final HashMap<String, String> toasterMap;
+    private static final HashMap<String, String> packageMap;
+    private static final HashMap<String, String> filterMap;
+    private static final UriMatcher mUriMatcher;
 
     private DatabaseHelper dbHelper;
 
@@ -67,7 +67,7 @@ public class ToasterProvider extends ContentProvider {
         mUriMatcher.addURI(AUTHORITY, "filter", FILTER);
         mUriMatcher.addURI(AUTHORITY, "filter/#", FILTER_ID);
 
-        toasterMap = new HashMap<String, String>();
+        toasterMap = new HashMap<>();
         toasterMap.put(ToasterTable._ID, ToasterTable._ID);
         toasterMap.put(ToasterTable.TIMESTAMP, ToasterTable.TIMESTAMP);
         toasterMap.put(ToasterTable.MESSAGE, ToasterTable.MESSAGE);
@@ -76,10 +76,10 @@ public class ToasterProvider extends ContentProvider {
         toasterMap.put(ToasterTable.VERSIONNAME, ToasterTable.VERSIONNAME);
         toasterMap.put(ToasterTable._COUNT, ToasterTable._COUNT);
 
-        packageMap = new HashMap<String, String>();
+        packageMap = new HashMap<>();
         packageMap.put(ToasterTable.PACKAGE, ToasterTable.PACKAGE);
 
-        filterMap = new HashMap<String, String>();
+        filterMap = new HashMap<>();
         filterMap.put(FilterTable._ID, FilterTable._ID);
         filterMap.put(FilterTable.PACKAGE, FilterTable.PACKAGE);
         filterMap.put(FilterTable.EXCL_INCL, FilterTable.EXCL_INCL);

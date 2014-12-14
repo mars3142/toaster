@@ -39,18 +39,7 @@ import java.util.Arrays;
  */
 public class Widget extends AppWidgetProvider {
 
-    private final static String TAG = Widget.class.getSimpleName();
-
-    public static void updateWidget(Context context, AppWidgetManager appWidgetManager) {
-        Intent intent = new Intent(context, WidgetService.class);
-        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-
-        RemoteViews widget = new RemoteViews(context.getPackageName(), R.layout.widget);
-        widget.setRemoteAdapter(R.id.listView, intent);
-
-        ComponentName componentName = new ComponentName(context, Widget.class);
-        appWidgetManager.updateAppWidget(componentName, widget);
-    }
+    private static final String TAG = Widget.class.getSimpleName();
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -68,5 +57,16 @@ public class Widget extends AppWidgetProvider {
         }
 
         updateWidget(context, AppWidgetManager.getInstance(context));
+    }
+
+    private void updateWidget(Context context, AppWidgetManager appWidgetManager) {
+        Intent intent = new Intent(context, WidgetService.class);
+        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+
+        RemoteViews widget = new RemoteViews(context.getPackageName(), R.layout.widget);
+        widget.setRemoteAdapter(R.id.listView, intent);
+
+        ComponentName componentName = new ComponentName(context, Widget.class);
+        appWidgetManager.updateAppWidget(componentName, widget);
     }
 }

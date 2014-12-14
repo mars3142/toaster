@@ -47,13 +47,12 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "onSharedPreferenceChanged key: " + key);
-        }
+        if (isAdded()) {
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "onSharedPreferenceChanged");
+            }
 
-        if (key.equals(getString(R.string.delete_key))) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            boolean enabled = preferences.getBoolean(getString(R.string.delete_key), false);
+            boolean enabled = sharedPreferences.getBoolean(key, false);
             int flag = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
 
             ComponentName component = new ComponentName(getActivity(), PackageReceiver.class);

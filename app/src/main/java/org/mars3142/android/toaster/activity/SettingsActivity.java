@@ -26,11 +26,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import org.mars3142.android.toaster.R;
+import org.mars3142.android.toaster.fragment.SettingsFragment;
 
 /**
  * @author mars3142
  */
 public class SettingsActivity extends ActionBarActivity {
+
+    private static final String TAG = SettingsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

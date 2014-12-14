@@ -53,9 +53,8 @@ import org.mars3142.android.toaster.table.ToasterTable;
 public class MainActivity extends ActionBarActivity
         implements PackagesFragment.PackagesCallbacks {
 
-    private final static String TAG = MainActivity.class.getSimpleName();
-
-    private final static String PACKAGE_NAME = "packageName";
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String PACKAGE_NAME = "packageName";
 
     private PackagesFragment mPackagesFragment;
     private CharSequence mTitle;

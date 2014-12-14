@@ -33,7 +33,7 @@ import org.mars3142.android.toaster.R;
  */
 public class PackageArrayAdapter extends ArrayAdapter<String> {
 
-    private final static String TAG = PackageArrayAdapter.class.getSimpleName();
+    private static final String TAG = PackageArrayAdapter.class.getSimpleName();
 
     private final Context mContext;
     private final String[] mPackages;

@@ -24,6 +24,6 @@
     <string name="section_default">General</string>
     <string name="delete_key" translatable="false">delete_on_uninstall</string>
     <string name="delete_title">Auto delete entries</string>
-    <string name="delete_summary">Deletes automatically toasts of apps, after the app is uninstalled.</string>
+    <string name="delete_summary">Deletes toasts of apps automatically, after the app is uninstalled.</string>
 
 </resources>

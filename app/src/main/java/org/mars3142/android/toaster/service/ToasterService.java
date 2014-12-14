@@ -41,7 +41,7 @@ import java.util.Calendar;
  */
 public class ToasterService extends AccessibilityService {
 
-    private final static String TAG = ToasterService.class.getSimpleName();
+    private static final String TAG = ToasterService.class.getSimpleName();
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
@@ -50,8 +50,7 @@ public class ToasterService extends AccessibilityService {
             return; // event is not a notification
         }
 
-        Calendar calendar = Calendar.getInstance();
-        long timestamp = calendar.getTimeInMillis();
+        long timestamp = Calendar.getInstance().getTimeInMillis();
         String sourcePackageName = (String) event.getPackageName();
         String message = "";
         for (CharSequence text : event.getText()) {

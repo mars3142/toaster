@@ -32,7 +32,7 @@ import android.net.Uri;
 public class DeleteListener
         implements DialogInterface.OnClickListener {
 
-    private final static String TAG = DeleteListener.class.getSimpleName();
+    private static final String TAG = DeleteListener.class.getSimpleName();
 
     private final Context mContext;
     private final Uri mUri;

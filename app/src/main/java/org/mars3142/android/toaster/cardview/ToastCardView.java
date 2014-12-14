@@ -28,6 +28,8 @@ import android.util.AttributeSet;
  */
 public class ToastCardView extends CardView {
 
+    private static final String TAG = ToastCardView.class.getSimpleName();
+
     public ToastCardView(Context context) {
         super(context);
     }
