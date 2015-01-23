@@ -13,8 +13,9 @@ env:
     - GRADLE_VERSION="2.2.1"
 
 notifications:
-  email: false
-
+  email:
+    recipients:
+      - developer@mars3142.org
 
 before_install:
 
@@ -32,9 +33,9 @@ before_install:
   - export TERM=dumb
 
   # newer version of gradle
-  - wget http://services.gradle.org/distributions/gradle-2.2.1-bin.zip
-  - unzip -qq gradle-2.2.1-bin.zip
-  - export GRADLE_HOME=$PWD/gradle-2.2.1
+  - wget http://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip
+  - unzip -qq gradle-${GRADLE_VERSION}-all.zip
+  - export GRADLE_HOME=$PWD/gradle-${GRADLE_VERSION}
   - export PATH=$GRADLE_HOME/bin:$PATH
 
   # just to test gradle version, against our provided one

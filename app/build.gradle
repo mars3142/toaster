@@ -11,12 +11,19 @@ android {
 
     signingConfigs {
         mars3142 {
-            def Properties keyProps = new Properties()
-            keyProps.load(new FileInputStream(file('keystore.properties')))
-            storeFile file(keyProps["store"])
-            keyAlias keyProps["alias"]
-            storePassword keyProps["storePass"]
-            keyPassword keyProps["pass"]
+            File propsFile = file('keystore.properties')
+            if (propsFile.exists()) {
+                Properties keyProps = new Properties()
+                keyProps.load(new FileInputStream(propsFile))
+                storeFile file(keyProps["store"])
+                keyAlias keyProps["alias"]
+                storePassword keyProps["storePass"]
+                keyPassword keyProps["pass"]
+            } else {
+                keyAlias ""
+                storePassword ""
+                keyPassword ""
+            }
         }
     }
 
