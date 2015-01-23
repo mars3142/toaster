@@ -19,21 +19,20 @@
   ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:visible="false"
         android:id="@+id/action_blacklist"
         android:orderInCategory="99"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/action_blacklist"/>
 
     <item
         android:visible="false"
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/action_settings"/>
 </menu>

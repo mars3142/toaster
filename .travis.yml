@@ -1,16 +1,17 @@
 language: java
 
 branches:
-  only:
-    - develop
-    - master
+  except:
+    - /^feature.*$/
 
 jdk: oraclejdk7
 
 env:
   global:
     - ANDROID_SDK_VERSION="r24.0.2"
+    - BUILD_TOOLS="21.1.2"
     - GRADLE_VERSION="2.2.1"
+    - TARGET_API="21"
 
 notifications:
   email:
@@ -53,16 +54,14 @@ before_install:
   # Install required components.
   # For a full list, run `android list sdk -a --extended`
   - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-  - echo yes | android update sdk --all --filter build-tools-21.1.2 --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter android-21 --no-ui --force > /dev/null
+  - echo yes | android update sdk --all --filter build-tools-${BUILD_TOOLS} --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter android-${TARGET_API} --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
 
-  # Otherwise
-  #- echo yes | android update sdk -t tools,platform-tools,extra-android-support,extra-android-m2repository,android-21 --force --no-ui
-
-
 # Let's try to build...
-install: gradle clean build
+install:
+  gradle clean build
 
-script: gradle check
+script:
+  gradle check

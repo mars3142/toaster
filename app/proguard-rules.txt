@@ -16,8 +16,8 @@
 #   public *;
 #}
 
--keep public class * extends android.app,backup.BackupAgent
+-keep public class * extends android.app.backup.BackupAgent
 
 -dontwarn it.gmariotti.cardslib.library.view.CardGridView
 
-#-dontobfuscate
+-dontobfuscate
