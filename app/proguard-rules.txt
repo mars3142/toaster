@@ -20,4 +20,4 @@
 
 -dontwarn it.gmariotti.cardslib.library.view.CardGridView
 
-#-dontobfuscate
+-dontobfuscate

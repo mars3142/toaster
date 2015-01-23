@@ -25,14 +25,12 @@
     <item
         android:id="@+id/action_blacklist"
         android:orderInCategory="99"
-        android:title="@string/action_blacklist"
-        android:visible="false"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:title="@string/action_blacklist"/>
 
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        android:visible="false"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:title="@string/action_settings"/>
 </menu>
