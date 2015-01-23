@@ -9,7 +9,8 @@ jdk: oraclejdk7
 
 env:
   global:
-    - ANDROID_SDK_VERSION="r22.6.2"
+    - ANDROID_SDK_VERSION="r24.0.2"
+    - GRADLE_VERSION="2.2.1"
 
 notifications:
   email: false
@@ -31,9 +32,9 @@ before_install:
   - export TERM=dumb
 
   # newer version of gradle
-  - wget http://services.gradle.org/distributions/gradle-1.11-bin.zip
-  - unzip -qq gradle-1.11-bin.zip
-  - export GRADLE_HOME=$PWD/gradle-1.11
+  - wget http://services.gradle.org/distributions/gradle-2.2.1-bin.zip
+  - unzip -qq gradle-2.2.1-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-2.2.1
   - export PATH=$GRADLE_HOME/bin:$PATH
 
   # just to test gradle version, against our provided one
@@ -51,13 +52,13 @@ before_install:
   # Install required components.
   # For a full list, run `android list sdk -a --extended`
   - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-  - echo yes | android update sdk --all --filter build-tools-19.0.3 --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter android-19 --no-ui --force > /dev/null
+  - echo yes | android update sdk --all --filter build-tools-21.1.2 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter android-21 --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
 
   # Otherwise
-  #- echo yes | android update sdk -t tools,platform-tools,extra-android-support,extra-android-m2repository,android-19 --force --no-ui
+  #- echo yes | android update sdk -t tools,platform-tools,extra-android-support,extra-android-m2repository,android-21 --force --no-ui
 
 
 # Let's try to build...
