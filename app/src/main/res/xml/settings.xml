@@ -23,6 +23,11 @@
 
     <PreferenceCategory android:title="@string/section_default">
 
+        <Preference
+            android:key="@string/blacklist_key"
+            android:summary="@string/blacklist_summary"
+            android:title="@string/blacklist_title" />
+
         <SwitchPreference
             android:defaultValue="false"
             android:key="@string/delete_key"

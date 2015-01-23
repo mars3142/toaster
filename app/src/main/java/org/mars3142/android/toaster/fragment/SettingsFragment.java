@@ -20,21 +20,23 @@
 package org.mars3142.android.toaster.fragment;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
+import org.mars3142.android.toaster.activity.BlacklistActivity;
 import org.mars3142.android.toaster.receiver.PackageReceiver;
 
 /**
  * @author mars3142
  */
-public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     private static final String TAG = SettingsFragment.class.getSimpleName();
 
@@ -42,21 +44,43 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.settings);
+
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+
+        Preference preference = findPreference(getString(R.string.blacklist_key));
+        preference.setOnPreferenceClickListener(this);
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (isAdded()) {
             if (BuildConfig.DEBUG) {
-                Log.d(TAG, "onSharedPreferenceChanged");
+                Log.d(TAG, "onSharedPreferenceChanged of " + key);
             }
 
-            boolean enabled = sharedPreferences.getBoolean(key, false);
-            int flag = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+            if (key.equals(getString(R.string.delete_key))) {
+                boolean enabled = sharedPreferences.getBoolean(key, false);
+                int flag = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
 
-            ComponentName component = new ComponentName(getActivity(), PackageReceiver.class);
-            getActivity().getPackageManager().setComponentEnabledSetting(component, flag, PackageManager.DONT_KILL_APP);
+                ComponentName component = new ComponentName(getActivity(), PackageReceiver.class);
+                getActivity().getPackageManager().setComponentEnabledSetting(component, flag, PackageManager.DONT_KILL_APP);
+            }
         }
     }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "onPreferenceClick on " + preference.getKey());
+        }
+
+        if (preference.getKey().equals(getString(R.string.blacklist_key))) {
+            Intent intent = new Intent(getActivity(), BlacklistActivity.class);
+            getActivity().startActivity(intent);
+            return true;
+        }
+
+        return false;
+    }
+
 }

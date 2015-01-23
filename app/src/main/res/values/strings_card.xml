@@ -28,5 +28,6 @@
     <string name="package_icon">Package icon</string>
     <string name="app_info">App Info</string>
     <string name="play_store">PlayStore</string>
+    <string name="amazon">Amazon Appstore</string>
 
 </resources>

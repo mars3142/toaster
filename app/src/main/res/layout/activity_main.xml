@@ -30,7 +30,7 @@
         tools:context=".MainActivity"
         tools:ignore="InconsistentLayout">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -42,8 +42,9 @@
             <FrameLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="?android:attr/actionBarSize" />
+        </FrameLayout>
 
         <fragment
             android:id="@+id/packages"

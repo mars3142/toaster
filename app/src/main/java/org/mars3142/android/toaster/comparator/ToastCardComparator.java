@@ -34,6 +34,6 @@ public class ToastCardComparator implements Comparator<ToastCard> {
 
     @Override
     public int compare(ToastCard lhs, ToastCard rhs) {
-        return lhs.appName.toUpperCase().compareTo(rhs.appName.toUpperCase());
+        return lhs.appName.toUpperCase().compareToIgnoreCase(rhs.appName.toUpperCase());
     }
 }

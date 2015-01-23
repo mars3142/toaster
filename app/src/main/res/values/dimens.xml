@@ -25,7 +25,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="preference_horizontal_margin">@dimen/activity_horizontal_margin</dimen>
+    <dimen name="preference_horizontal_margin">0dp</dimen>
 
     <!--
     Per the design guidelines, navigation drawers should be between 240dp and 320dp:
@@ -37,5 +37,10 @@
 
     <dimen name="elevation_toolbar">5dp</dimen>
     <dimen name="card_empty_height">96dp</dimen>
+
+    <dimen name="fab_size">56dp</dimen>
+
+    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_press_elevation">4dp</dimen>
 
 </resources>

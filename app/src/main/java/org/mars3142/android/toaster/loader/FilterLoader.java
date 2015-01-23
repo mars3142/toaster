@@ -17,38 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.adapter;
+package org.mars3142.android.toaster.loader;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
+import android.content.AsyncTaskLoader;
+import android.content.Context;
+import android.os.Bundle;
 
-import org.mars3142.android.toaster.card.ToastCard;
-import org.mars3142.android.toaster.viewholder.PackagesRecyclerViewHolder;
-
-import java.util.ArrayList;
+import org.mars3142.android.toaster.data.PackageEntry;
 
 /**
  * @author mars3142
  */
-public class PackagesRecyclerAdapter extends RecyclerView.Adapter<PackagesRecyclerViewHolder> {
+public class FilterLoader extends AsyncTaskLoader<PackageEntry[]> {
 
+    public static final String SELECTION = "selection";
+    public static final String SELECTION_ARGS = "selection_args";
 
-    public PackagesRecyclerAdapter(ArrayList<ToastCard> data) {
-
+    public FilterLoader(Context context, Bundle params) {
+        super(context);
     }
 
     @Override
-    public PackagesRecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(PackagesRecyclerViewHolder viewHolder, int i) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
+    public PackageEntry[] loadInBackground() {
+        return new PackageEntry[1];
     }
 }

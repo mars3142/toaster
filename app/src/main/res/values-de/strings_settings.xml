@@ -22,6 +22,10 @@
 <resources>
 
     <string name="section_default">Allgemein</string>
+
+    <string name="blacklist_title">Ausnahmeliste</string>
+    <string name="blacklist_summary">Apps, die nicht von Toaster aufgezeichnet werden sollen</string>
+
     <string name="delete_title">Einträge automatisch löschen</string>
     <string name="delete_summary">Löscht die Toast Einträge automatisch, nachdem die App deinstalliert wurde.</string>
 

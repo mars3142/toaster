@@ -26,10 +26,13 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.activity.MainActivity;
@@ -46,7 +49,7 @@ import it.gmariotti.cardslib.library.view.CardListView;
  * @author mars3142
  */
 public class ToasterFragment extends Fragment
-        implements LoaderManager.LoaderCallbacks<Cursor> {
+        implements LoaderManager.LoaderCallbacks<Cursor>, AbsListView.OnScrollListener {
 
     private static final String TAG = ToasterFragment.class.getSimpleName();
     private static final String PACKAGE_FILTER = "packageFilter";
@@ -79,6 +82,7 @@ public class ToasterFragment extends Fragment
         CardListView mListView = (CardListView) getActivity().findViewById(R.id.toast_card_list);
         if (mListView != null) {
             mListView.setAdapter(mAdapter);
+            mListView.setOnScrollListener(this);
         }
 
         String packageFilter = null;
@@ -151,6 +155,21 @@ public class ToasterFragment extends Fragment
             ((MainActivity) activity).onSectionAttached(packageFilter);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            // activity.toggleToolbarVisibility();
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (view.getChildCount() > 0) {
+            //
         }
     }
 }

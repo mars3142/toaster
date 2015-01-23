@@ -21,7 +21,7 @@
 
 <resources>
 
-    <string name="package_hint">org.firma.appname</string>
-    <string name="button_new">Neu</string>
+    <string name="filter_intro">Apps in dieser Liste werden nicht von Toaster erfasst.</string>
+    <string name="filter_app">App hinzufügen</string>
 
 </resources>

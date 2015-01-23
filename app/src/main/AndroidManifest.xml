@@ -32,9 +32,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.FilterActivity"
+            android:name=".activity.BlacklistActivity"
             android:exported="false"
-            android:label="@string/action_blacklist" />
+            android:label="@string/action_blacklist"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
 
         <activity
             android:name=".activity.MainActivity"

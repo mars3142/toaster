@@ -19,6 +19,8 @@
 
 package org.mars3142.android.toaster.activity;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +34,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
@@ -59,6 +63,8 @@ public class MainActivity extends ActionBarActivity
     private PackagesFragment mPackagesFragment;
     private CharSequence mTitle;
     private String mPackageName;
+    private Toolbar mToolbar;
+    private Boolean mToobarVisible = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +74,9 @@ public class MainActivity extends ActionBarActivity
 
         mTitle = getTitle();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
@@ -120,7 +126,7 @@ public class MainActivity extends ActionBarActivity
         Intent intent;
         switch (item.getItemId()) {
             case R.id.action_blacklist:
-                intent = new Intent(this, FilterActivity.class);
+                intent = new Intent(this, BlacklistActivity.class);
                 startActivity(intent);
                 return true;
 
@@ -218,5 +224,60 @@ public class MainActivity extends ActionBarActivity
         }
 
         return false;
+    }
+
+    public void toggleToolbarVisibility() {
+        // Animate Toolbar
+        ObjectAnimator mAnimatorToolbar;
+        if (mToobarVisible) {
+            mAnimatorToolbar = ObjectAnimator.ofFloat(mToolbar, "y", mToolbar.getHeight() * -1);
+            mAnimatorToolbar.setInterpolator(new LinearInterpolator());
+            mAnimatorToolbar.addListener(new Animator.AnimatorListener() {
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mToobarVisible = false;
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+        } else { // show
+            mAnimatorToolbar = ObjectAnimator.ofFloat(mToolbar, "y", 0);
+            mAnimatorToolbar.setInterpolator(new BounceInterpolator());
+            mAnimatorToolbar.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mToobarVisible = true;
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+        }
+        mAnimatorToolbar.setDuration(400);
+        mAnimatorToolbar.start();
     }
 }

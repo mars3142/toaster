@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ This file is part of Toaster
   ~
   ~ Copyright (c) 2014 Peter Siegmund
@@ -19,16 +17,13 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <string name="section_default">General</string>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <string name="blacklist_key" translatable="false">blacklist</string>
-    <string name="blacklist_title">App Blacklist</string>
-    <string name="blacklist_summary">Apps not recorded by Toaster</string>
-
-    <string name="delete_key" translatable="false">delete_on_uninstall</string>
-    <string name="delete_title">Auto delete entries</string>
-    <string name="delete_summary">Deletes toasts of apps automatically, after the app is uninstalled.</string>
-
-</resources>
+</RelativeLayout>

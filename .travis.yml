@@ -13,8 +13,9 @@ env:
     - GRADLE_VERSION="2.2.1"
 
 notifications:
-  email: false
-
+  email:
+    recipients:
+      - developer@mars3142.org
 
 before_install:
 

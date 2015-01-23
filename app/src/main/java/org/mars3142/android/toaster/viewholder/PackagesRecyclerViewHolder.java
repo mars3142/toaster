@@ -27,20 +27,22 @@ import android.widget.TextView;
 import org.mars3142.android.toaster.R;
 
 /**
- * RecyclerViewHolder for the Navigation Drawer
+ * RecyclerViewHolder
  *
  * @author mars3142
  */
-public class PackagesRecyclerViewHolder extends RecyclerView.ViewHolder {
+public class PackagesRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private static final String TAG = PackagesRecyclerViewHolder.class.getSimpleName();
 
+    private OnItemClickListener mOnItemClickListener;
     private ImageView mPackageIcon;
     private TextView mPackageName;
 
-    public PackagesRecyclerViewHolder(View itemView) {
+    public PackagesRecyclerViewHolder(View itemView, OnItemClickListener onItemClickListener) {
         super(itemView);
 
+        mOnItemClickListener = onItemClickListener;
         mPackageName = (TextView) itemView.findViewById(R.id.package_name);
         mPackageIcon = (ImageView) itemView.findViewById(R.id.package_icon);
     }
@@ -51,5 +53,16 @@ public class PackagesRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public ImageView getPackageIcon() {
         return mPackageIcon;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(view, getPosition());
+        }
+    }
+
+    public interface OnItemClickListener {
+        public void onItemClick(View view , int position);
     }
 }

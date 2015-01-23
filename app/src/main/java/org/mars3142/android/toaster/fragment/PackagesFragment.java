@@ -19,6 +19,7 @@
 
 package org.mars3142.android.toaster.fragment;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -49,7 +50,7 @@ import android.widget.RelativeLayout;
 
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.activity.SettingsActivity;
-import org.mars3142.android.toaster.adapter.PackagesRecyclerAdapter;
+import org.mars3142.android.toaster.adapter.ToastRecyclerAdapter;
 import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.comparator.ToastCardComparator;
@@ -110,7 +111,9 @@ public class PackagesFragment extends Fragment
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mDrawerRecyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
-        mDrawerRecyclerView.setLayoutManager(layoutManager);
+        if (mDrawerRecyclerView != null) {
+            mDrawerRecyclerView.setLayoutManager(layoutManager);
+        }
 
         getLoaderManager().restartLoader(DATA_LOADER, null, this);
 
@@ -203,7 +206,7 @@ public class PackagesFragment extends Fragment
                 Collections.sort(mNavList, new ToastCardComparator());
                 Collections.swap(mNavList, mNavList.indexOf(emptyCard), 0);
 
-                mDrawerRecyclerView.setAdapter(new PackagesRecyclerAdapter(mNavList));
+                mDrawerRecyclerView.setAdapter(new ToastRecyclerAdapter(mNavList));
 
                 mDrawerListView.setAdapter(new ToastArrayAdapter(getActionBar().getThemedContext(), mNavList));
                 mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
@@ -241,6 +244,7 @@ public class PackagesFragment extends Fragment
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
@@ -312,6 +316,7 @@ public class PackagesFragment extends Fragment
         selectItem(position);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ This file is part of Toaster
   ~
   ~ Copyright (c) 2014 Peter Siegmund
@@ -19,16 +17,7 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-
-    <string name="section_default">General</string>
-
-    <string name="blacklist_key" translatable="false">blacklist</string>
-    <string name="blacklist_title">App Blacklist</string>
-    <string name="blacklist_summary">Apps not recorded by Toaster</string>
-
-    <string name="delete_key" translatable="false">delete_on_uninstall</string>
-    <string name="delete_title">Auto delete entries</string>
-    <string name="delete_summary">Deletes toasts of apps automatically, after the app is uninstalled.</string>
-
-</resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/colorAccent" />
+</shape>

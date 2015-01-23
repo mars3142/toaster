@@ -21,14 +21,6 @@
 
 <resources>
 
-    <string name="section_default">General</string>
-
-    <string name="blacklist_key" translatable="false">blacklist</string>
-    <string name="blacklist_title">App Blacklist</string>
-    <string name="blacklist_summary">Apps not recorded by Toaster</string>
-
-    <string name="delete_key" translatable="false">delete_on_uninstall</string>
-    <string name="delete_title">Auto delete entries</string>
-    <string name="delete_summary">Deletes toasts of apps automatically, after the app is uninstalled.</string>
+    <string name="app_name">Toaster (DEV)</string>
 
 </resources>
