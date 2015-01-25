@@ -12,6 +12,7 @@ env:
     - ANDROID_SDK_VERSION="r24.0.2"
     - BUILD_TOOLS="21.1.2"
     - TARGET_API="21"
+    - ANDROID_ABI="armeabi-v7a"
 
 before_install:
   # environment info
@@ -35,14 +36,20 @@ before_install:
   # Install required components.
   # For a full list, run `android list sdk -a --extended`
   - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-  - echo yes | android update sdk --all --filter build-tools-${BUILD_TOOLS} --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter build-tools-${BUILD_TOOLS} --no-ui --force > /dev/null
   - echo yes | android update sdk --filter android-${TARGET_API} --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
 
+  # creating emulator for testing
+  - echo no | android create avd --force -n toaster -t $TARGET_API --abi $ANDROID_ABI
+  - emulator -avd toaster -no-skin -no-audio -no-window &
+  - adb wait-for-device
+  - adb shell input keyevent 82 &
+
 # Let's try to build...
 install:
-  gradle clean build
+  ./gradlew clean build
 
 script:
-  gradle check
+  ./gradlew check connectedAndroidTest
