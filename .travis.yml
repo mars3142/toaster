@@ -60,7 +60,7 @@ before_install:
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
 
   # creating emulator for testing
-  - echo no | android create avd --force -n toaster -t $TARGET_API --abi $ANDROID_ABI
+  - echo no | android create avd --force -n toaster -t android-${TARGET_API} --abi ${ANDROID_ABI}
   - emulator -avd toaster -no-skin -no-audio -no-window &
   - adb wait-for-device
   - adb shell input keyevent 82 &
