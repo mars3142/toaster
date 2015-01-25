@@ -12,11 +12,7 @@ env:
     - ANDROID_SDK_VERSION=r24.0.2
     - BUILD_TOOLS=21.1.2
     - TARGET_API=21
-
-    # testing settings
-    - TEST_API=19
-    # - ANDROID_ABI=armeabi-v7a
-    - ANDROID_ABI=x86
+    - ANDROID_ABI=armeabi-v7a
 
 before_install:
   # environment info
@@ -47,12 +43,10 @@ before_install:
   - echo yes | android update sdk --filter android-${TARGET_API} --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
-  # Everything needed for testing
-  - echo yes | android update sdk --filter android-${TEST_API} --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter sys-img-${ANDROID_ABI}-android-${TEST_API} --no-ui --force > /dev/null
+  - echo yes | android update sdk -u -a -t sys-img-${ANDROID_ABI}-android-${TARGET_API} > /dev/null
 
   # creating emulator for testing
-  - echo no | android create avd --force -n toaster -t android-${TEST_API} --abi ${ANDROID_ABI}
+  - echo no | android create avd --force -n toaster -t android-${TARGET_API} --abi ${ANDROID_ABI}
   - emulator -avd toaster -no-skin -no-audio -no-window &
   - adb wait-for-device
   - adb shell input keyevent 82 &
