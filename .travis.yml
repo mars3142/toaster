@@ -4,15 +4,15 @@ branches:
   except:
     - /^feature.*$/
 
-jdk:
-  oraclejdk7
+jdk: 
+  - oraclejdk7
 
 env:
   global:
-    - ANDROID_SDK_VERSION="r24.0.2"
-    - BUILD_TOOLS="21.1.2"
-    - TARGET_API="21"
-    - ANDROID_ABI="armeabi-v7a"
+    - ANDROID_SDK_VERSION=r24.0.2
+    - BUILD_TOOLS=21.1.2
+    - TARGET_API=21
+    - ANDROID_ABI=armeabi-v7a
 
 before_install:
   # environment info
@@ -35,9 +35,11 @@ before_install:
 
   # Install required components.
   # For a full list, run `android list sdk -a --extended`
+  - echo yes | android update sdk --filter tools --no-ui --force > /dev/null
   - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
   - echo yes | android update sdk --filter build-tools-${BUILD_TOOLS} --no-ui --force > /dev/null
   - echo yes | android update sdk --filter android-${TARGET_API} --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter sys-img-${ANDROID_ABI}-android-${TARGET_API} --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
 
