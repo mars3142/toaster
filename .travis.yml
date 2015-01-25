@@ -9,6 +9,7 @@ jdk:
 
 env:
   global:
+    - GRADLE_VERSION="2.2.1"
     - ANDROID_SDK_VERSION=r24.0.2
     - BUILD_TOOLS=21.1.2
     - TARGET_API=21
@@ -26,6 +27,13 @@ before_install:
 
   # for gradle output style
   - export TERM=dumb
+
+  # newer version of gradle
+  - wget http://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip
+  - unzip -qq gradle-${GRADLE_VERSION}-all.zip
+  - export GRADLE_HOME=$PWD/gradle-${GRADLE_VERSION}
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - gradle -v
 
   # newest android SDK
   - wget http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
@@ -53,7 +61,7 @@ before_install:
 
 # Let's try to build...
 install:
-  ./gradlew clean build
+  - gradle clean build
 
 script:
-  ./gradlew check connectedAndroidTest
+  - gradle check connectedAndroidTest
