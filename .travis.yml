@@ -54,14 +54,15 @@ before_install:
   - echo yes | android update sdk -u -a -t sys-img-${ANDROID_ABI}-android-${TARGET_API} > /dev/null
 
   # creating emulator for testing
-  - echo no | android create avd --force -n toaster -t android-${TARGET_API} --abi ${ANDROID_ABI}
-  - emulator -avd toaster -no-skin -no-audio -no-window &
-  - adb wait-for-device
-  - adb shell input keyevent 82 &
+  # - echo no | android create avd --force -n toaster -t android-${TARGET_API} --abi ${ANDROID_ABI}
+  # - emulator -avd toaster -no-skin -no-audio -no-window &
+  # - adb wait-for-device
+  # - adb shell input keyevent 82 &
 
 # Let's try to build...
 install:
   - gradle clean build
 
 script:
-  - gradle check connectedAndroidTest
+  # - gradle check connectedAndroidTest
+  - gradle check
