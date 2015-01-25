@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
 import org.mars3142.android.toaster.table.ToasterTable;
+import org.mars3142.android.toaster.task.AsyncInsert;
 
 import java.util.Calendar;
 
@@ -62,12 +63,11 @@ public class ToasterService extends AccessibilityService {
 
         Parcelable parcelable = event.getParcelableData();
         if (!(parcelable instanceof Notification)) {
-            ContentResolver cr = getContentResolver();
             ContentValues cv = new ContentValues();
             cv.put(ToasterTable.PACKAGE, sourcePackageName);
             cv.put(ToasterTable.MESSAGE, message);
             cv.put(ToasterTable.TIMESTAMP, timestamp);
-            cr.insert(ToasterTable.TOASTER_URI, cv);
+            new AsyncInsert(this, ToasterTable.TOASTER_URI, cv).execute();
 
             Intent intent = new Intent("org.mars3142.android.toaster.APPWIDGET_UPDATE");
             sendBroadcast(intent);

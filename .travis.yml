@@ -4,24 +4,17 @@ branches:
   except:
     - /^feature.*$/
 
-jdk: oraclejdk7
+jdk:
+  oraclejdk7
 
 env:
   global:
     - ANDROID_SDK_VERSION="r24.0.2"
     - BUILD_TOOLS="21.1.2"
-    - GRADLE_VERSION="2.2.1"
     - TARGET_API="21"
 
-notifications:
-  email:
-    recipients:
-      - developer@mars3142.org
-
 before_install:
-
   # environment info
-  - gradle -v
   - uname -a
 
   # required libs for android build tools
@@ -33,23 +26,11 @@ before_install:
   # for gradle output style
   - export TERM=dumb
 
-  # newer version of gradle
-  - wget http://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip
-  - unzip -qq gradle-${GRADLE_VERSION}-all.zip
-  - export GRADLE_HOME=$PWD/gradle-${GRADLE_VERSION}
-  - export PATH=$GRADLE_HOME/bin:$PATH
-
-  # just to test gradle version, against our provided one
-  - gradle -v
-
   # newest android SDK
   - wget http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
   - tar -zxf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
   - export ANDROID_HOME=`pwd`/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-
-  # manually set sdk.dir variable, according to local paths
-  - echo "sdk.dir=$ANDROID_HOME" > local.properties
 
   # Install required components.
   # For a full list, run `android list sdk -a --extended`

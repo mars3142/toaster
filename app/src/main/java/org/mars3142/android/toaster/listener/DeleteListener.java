@@ -24,6 +24,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 
+import org.mars3142.android.toaster.task.AsyncDelete;
+
 /**
  * Listener for calling a delete on the database provider
  *
@@ -53,8 +55,8 @@ public class DeleteListener
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if (mUri != null) {
-            ContentResolver cr = mContext.getContentResolver();
-            cr.delete(mUri, mWhere, mSelectionArgs);
+            AsyncDelete task = new AsyncDelete(mContext, mUri, mWhere, mSelectionArgs);
+            task.execute();
         }
     }
 }

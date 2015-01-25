@@ -31,6 +31,7 @@ import android.widget.PopupMenu;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.table.ToasterTable;
+import org.mars3142.android.toaster.task.AsyncDelete;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -73,8 +74,8 @@ public class ToastCardAdapter extends CardCursorAdapter {
 
                 switch (menuItem.getItemId()) {
                     case R.id.delete:
-                        ContentResolver cr = context.getContentResolver();
-                        cr.delete(ToasterTable.TOASTER_URI, ToasterTable._ID + " = ?", new String[]{baseCard.getId()});
+                        AsyncDelete task = new AsyncDelete(context, ToasterTable.TOASTER_URI, ToasterTable._ID + " = ?", new String[]{baseCard.getId()});
+                        task.execute();
                         break;
 
                     case R.id.app_info:

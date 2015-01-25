@@ -132,7 +132,7 @@ public class MainActivity extends ActionBarActivity
 
             case R.id.action_delete:
                 DeleteListener deleteListener;
-                if (mPackageName.length() == 0) {
+                if (TextUtils.isEmpty(mPackageName)) {
                     deleteListener = new DeleteListener(this, ToasterTable.TOASTER_URI);
                 } else {
                     deleteListener = new DeleteListener(this, ToasterTable.TOASTER_URI, ToasterTable.PACKAGE + " = ?", new String[]{mPackageName});
