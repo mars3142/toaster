@@ -10,3 +10,5 @@ It has to be activated as accessibility service.
 #### Donation
 
 You can donate the project with [Bitcoins](http://en.wikipedia.org/wiki/Bitcoin) and the Bitcoin Wallet Address is `145shMevMSXYeWp5VLSGcw6AZYsq8T67KX`.
+
+![Bitcoin QRCode](qrcode_bitcoin.png)
