@@ -5,3 +5,8 @@ Toaster
 
 Records every toast message including the sender package. May be helpful if you get messages and don't know, which app sends it.
 It has to be activated as accessibility service.
+
+
+#### Donation
+
+You can donate the project with [Bitcoins](http://en.wikipedia.org/wiki/Bitcoin) and the Bitcoin Wallet Address is `145shMevMSXYeWp5VLSGcw6AZYsq8T67KX`.
