@@ -1,20 +1,20 @@
 /*
- * Copyright (c) 2014.
+ * This file is part of Toaster
  *
- * This file is part of Toaster.
+ * Copyright (c) 2015 Peter Siegmund
  *
- * Toaster is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Toaster is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.mars3142.android.toaster.adapter;
@@ -27,18 +27,23 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.base.BaseCard;
+
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.table.ToasterTable;
+import org.mars3142.android.toaster.task.AsyncDelete;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardCursorAdapter;
+import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.base.BaseCard;
+
 /**
+ * CursorAdapter for the main view
+ *
  * @author mars3142
  */
 public class ToastCardAdapter extends CardCursorAdapter {
@@ -54,8 +59,7 @@ public class ToastCardAdapter extends CardCursorAdapter {
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
         card.timestamp = dateFormat.format(Long.parseLong(cursor.getString(cursor.getColumnIndex(ToasterTable.TIMESTAMP))));
         card.message = cursor.getString(cursor.getColumnIndex(ToasterTable.MESSAGE));
-        card.packageName = cursor.getString(cursor.getColumnIndex(ToasterTable.PACKAGE));
-        card.loadData();
+        card.loadData(cursor.getString(cursor.getColumnIndex(ToasterTable.PACKAGE)));
 
         card.setId(cursor.getString(cursor.getColumnIndex(ToasterTable._ID)));
 
@@ -70,8 +74,8 @@ public class ToastCardAdapter extends CardCursorAdapter {
 
                 switch (menuItem.getItemId()) {
                     case R.id.delete:
-                        ContentResolver cr = context.getContentResolver();
-                        cr.delete(ToasterTable.TOASTER_URI, ToasterTable._ID + " = ?", new String[]{baseCard.getId()});
+                        AsyncDelete task = new AsyncDelete(context, ToasterTable.TOASTER_URI, ToasterTable._ID + " = ?", new String[]{baseCard.getId()});
+                        task.execute();
                         break;
 
                     case R.id.app_info:
@@ -94,20 +98,12 @@ public class ToastCardAdapter extends CardCursorAdapter {
                             context.startActivity(intent);
                         }
                         break;
-
-                    case R.id.share:
-                        intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("image/*");
-                        intent.putExtra(Intent.EXTRA_STREAM, baseCard.getCardView().createBitmap());
-                        context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_card_title)));
-                        break;
                 }
             }
         });
         header.setPopupMenuPrepareListener(new CardHeader.OnPrepareCardHeaderPopupMenuListener() {
             @Override
             public boolean onPreparePopupMenu(BaseCard baseCard, PopupMenu popupMenu) {
-                popupMenu.getMenu().removeItem(R.id.share);
                 if (((ToastCard) baseCard).packageIcon == null) {
                     popupMenu.getMenu().removeItem(R.id.app_info);
                 }

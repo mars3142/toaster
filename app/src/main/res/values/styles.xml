@@ -1,44 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (c) 2014.
+  ~ This file is part of Toaster
   ~
-  ~ This file is part of Toaster.
+  ~ Copyright (c) 2015 Peter Siegmund
   ~
-  ~ Toaster is free software: you can redistribute it and/or modify
+  ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ Toaster is distributed in the hope that it will be useful,
+  ~ This program is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Holo.Light">
-        <!--item name="android:actionBarStyle">@style/mars3142.ActionBarStyle</item-->
-        <item name="android:actionOverflowButtonStyle">@style/mars3142.ActionOverflowButtonStyle
-        </item>
-        <!--item name="android:activatedBackgroundIndicator">@drawable/list_activated_background</item-->
+    <style name="AppTheme" parent="AppTheme.Base" />
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="drawerArrowStyle">@style/AppTheme.Widget.DrawerArrowStyle</item>
     </style>
 
-    <style name="mars3142.ActionBarStyle" parent="android:Widget.Holo.Light.ActionBar">
-        <item name="android:background">@drawable/actionbar</item>
-        <item name="android:titleTextStyle">@style/mars3142.ActionBarStyle.TitleTextStyle</item>
-    </style>
-
-    <style name="mars3142.ActionBarStyle.TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@drawable/text_color_light</item>
-    </style>
-
-    <style name="mars3142.ActionOverflowButtonStyle" parent="android:style/Widget.Holo.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_action_overflow</item>
+    <style name="AppTheme.Widget.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">false</item>
     </style>
 
 </resources>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (c) 2014.
+  ~ This file is part of Toaster
   ~
-  ~ This file is part of Toaster.
+  ~ Copyright (c) 2015 Peter Siegmund
   ~
-  ~ Toaster is free software: you can redistribute it and/or modify
+  ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ Toaster is distributed in the hope that it will be useful,
+  ~ This program is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources>
@@ -24,8 +24,9 @@
     <string name="toaster_widget">Toaster</string>
     <string name="app_icon">App icon</string>
     <string name="latest_toasts">Latest toasts</string>
+    <string name="loading">Loading&#8230;</string>
 
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Example</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
 

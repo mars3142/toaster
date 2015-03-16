@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (c) 2014.
+  ~ This file is part of Toaster
   ~
-  ~ This file is part of Toaster.
+  ~ Copyright (c) 2015 Peter Siegmund
   ~
-  ~ Toaster is free software: you can redistribute it and/or modify
+  ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ Toaster is distributed in the hope that it will be useful,
+  ~ This program is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources>
 
-    <drawable name="nav_row">#C8C8C8</drawable>
+    <color name="colorPrimary">#03a9f4</color>
+    <color name="colorPrimaryDark">#0288d1</color>
+    <color name="colorAccent">#00796b</color>
+    <color name="colorTint">#767676</color>
 
-    <drawable name="widget_header_background">#D4CFD3</drawable>
-    <drawable name="widget_row_background">#B7B7B7</drawable>
+    <color name="nav_row">#c8c8c8</color>
+    <color name="nav_background">#b7b7b7</color>
 
-    <drawable name="actionbar">#DDDDDD</drawable>
-    <drawable name="text_color_dark">#585858</drawable>
-    <drawable name="text_color_light">#777777</drawable>
-    <drawable name="text_color_toast">#FA6367</drawable>
-    <drawable name="text_color_time">#FFFFFF</drawable>
-
-    <drawable name="activity_background">#DDDDDD</drawable>
-    <drawable name="menu_background">#EFEFEF</drawable>
+    <color name="widget_text_color">#000000</color>
 
 </resources>

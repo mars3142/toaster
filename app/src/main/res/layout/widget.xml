@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (c) 2014.
+  ~ This file is part of Toaster
   ~
-  ~ This file is part of Toaster.
+  ~ Copyright (c) 2015 Peter Siegmund
   ~
-  ~ Toaster is free software: you can redistribute it and/or modify
+  ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ Toaster is distributed in the hope that it will be useful,
+  ~ This program is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -29,7 +28,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/widget_header_background"
+        android:background="@color/colorPrimaryDark"
         android:weightSum="1">
 
         <ImageView
@@ -37,15 +36,16 @@
             android:layout_height="@dimen/icon_size_small"
             android:layout_margin="10dp"
             android:contentDescription="@string/app_icon"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_launcher" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:text="@string/latest_toasts"
-            android:textColor="@drawable/text_color_dark"/>
+            android:textColor="@color/widget_text_color" />
 
     </LinearLayout>
 
@@ -53,6 +53,6 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/widget_row_background"/>
+        android:background="@color/colorPrimaryDark" />
 
 </LinearLayout>

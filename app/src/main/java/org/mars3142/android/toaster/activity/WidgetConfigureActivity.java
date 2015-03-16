@@ -1,20 +1,20 @@
 /*
- * Copyright (c) 2014.
+ * This file is part of Toaster
  *
- * This file is part of Toaster.
+ * Copyright (c) 2015 Peter Siegmund
  *
- * Toaster is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Toaster is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.mars3142.android.toaster.activity;
@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
 import org.mars3142.android.toaster.R;
 
 /**
@@ -34,10 +35,12 @@ import org.mars3142.android.toaster.R;
  */
 public class WidgetConfigureActivity extends Activity {
 
-    private final static String TAG = WidgetConfigureActivity.class.getSimpleName();
+    private static final String TAG = WidgetConfigureActivity.class.getSimpleName();
     private static final String PREFS_NAME = "org.mars3142.android.toaster_preferences";
     private static final String PREF_PREFIX_KEY = "appwidget_";
+
     private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             final Context context = WidgetConfigureActivity.this;
@@ -57,6 +60,7 @@ public class WidgetConfigureActivity extends Activity {
             finish();
         }
     };
+
     private EditText mAppWidgetText;
 
     public WidgetConfigureActivity() {
@@ -67,7 +71,7 @@ public class WidgetConfigureActivity extends Activity {
     public static void saveTitlePref(Context context, int appWidgetId, String text) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.putString(PREF_PREFIX_KEY + appWidgetId, text);
-        prefs.commit();
+        prefs.apply();
     }
 
     // Read the prefix from the SharedPreferences object for this widget.
@@ -85,7 +89,7 @@ public class WidgetConfigureActivity extends Activity {
     public static void deleteTitlePref(Context context, int appWidgetId) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.remove(PREF_PREFIX_KEY + appWidgetId);
-        prefs.commit();
+        prefs.apply();
     }
 
     @Override

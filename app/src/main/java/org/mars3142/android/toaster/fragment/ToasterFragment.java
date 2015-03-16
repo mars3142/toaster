@@ -1,20 +1,20 @@
 /*
- * Copyright (c) 2014.
+ * This file is part of Toaster
  *
- * This file is part of Toaster.
+ * Copyright (c) 2015 Peter Siegmund
  *
- * Toaster is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Toaster is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.mars3142.android.toaster.fragment;
@@ -26,25 +26,35 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import it.gmariotti.cardslib.library.view.CardListView;
+import android.widget.AbsListView;
+
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.activity.MainActivity;
 import org.mars3142.android.toaster.adapter.ToastCardAdapter;
 import org.mars3142.android.toaster.table.ToasterTable;
 
+import it.gmariotti.cardslib.library.view.CardListView;
+
 /**
+ * Fragment showing all toasts entries
+ * <p/>
+ * <p>The fragment showed every toast message, depending on the current filter.</p>
+ *
  * @author mars3142
  */
 public class ToasterFragment extends Fragment
-        implements LoaderManager.LoaderCallbacks<Cursor> {
+        implements LoaderManager.LoaderCallbacks<Cursor>, AbsListView.OnScrollListener {
 
-    private final static String TAG = ToasterFragment.class.getSimpleName();
-    private final static String PACKAGE_FILTER = "packageFilter";
-    private final int DATA_LOADER_ALL = 0;
-    private final int DATA_LOADER_FILTERED = 1;
+    private static final String TAG = ToasterFragment.class.getSimpleName();
+    private static final String PACKAGE_FILTER = "packageFilter";
+    private static final int DATA_LOADER_ALL = 0;
+    private static final int DATA_LOADER_FILTERED = 1;
 
     private ToastCardAdapter mAdapter;
 
@@ -72,10 +82,14 @@ public class ToasterFragment extends Fragment
         CardListView mListView = (CardListView) getActivity().findViewById(R.id.toast_card_list);
         if (mListView != null) {
             mListView.setAdapter(mAdapter);
+            mListView.setOnScrollListener(this);
         }
 
-        String packageFilter = getArguments().getString(PACKAGE_FILTER);
-        if (packageFilter == null || packageFilter.length() == 0) {
+        String packageFilter = null;
+        if (getArguments() != null) {
+            packageFilter = getArguments().getString(PACKAGE_FILTER);
+        }
+        if (TextUtils.isEmpty(packageFilter)) {
             getLoaderManager().restartLoader(DATA_LOADER_ALL, null, this);
         } else {
             getLoaderManager().restartLoader(DATA_LOADER_FILTERED, null, this);
@@ -129,14 +143,33 @@ public class ToasterFragment extends Fragment
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         try {
-            String packageFilter = getArguments().getString(PACKAGE_FILTER);
-            if (packageFilter == null) {
+            String packageFilter = null;
+            if (getArguments() != null) {
+                packageFilter = getArguments().getString(PACKAGE_FILTER);
+            }
+            if (TextUtils.isEmpty(packageFilter)) {
                 packageFilter = "";
             }
             ((MainActivity) activity).onSectionAttached(packageFilter);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            // activity.toggleToolbarVisibility();
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (view.getChildCount() > 0) {
+            //
         }
     }
 }

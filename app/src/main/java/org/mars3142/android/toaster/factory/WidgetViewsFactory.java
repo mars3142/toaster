@@ -1,20 +1,20 @@
 /*
- * Copyright (c) 2014.
+ * This file is part of Toaster
  *
- * This file is part of Toaster.
+ * Copyright (c) 2015 Peter Siegmund
  *
- * Toaster is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Toaster is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.mars3142.android.toaster.factory;
@@ -25,6 +25,7 @@ import android.database.Cursor;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.card.ToastCard;
@@ -39,25 +40,23 @@ import java.util.ArrayList;
 public class WidgetViewsFactory
         implements RemoteViewsService.RemoteViewsFactory {
 
-    private final static String TAG = WidgetViewsFactory.class.getSimpleName();
+    private static final String TAG = WidgetViewsFactory.class.getSimpleName();
 
-    private final Context context;
-    private final ArrayList<String> packages = new ArrayList<String>();
+    private Context mContext;
+    private ArrayList<String> mPackages = new ArrayList<String>();
 
     public WidgetViewsFactory(Context context) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "ctr");
-        }
-
-        this.context = context;
+        mContext = context;
 
         ContentResolver cr = context.getContentResolver();
-        Cursor data = cr.query(ToasterTable.TOASTER_URI, null, null, null, ToasterTable._ID + " DESC LIMIT 5");
+        Cursor data = cr.query(ToasterTable.TOASTER_URI, new String[]{ToasterTable.PACKAGE}, null, null, ToasterTable._ID + " DESC LIMIT 5");
         if (data != null) {
-            packages.clear();
+            mPackages.clear();
             data.moveToFirst();
             do {
-                packages.add(data.getString(data.getColumnIndex(ToasterTable.PACKAGE)));
+                if (!data.isAfterLast()) {
+                    mPackages.add(data.getString(data.getColumnIndex(ToasterTable.PACKAGE)));
+                }
             } while (data.moveToNext());
         }
     }
@@ -74,12 +73,12 @@ public class WidgetViewsFactory
 
     @Override
     public void onDestroy() {
-        // no-op
+        mContext = null;
     }
 
     @Override
     public int getCount() {
-        return packages.size();
+        return mPackages.size();
     }
 
     @Override
@@ -88,20 +87,29 @@ public class WidgetViewsFactory
             Log.v(TAG, "getViewAt( " + position + " )");
         }
 
-        RemoteViews row = new RemoteViews(context.getPackageName(), R.layout.widget_row);
-        ToastCard toastCard = new ToastCard(context);
-        toastCard.packageName = packages.get(position);
-        toastCard.loadData();
+        RemoteViews row = new RemoteViews(mContext.getPackageName(), R.layout.widget_row);
+        ToastCard toastCard = new ToastCard(mContext);
+        toastCard.loadData(mPackages.get(position));
 
-        row.setTextViewText(R.id.packageName, toastCard.appName);
-        row.setImageViewBitmap(R.id.packageIcon, PackageHelper.drawableToBitmap(toastCard.packageIcon));
+        row.setTextViewText(R.id.package_name, toastCard.appName);
+        row.setImageViewBitmap(R.id.package_icon, PackageHelper.drawableToBitmap(toastCard.packageIcon));
+
+        int color = mContext.getResources().getColor(R.color.colorPrimary);
+        if (toastCard.palette != null) {
+            color = toastCard.palette.getMutedColor(color);
+        }
+        row.setInt(R.id.row, "setBackgroundColor", color);
 
         return (row);
     }
 
     @Override
     public RemoteViews getLoadingView() {
-        return null;
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "getLoadingView");
+        }
+
+        return new RemoteViews(mContext.getPackageName(), R.layout.widget_loading);
     }
 
     @Override

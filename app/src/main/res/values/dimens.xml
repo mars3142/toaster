@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (c) 2014.
+  ~ This file is part of Toaster
   ~
-  ~ This file is part of Toaster.
+  ~ Copyright (c) 2015 Peter Siegmund
   ~
-  ~ Toaster is free software: you can redistribute it and/or modify
+  ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ Toaster is distributed in the hope that it will be useful,
+  ~ This program is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources>
@@ -25,12 +25,22 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="preference_horizontal_margin">0dp</dimen>
+
     <!--
     Per the design guidelines, navigation drawers should be between 240dp and 320dp:
     https://developer.android.com/design/patterns/navigation-drawer.html
     -->
-    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="navigation_drawer_width">280dp</dimen>
     <dimen name="icon_size_small">32dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
+
+    <dimen name="elevation_toolbar">5dp</dimen>
+    <dimen name="card_empty_height">96dp</dimen>
+
+    <dimen name="fab_size">56dp</dimen>
+
+    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_press_elevation">4dp</dimen>
 
 </resources>

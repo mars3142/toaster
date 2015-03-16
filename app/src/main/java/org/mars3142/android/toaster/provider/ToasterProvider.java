@@ -1,20 +1,20 @@
 /*
- * Copyright (c) 2014.
+ * This file is part of Toaster
  *
- * This file is part of Toaster.
+ * Copyright (c) 2015 Peter Siegmund
  *
- * Toaster is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Toaster is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Toaster.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.mars3142.android.toaster.provider;
@@ -22,6 +22,7 @@ package org.mars3142.android.toaster.provider;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -29,6 +30,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
+
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.helper.DatabaseHelper;
 import org.mars3142.android.toaster.table.FilterTable;
@@ -42,18 +44,18 @@ import java.util.HashMap;
  */
 public class ToasterProvider extends ContentProvider {
 
-    public final static String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider";
+    public static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider";
 
-    private final static String TAG = ToasterProvider.class.getSimpleName();
-    private final static int TOASTER = 1;
-    private final static int TOASTER_ID = 2;
-    private final static int PACKAGE = 3;
-    private final static int FILTER = 4;
-    private final static int FILTER_ID = 5;
-    private final static HashMap<String, String> toasterMap;
-    private final static HashMap<String, String> packageMap;
-    private final static HashMap<String, String> filterMap;
-    private final static UriMatcher mUriMatcher;
+    private static final String TAG = ToasterProvider.class.getSimpleName();
+    private static final int TOASTER = 1;
+    private static final int TOASTER_ID = 2;
+    private static final int PACKAGE = 3;
+    private static final int FILTER = 4;
+    private static final int FILTER_ID = 5;
+    private static final HashMap<String, String> toasterMap;
+    private static final HashMap<String, String> packageMap;
+    private static final HashMap<String, String> filterMap;
+    private static final UriMatcher mUriMatcher;
 
     private DatabaseHelper dbHelper;
 
@@ -65,7 +67,7 @@ public class ToasterProvider extends ContentProvider {
         mUriMatcher.addURI(AUTHORITY, "filter", FILTER);
         mUriMatcher.addURI(AUTHORITY, "filter/#", FILTER_ID);
 
-        toasterMap = new HashMap<String, String>();
+        toasterMap = new HashMap<>();
         toasterMap.put(ToasterTable._ID, ToasterTable._ID);
         toasterMap.put(ToasterTable.TIMESTAMP, ToasterTable.TIMESTAMP);
         toasterMap.put(ToasterTable.MESSAGE, ToasterTable.MESSAGE);
@@ -74,10 +76,10 @@ public class ToasterProvider extends ContentProvider {
         toasterMap.put(ToasterTable.VERSIONNAME, ToasterTable.VERSIONNAME);
         toasterMap.put(ToasterTable._COUNT, ToasterTable._COUNT);
 
-        packageMap = new HashMap<String, String>();
+        packageMap = new HashMap<>();
         packageMap.put(ToasterTable.PACKAGE, ToasterTable.PACKAGE);
 
-        filterMap = new HashMap<String, String>();
+        filterMap = new HashMap<>();
         filterMap.put(FilterTable._ID, FilterTable._ID);
         filterMap.put(FilterTable.PACKAGE, FilterTable.PACKAGE);
         filterMap.put(FilterTable.EXCL_INCL, FilterTable.EXCL_INCL);
@@ -214,6 +216,7 @@ public class ToasterProvider extends ContentProvider {
             rowId = database.insert(tableName, null, values);
         }
         if (rowId > 0) {
+            refreshWidget();
             getContext().getContentResolver().notifyChange(uri, null);
             return ContentUris.withAppendedId(contentUri, rowId);
         }
@@ -262,6 +265,7 @@ public class ToasterProvider extends ContentProvider {
                     throw new IllegalArgumentException("Unknown URI: " + uri);
             }
         }
+        refreshWidget();
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }
@@ -309,7 +313,13 @@ public class ToasterProvider extends ContentProvider {
                     throw new IllegalArgumentException("Unknown URI: " + uri);
             }
         }
+        refreshWidget();
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
+    }
+
+    private void refreshWidget() {
+        Intent intent = new Intent(String.format("%s.APPWIDGET_UPDATE", BuildConfig.APPLICATION_ID));
+        getContext().sendBroadcast(intent);
     }
 }
