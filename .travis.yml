@@ -9,13 +9,14 @@ jdk:
 
 env:
   global:
-    - GRADLE_VERSION="2.2.1"
-    - ANDROID_SDK_VERSION=r24.0.2
-    - BUILD_TOOLS=21.1.2
-    - TARGET_API=21
+    - GRADLE_VERSION="2.3"
+    - ANDROID_SDK_VERSION=r24.1.2
+    - BUILD_TOOLS=22.0.0
+    - TARGET_API=22
     - ANDROID_ABI=armeabi-v7a
 
 before_install:
+  - chmod +x gradlew
   # environment info
   - uname -a
 
