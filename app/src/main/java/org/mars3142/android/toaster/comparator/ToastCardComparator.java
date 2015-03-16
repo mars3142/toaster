@@ -22,6 +22,7 @@ package org.mars3142.android.toaster.comparator;
 import org.mars3142.android.toaster.card.ToastCard;
 
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * Compares two TwoCards app names (case insensitive)
@@ -34,6 +35,6 @@ public class ToastCardComparator implements Comparator<ToastCard> {
 
     @Override
     public int compare(ToastCard lhs, ToastCard rhs) {
-        return lhs.appName.toUpperCase().compareToIgnoreCase(rhs.appName.toUpperCase());
+        return lhs.appName.toUpperCase(Locale.getDefault()).compareToIgnoreCase(rhs.appName.toUpperCase(Locale.getDefault()));
     }
 }
