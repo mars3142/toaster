@@ -48,7 +48,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 
         Preference preference = findPreference(getString(R.string.blacklist_key));
-        preference.setOnPreferenceClickListener(this);
+        if (preference != null) {
+            preference.setOnPreferenceClickListener(this);
+        }
     }
 
     @Override

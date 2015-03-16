@@ -105,10 +105,10 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        int menuRes = R.menu.nav_drawer_closed;
+        int menuRes = R.menu.main_options;
         if (mPackagesFragment != null) {
             if (!mPackagesFragment.isDrawerOpen()) {
-                menuRes = R.menu.nav_drawer_closed;
+                menuRes = R.menu.main_options;
             }
         }
         getMenuInflater().inflate(menuRes, menu);
