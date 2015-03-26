@@ -25,7 +25,7 @@ android {
     def versionPatch = 9
     def versionBuild = 2
 
-    buildToolsVersion "22.0.0"
+    buildToolsVersion "22.0.1"
     compileSdkVersion 22
 
     signingConfigs {
