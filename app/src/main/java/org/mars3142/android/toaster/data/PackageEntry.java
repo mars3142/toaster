@@ -19,6 +19,7 @@
 
 package org.mars3142.android.toaster.data;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
@@ -68,6 +69,7 @@ public class PackageEntry {
         return mLabel;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public Drawable getIcon(Context context) {
         if (mIcon == null) {
             if (mApkFile.exists()) {
