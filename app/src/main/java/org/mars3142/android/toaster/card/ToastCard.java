@@ -75,7 +75,7 @@ public class ToastCard extends Card {
             appName = (appName == null) ? packageName : appName;
             packageIcon = PackageHelper.getIconFromPackageName(super.getContext(), packageName);
             if (packageIcon != null) {
-                palette = Palette.generate(PackageHelper.drawableToBitmap(packageIcon));
+                palette = new Palette.Builder(PackageHelper.drawableToBitmap(packageIcon)).generate();
             }
         }
     }

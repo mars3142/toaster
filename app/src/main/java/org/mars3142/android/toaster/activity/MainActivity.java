@@ -21,14 +21,14 @@ package org.mars3142.android.toaster.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -54,7 +54,7 @@ import org.mars3142.android.toaster.table.ToasterTable;
  *
  * @author mars3142
  */
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends AppCompatActivity
         implements PackagesFragment.PackagesCallbacks {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -78,9 +78,11 @@ public class MainActivity extends ActionBarActivity
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setHomeButtonEnabled(false);
-            getSupportActionBar().setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                getSupportActionBar().setHomeButtonEnabled(false);
+                getSupportActionBar().setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
+            }
         }
 
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -137,7 +139,7 @@ public class MainActivity extends ActionBarActivity
                 } else {
                     deleteListener = new DeleteListener(this, ToasterTable.TOASTER_URI, ToasterTable.PACKAGE + " = ?", new String[]{mPackageName});
                 }
-                new Builder(this)
+                new AlertDialog.Builder(this)
                         .setTitle(R.string.action_delete)
                         .setMessage(R.string.delete_question)
                         .setCancelable(true)
@@ -157,7 +159,7 @@ public class MainActivity extends ActionBarActivity
         super.onResume();
 
         if (!isAccessibilitySettingsOn(getApplicationContext())) {
-            new Builder(this)
+            new AlertDialog.Builder(this)
                     .setTitle(R.string.toaster_service_header)
                     .setMessage(R.string.toaster_service_message)
                     .setCancelable(true)

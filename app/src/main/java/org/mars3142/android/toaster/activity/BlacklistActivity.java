@@ -26,7 +26,7 @@ import android.content.Loader;
 import android.graphics.Outline;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,7 +48,7 @@ import org.mars3142.android.toaster.table.FilterTable;
 /**
  * @author mars3142
  */
-public class BlacklistActivity extends ActionBarActivity
+public class BlacklistActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<PackageEntry[]>, View.OnClickListener {
 
     private static final String TAG = BlacklistActivity.class.getSimpleName();
@@ -71,9 +71,11 @@ public class BlacklistActivity extends ActionBarActivity
         if (toolbar != null) {
             setSupportActionBar(toolbar);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeButtonEnabled(true);
+                getSupportActionBar().setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
+            }
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
