@@ -32,7 +32,9 @@ import org.mars3142.android.toaster.viewholder.PackagesRecyclerViewHolder;
 /**
  * @author mars3142
  */
-public class PackageRecyclerAdapter extends RecyclerView.Adapter<PackagesRecyclerViewHolder> {
+public class PackageRecyclerAdapter
+        extends RecyclerView.Adapter<PackagesRecyclerViewHolder>
+        implements PackagesRecyclerViewHolder.OnItemClickListener {
 
     private Context mContext;
     private PackageEntry[] mPackages;
@@ -45,7 +47,7 @@ public class PackageRecyclerAdapter extends RecyclerView.Adapter<PackagesRecycle
     @Override
     public PackagesRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.packages_row, parent, false);
-        return new PackagesRecyclerViewHolder(view, null);
+        return new PackagesRecyclerViewHolder(view, this);
     }
 
     @Override
@@ -61,5 +63,10 @@ public class PackageRecyclerAdapter extends RecyclerView.Adapter<PackagesRecycle
     @Override
     public int getItemCount() {
         return mPackages.length;
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+
     }
 }

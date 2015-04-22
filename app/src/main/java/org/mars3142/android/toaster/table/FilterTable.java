@@ -35,7 +35,7 @@ public class FilterTable
 
     private static final String TAG = FilterTable.class.getSimpleName();
 
-    public static final String TABLENAME = "filter";
+    public static final String TABLE_NAME = "filter";
     public static final String PACKAGE = "package";
     public static final String EXCL_INCL = "excl_incl";
     public static final Uri FILTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/filter");
@@ -43,7 +43,7 @@ public class FilterTable
     public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.filter";
 
     public static void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLENAME +
+        db.execSQL("CREATE TABLE " + TABLE_NAME +
                 " (" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 PACKAGE + " TEXT," +
@@ -56,15 +56,15 @@ public class FilterTable
             switch (oldVersion) {
                 case 1:
                     try {
-                        db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + PACKAGE + " TEXT;");
-                        db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + EXCL_INCL + " INTEGER;");
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + PACKAGE + " TEXT;");
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + EXCL_INCL + " INTEGER;");
                     } catch (SQLException ex) {
                         // upgrade already gone
                     }
                     break;
 
                 default:
-                    db.execSQL("DROP TABLE IF EXISTS " + TABLENAME);
+                    db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
                     onCreate(db);
             }
         }

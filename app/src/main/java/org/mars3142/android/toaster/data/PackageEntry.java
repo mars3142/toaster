@@ -22,6 +22,7 @@ package org.mars3142.android.toaster.data;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 
 import java.io.File;
 
@@ -85,7 +86,13 @@ public class PackageEntry {
             return mIcon;
         }
 
-        return context.getResources().getDrawable(android.R.drawable.sym_def_app_icon);
+        Drawable drawable;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            drawable = context.getDrawable(android.R.drawable.sym_def_app_icon);
+        } else {
+            drawable = context.getResources().getDrawable(android.R.drawable.sym_def_app_icon);
+        }
+        return drawable;
     }
 
     @Override

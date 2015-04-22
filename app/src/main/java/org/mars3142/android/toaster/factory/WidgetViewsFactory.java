@@ -21,6 +21,7 @@ package org.mars3142.android.toaster.factory;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.database.Cursor;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -43,22 +44,21 @@ public class WidgetViewsFactory
     private static final String TAG = WidgetViewsFactory.class.getSimpleName();
 
     private Context mContext;
-    private ArrayList<String> mPackages = new ArrayList<String>();
+    private ArrayList<String> mPackages;
 
     public WidgetViewsFactory(Context context) {
         mContext = context;
 
+        mPackages = new ArrayList<>();
+
         ContentResolver cr = context.getContentResolver();
         Cursor data = cr.query(ToasterTable.TOASTER_URI, new String[]{ToasterTable.PACKAGE}, null, null, ToasterTable._ID + " DESC LIMIT 5");
-        if (data != null) {
-            mPackages.clear();
-            data.moveToFirst();
+        if (data.moveToFirst()) {
             do {
-                if (!data.isAfterLast()) {
-                    mPackages.add(data.getString(data.getColumnIndex(ToasterTable.PACKAGE)));
-                }
+                mPackages.add(data.getString(data.getColumnIndex(ToasterTable.PACKAGE)));
             } while (data.moveToNext());
         }
+        data.close();
     }
 
     @Override

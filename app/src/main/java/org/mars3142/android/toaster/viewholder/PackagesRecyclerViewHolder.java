@@ -58,7 +58,7 @@ public class PackagesRecyclerViewHolder extends RecyclerView.ViewHolder implemen
     @Override
     public void onClick(View view) {
         if (mOnItemClickListener != null) {
-            mOnItemClickListener.onItemClick(view, getPosition());
+            mOnItemClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 

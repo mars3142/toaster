@@ -35,26 +35,26 @@ public class ToasterTable
 
     private static final String TAG = ToasterTable.class.getSimpleName();
     
-    public static final String TABLENAME = "toaster";
+    public static final String TABLE_NAME = "toaster";
     public static final String TIMESTAMP = "timestamp";
     public static final String PACKAGE = "package";
     public static final String MESSAGE = "message";
-    public static final String VERSIONCODE = "version_code";
-    public static final String VERSIONNAME = "version_name";
+    public static final String VERSION_CODE = "version_code";
+    public static final String VERSION_NAME = "version_name";
     public static final Uri TOASTER_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/toaster");
     public static final Uri PACKAGE_URI = Uri.parse("content://" + ToasterProvider.AUTHORITY + "/packages");
     public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.mars3142.content.toaster";
     public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.mars3142.content.toaster";
 
     public static void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLENAME +
+        db.execSQL("CREATE TABLE " + TABLE_NAME +
                 " (" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TIMESTAMP + " LONG, " +
                 PACKAGE + " TEXT, " +
                 MESSAGE + " TEXT, " +
-                VERSIONCODE + " INTEGER, " +
-                VERSIONNAME + " TEXT " +
+                VERSION_CODE + " INTEGER, " +
+                VERSION_NAME + " TEXT " +
                 ");");
     }
 
@@ -63,15 +63,15 @@ public class ToasterTable
             switch (oldVersion) {
                 case 1:
                     try {
-                        db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + VERSIONCODE + " INTEGER;");
-                        db.execSQL("ALTER TABLE " + TABLENAME + " ADD COLUMN " + VERSIONNAME + " TEXT;");
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + VERSION_CODE + " INTEGER;");
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + VERSION_NAME + " TEXT;");
                     } catch (SQLException ex) {
                         // upgrade already done
                     }
                     break;
 
                 default:
-                    db.execSQL("DROP TABLE IF EXISTS " + TABLENAME);
+                    db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
                     onCreate(db);
             }
         }

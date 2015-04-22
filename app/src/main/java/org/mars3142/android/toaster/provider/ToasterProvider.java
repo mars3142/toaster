@@ -72,8 +72,8 @@ public class ToasterProvider extends ContentProvider {
         toasterMap.put(ToasterTable.TIMESTAMP, ToasterTable.TIMESTAMP);
         toasterMap.put(ToasterTable.MESSAGE, ToasterTable.MESSAGE);
         toasterMap.put(ToasterTable.PACKAGE, ToasterTable.PACKAGE);
-        toasterMap.put(ToasterTable.VERSIONCODE, ToasterTable.VERSIONCODE);
-        toasterMap.put(ToasterTable.VERSIONNAME, ToasterTable.VERSIONNAME);
+        toasterMap.put(ToasterTable.VERSION_CODE, ToasterTable.VERSION_CODE);
+        toasterMap.put(ToasterTable.VERSION_NAME, ToasterTable.VERSION_NAME);
         toasterMap.put(ToasterTable._COUNT, ToasterTable._COUNT);
 
         packageMap = new HashMap<>();
@@ -105,7 +105,7 @@ public class ToasterProvider extends ContentProvider {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         switch (mUriMatcher.match(uri)) {
             case TOASTER:
-                queryBuilder.setTables(ToasterTable.TABLENAME);
+                queryBuilder.setTables(ToasterTable.TABLE_NAME);
                 queryBuilder.setProjectionMap(toasterMap);
                 if (sortOrder == null) {
                     sortOrder = ToasterTable.TIMESTAMP + " DESC ";
@@ -114,13 +114,13 @@ public class ToasterProvider extends ContentProvider {
 
             case TOASTER_ID:
                 id = uri.getLastPathSegment();
-                queryBuilder.setTables(ToasterTable.TABLENAME);
+                queryBuilder.setTables(ToasterTable.TABLE_NAME);
                 queryBuilder.setProjectionMap(toasterMap);
                 queryBuilder.appendWhere(ToasterTable._ID + " = " + id);
                 break;
 
             case PACKAGE:
-                queryBuilder.setTables(ToasterTable.TABLENAME);
+                queryBuilder.setTables(ToasterTable.TABLE_NAME);
                 queryBuilder.setProjectionMap(packageMap);
                 queryBuilder.setDistinct(true);
                 if (sortOrder == null) {
@@ -129,7 +129,7 @@ public class ToasterProvider extends ContentProvider {
                 break;
 
             case FILTER:
-                queryBuilder.setTables(FilterTable.TABLENAME);
+                queryBuilder.setTables(FilterTable.TABLE_NAME);
                 queryBuilder.setProjectionMap(filterMap);
                 if (sortOrder == null) {
                     sortOrder = FilterTable.PACKAGE + " ASC ";
@@ -138,7 +138,7 @@ public class ToasterProvider extends ContentProvider {
 
             case FILTER_ID:
                 id = uri.getLastPathSegment();
-                queryBuilder.setTables(FilterTable.TABLENAME);
+                queryBuilder.setTables(FilterTable.TABLE_NAME);
                 queryBuilder.setProjectionMap(filterMap);
                 queryBuilder.appendWhere(FilterTable._ID + " = " + id);
                 break;
@@ -191,12 +191,12 @@ public class ToasterProvider extends ContentProvider {
         Uri contentUri;
         switch (mUriMatcher.match(uri)) {
             case TOASTER:
-                tableName = ToasterTable.TABLENAME;
+                tableName = ToasterTable.TABLE_NAME;
                 contentUri = ToasterTable.TOASTER_URI;
                 break;
 
             case FILTER:
-                tableName = FilterTable.TABLENAME;
+                tableName = FilterTable.TABLE_NAME;
                 contentUri = FilterTable.FILTER_URI;
                 break;
 
@@ -236,7 +236,7 @@ public class ToasterProvider extends ContentProvider {
         if (database != null) {
             switch (mUriMatcher.match(uri)) {
                 case TOASTER:
-                    count = database.delete(ToasterTable.TABLENAME, selection, selectionArgs);
+                    count = database.delete(ToasterTable.TABLE_NAME, selection, selectionArgs);
                     break;
 
                 case TOASTER_ID:
@@ -245,11 +245,11 @@ public class ToasterProvider extends ContentProvider {
                     if (selection != null) {
                         finalWhere += " AND " + selection;
                     }
-                    count = database.delete(ToasterTable.TABLENAME, finalWhere, selectionArgs);
+                    count = database.delete(ToasterTable.TABLE_NAME, finalWhere, selectionArgs);
                     break;
 
                 case FILTER:
-                    count = database.delete(FilterTable.TABLENAME, selection, selectionArgs);
+                    count = database.delete(FilterTable.TABLE_NAME, selection, selectionArgs);
                     break;
 
                 case FILTER_ID:
@@ -258,7 +258,7 @@ public class ToasterProvider extends ContentProvider {
                     if (selection != null) {
                         finalWhere += " AND " + selection;
                     }
-                    count = database.delete(FilterTable.TABLENAME, finalWhere, selectionArgs);
+                    count = database.delete(FilterTable.TABLE_NAME, finalWhere, selectionArgs);
                     break;
 
                 default:
@@ -284,7 +284,7 @@ public class ToasterProvider extends ContentProvider {
         if (database != null) {
             switch (mUriMatcher.match(uri)) {
                 case TOASTER:
-                    count = database.update(ToasterTable.TABLENAME, values, selection, selectionArgs);
+                    count = database.update(ToasterTable.TABLE_NAME, values, selection, selectionArgs);
                     break;
 
                 case TOASTER_ID:
@@ -293,11 +293,11 @@ public class ToasterProvider extends ContentProvider {
                     if (selection != null) {
                         finalWhere += " AND " + selection;
                     }
-                    count = database.update(ToasterTable.TABLENAME, values, finalWhere, selectionArgs);
+                    count = database.update(ToasterTable.TABLE_NAME, values, finalWhere, selectionArgs);
                     break;
 
                 case FILTER:
-                    count = database.update(FilterTable.TABLENAME, values, selection, selectionArgs);
+                    count = database.update(FilterTable.TABLE_NAME, values, selection, selectionArgs);
                     break;
 
                 case FILTER_ID:
@@ -306,7 +306,7 @@ public class ToasterProvider extends ContentProvider {
                     if (selection != null) {
                         finalWhere += " AND " + selection;
                     }
-                    count = database.update(FilterTable.TABLENAME, values, finalWhere, selectionArgs);
+                    count = database.update(FilterTable.TABLE_NAME, values, finalWhere, selectionArgs);
                     break;
 
                 default:

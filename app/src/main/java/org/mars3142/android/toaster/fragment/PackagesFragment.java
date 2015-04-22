@@ -32,7 +32,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,8 +50,8 @@ import android.widget.RelativeLayout;
 
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.activity.SettingsActivity;
-import org.mars3142.android.toaster.adapter.ToastRecyclerAdapter;
 import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
+import org.mars3142.android.toaster.adapter.ToastRecyclerAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.comparator.ToastCardComparator;
 import org.mars3142.android.toaster.table.ToasterTable;
@@ -189,7 +188,7 @@ public class PackagesFragment extends Fragment
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         switch (loader.getId()) {
             case DATA_LOADER:
-                mNavList = new ArrayList<ToastCard>();
+                mNavList = new ArrayList<>();
 
                 ToastCard emptyCard = new ToastCard(getActionBar().getThemedContext());
                 emptyCard.appName = getString(R.string.all_data);

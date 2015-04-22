@@ -19,7 +19,6 @@
 
 package org.mars3142.android.toaster.listener;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
