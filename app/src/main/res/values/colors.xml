@@ -21,13 +21,18 @@
 
 <resources>
 
-    <color name="colorPrimary">#03a9f4</color>
-    <color name="colorPrimaryDark">#0288d1</color>
-    <color name="colorAccent">#00796b</color>
-    <color name="colorTint">#767676</color>
+    <color name="colorPrimary">#03A9f4</color>
+    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorPrimaryLight">#B3E5FC</color>
+    <color name="colorAccent">#448AFF</color>
+    <color name="colorTint">#FFFFFF</color>
 
-    <color name="nav_row">#c8c8c8</color>
-    <color name="nav_background">#b7b7b7</color>
+    <color name="primaryText">#212121</color>
+    <color name="secondaryText">#727272</color>
+    <color name="dividerColor">#B6B6B6</color>
+
+    <color name="nav_row">#C8C8C8</color>
+    <color name="nav_background">#B7B7B7</color>
 
     <color name="widget_text_color">#000000</color>
 
