@@ -196,8 +196,8 @@ public class PackagesFragment extends Fragment
 
                 if (data.moveToFirst()) {
                     do {
-                        ToastCard packageCard = new ToastCard(getActionBar().getThemedContext());
-                        packageCard.loadData(data.getString(data.getColumnIndex(ToasterTable.PACKAGE)));
+                        String packageName = data.getString(data.getColumnIndex(ToasterTable.PACKAGE));
+                        ToastCard packageCard = new ToastCard(getActionBar().getThemedContext(), packageName);
                         if (packageCard.packageName != null) {
                             mNavList.add(packageCard);
                         }
@@ -233,7 +233,6 @@ public class PackagesFragment extends Fragment
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(R.string.app_name);
     }
 
     private ActionBar getActionBar() {
@@ -349,7 +348,7 @@ public class PackagesFragment extends Fragment
         }
     }
 
-    public static interface PackagesCallbacks {
+    public interface PackagesCallbacks {
         void onPackagesItemSelected(String packageName);
     }
 }

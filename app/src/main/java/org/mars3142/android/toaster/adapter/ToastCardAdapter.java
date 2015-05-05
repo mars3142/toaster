@@ -54,12 +54,12 @@ public class ToastCardAdapter extends CardCursorAdapter {
 
     @Override
     protected Card getCardFromCursor(Cursor cursor) {
-        ToastCard card = new ToastCard(super.getContext());
+        String packageName = cursor.getString(cursor.getColumnIndex(ToasterTable.PACKAGE));
+        ToastCard card = new ToastCard(super.getContext(), packageName);
 
         DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
         card.timestamp = dateFormat.format(Long.parseLong(cursor.getString(cursor.getColumnIndex(ToasterTable.TIMESTAMP))));
         card.message = cursor.getString(cursor.getColumnIndex(ToasterTable.MESSAGE));
-        card.loadData(cursor.getString(cursor.getColumnIndex(ToasterTable.PACKAGE)));
 
         card.setId(cursor.getString(cursor.getColumnIndex(ToasterTable._ID)));
 

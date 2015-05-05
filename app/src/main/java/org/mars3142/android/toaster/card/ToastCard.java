@@ -63,12 +63,13 @@ public class ToastCard extends Card {
         mResources = getContext().getResources();
     }
 
-    /**
-     * Loads the data for the given package name
-     *
-     * @param packageName package name to load data from
-     */
-    public void loadData(String packageName) {
+    public ToastCard(Context context, String packageName) {
+        this(context);
+
+        loadData(packageName);
+    }
+
+    private void loadData(String packageName) {
         if (!TextUtils.isEmpty(packageName)) {
             this.packageName = packageName;
             appName = PackageHelper.getAppName(super.getContext(), packageName);
