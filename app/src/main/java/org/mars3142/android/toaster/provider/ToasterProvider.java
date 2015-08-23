@@ -29,6 +29,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.mars3142.android.toaster.BuildConfig;
@@ -86,7 +87,6 @@ public class ToasterProvider extends ContentProvider {
         filterMap.put(FilterTable._COUNT, FilterTable._COUNT);
     }
 
-
     @Override
     public boolean onCreate() {
         dbHelper = new DatabaseHelper(getContext());
@@ -94,7 +94,7 @@ public class ToasterProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "query: uri=" + uri + " projection=" + Arrays.toString(projection) +
                     " selection=[" + selection + "] args=" + Arrays.toString(selectionArgs) +
@@ -158,7 +158,7 @@ public class ToasterProvider extends ContentProvider {
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "getType: uri=" + uri);
         }
@@ -182,7 +182,7 @@ public class ToasterProvider extends ContentProvider {
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues initialValues) {
+    public Uri insert(@NonNull Uri uri, ContentValues initialValues) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "insert: uri=" + uri + " initialValues=[" + initialValues.toString() + "]");
         }
@@ -224,7 +224,7 @@ public class ToasterProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "delete: uri=" + uri + " selection=[" + selection + "] args=" + Arrays.toString(selectionArgs));
         }
@@ -271,7 +271,7 @@ public class ToasterProvider extends ContentProvider {
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         if (BuildConfig.DEBUG) {
             Log.v(TAG, "update: uri=" + uri + " values=[" + values.toString() + "] selection=[" + selection + "]" +
                     " args=" + Arrays.toString(selectionArgs));
