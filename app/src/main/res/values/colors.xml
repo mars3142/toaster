@@ -35,5 +35,6 @@
     <color name="nav_background">#B7B7B7</color>
 
     <color name="widget_text_color">#000000</color>
+    <color name="black">#000000</color>
 
 </resources>
