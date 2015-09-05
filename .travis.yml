@@ -9,10 +9,10 @@ jdk:
 
 env:
   global:
-    - GRADLE_VERSION="2.3"
-    - ANDROID_SDK_VERSION=r24.1.2
-    - BUILD_TOOLS=22.0.1
-    - TARGET_API=22
+    - GRADLE_VERSION="2.6"
+    - ANDROID_SDK_VERSION=r24.3.4
+    - BUILD_TOOLS=23.0.1
+    - TARGET_API=23
     - ANDROID_ABI=armeabi-v7a
 
 before_install:
