@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
     public void onSectionAttached(String packageName) {
         if (mPackagesFragment != null) {
             if (!TextUtils.isEmpty(packageName)) {
-                mTitle = PackageHelper.getAppName(getApplicationContext(), packageName);
+                mTitle = PackageHelper.with(this).getAppName(packageName);
             } else {
                 mTitle = getString(R.string.all_data);
             }

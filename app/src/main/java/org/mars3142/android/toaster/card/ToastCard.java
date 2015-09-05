@@ -22,6 +22,7 @@ package org.mars3142.android.toaster.card;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,6 +34,8 @@ import android.widget.TextView;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.helper.PackageHelper;
 
+import java.util.HashMap;
+
 import it.gmariotti.cardslib.library.internal.Card;
 
 /**
@@ -41,8 +44,6 @@ import it.gmariotti.cardslib.library.internal.Card;
  * @author mars3142
  */
 public class ToastCard extends Card {
-
-    private static final String TAG = ToastCard.class.getSimpleName();
 
     public String message;
     public String appName;
@@ -55,28 +56,41 @@ public class ToastCard extends Card {
     private TextView mPackageNameTextView;
     private ImageView mPackageIconView;
     private RelativeLayout mCardBackgroundView;
-    private Resources mResources;
+
+    private static HashMap<String, Palette> mPalettes;
 
     public ToastCard(Context context) {
         super(context, R.layout.toaster_card);
 
-        mResources = getContext().getResources();
+        init();
     }
 
     public ToastCard(Context context, String packageName) {
         this(context);
 
+        init();
         loadData(packageName);
+    }
+
+    private void init() {
+        if (mPalettes == null) {
+            mPalettes = new HashMap<>();
+        }
     }
 
     private void loadData(String packageName) {
         if (!TextUtils.isEmpty(packageName)) {
             this.packageName = packageName;
-            appName = PackageHelper.getAppName(super.getContext(), packageName);
+            appName = PackageHelper.with(getContext()).getAppName(packageName);
             appName = (appName == null) ? packageName : appName;
-            packageIcon = PackageHelper.getIconFromPackageName(super.getContext(), packageName);
-            if (packageIcon != null) {
-                palette = new Palette.Builder(PackageHelper.drawableToBitmap(packageIcon)).generate();
+            packageIcon = PackageHelper.with(getContext()).getIconFromPackageName(packageName);
+            if (mPalettes.containsKey(packageName)) {
+                palette = mPalettes.get(packageName);
+            } else {
+                if (packageIcon != null) {
+                    palette = new Palette.Builder(PackageHelper.drawableToBitmap(packageIcon)).generate();
+                    mPalettes.put(packageName, palette);
+                }
             }
         }
     }
@@ -100,7 +114,7 @@ public class ToastCard extends Card {
         }
 
         if (mCardBackgroundView != null) {
-            int color = mResources.getColor(R.color.colorPrimary);
+            int color = ContextCompat.getColor(getContext(), R.color.colorPrimary);
             if (palette != null) {
                 color = palette.getMutedColor(color);
             }

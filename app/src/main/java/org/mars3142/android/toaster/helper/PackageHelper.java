@@ -19,6 +19,7 @@
 
 package org.mars3142.android.toaster.helper;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -32,38 +33,75 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.DisplayMetrics;
 
+import java.util.HashMap;
+
 /**
  * @author mars3142
  */
 public class PackageHelper {
 
-    private static final String TAG = PackageHelper.class.getSimpleName();
+    private static PackageHelper mInstance;
 
-    public static String getAppName(Context context, String packageName) {
-        try {
-            PackageManager pm = context.getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(packageName, 0);
-            return pi.applicationInfo.loadLabel(context.getPackageManager()).toString();
-        } catch (Exception e) {
-            // Nothing
+    private Context mContext;
+    private HashMap<String, String> mAppNames;
+    private BitmapLruCache mBitmapCache;
+
+    private PackageHelper(Context context) {
+        mContext = context;
+        mAppNames = new HashMap<>();
+        mBitmapCache = new BitmapLruCache();
+    }
+
+    public synchronized static PackageHelper with(Context context) {
+        if (mInstance == null) {
+            mInstance = new PackageHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
+
+    public String getAppName(String packageName) {
+        if (mAppNames.containsKey(packageName)) {
+            return mAppNames.get(packageName);
+        } else {
+            try {
+                PackageManager pm = mContext.getPackageManager();
+                PackageInfo pi = pm.getPackageInfo(packageName, 0);
+                String appName = pi.applicationInfo.loadLabel(mContext.getPackageManager()).toString();
+                mAppNames.put(packageName, appName);
+                return appName;
+            } catch (Exception e) {
+                // Nothing
+            }
         }
         return packageName;
     }
 
-    public static Drawable getIconFromPackageName(Context context, String packageName) {
-        PackageManager pm = context.getPackageManager();
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public Drawable getIconFromPackageName(String packageName) {
+        Bitmap bitmap = mBitmapCache.get(packageName);
+        if (bitmap != null) {
+            return new BitmapDrawable(mContext.getResources(), bitmap);
+        }
+
+        PackageManager pm = mContext.getPackageManager();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
             try {
                 PackageInfo pi = pm.getPackageInfo(packageName, 0);
-                Context otherAppCtx = context.createPackageContext(packageName, Context.CONTEXT_IGNORE_SECURITY);
+                Context otherAppCtx = mContext.createPackageContext(packageName, Context.CONTEXT_IGNORE_SECURITY);
 
                 int displayMetrics[] = {DisplayMetrics.DENSITY_XHIGH, DisplayMetrics.DENSITY_HIGH, DisplayMetrics.DENSITY_TV,
                         DisplayMetrics.DENSITY_MEDIUM, DisplayMetrics.DENSITY_LOW};
 
                 for (int displayMetric : displayMetrics) {
                     try {
-                        Drawable drawable = otherAppCtx.getResources().getDrawableForDensity(pi.applicationInfo.icon, displayMetric);
+                        Drawable drawable;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            drawable = otherAppCtx.getResources().getDrawableForDensity(pi.applicationInfo.icon, displayMetric, null);
+                        } else {
+                            drawable = otherAppCtx.getResources().getDrawableForDensity(pi.applicationInfo.icon, displayMetric);
+                        }
                         if (drawable != null) {
+                            mBitmapCache.put(packageName, drawableToBitmap(drawable));
                             return drawable;
                         }
                     } catch (Resources.NotFoundException e) {
