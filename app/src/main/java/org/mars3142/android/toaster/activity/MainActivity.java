@@ -21,6 +21,7 @@ package org.mars3142.android.toaster.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
 import org.mars3142.android.toaster.listener.DeleteListener;
 import org.mars3142.android.toaster.service.ToasterService;
 import org.mars3142.android.toaster.table.ToasterTable;
+import org.mars3142.android.toaster.viewholder.NavDrawerRecyclerViewHolder;
 
 /**
  * MainActivity of Toaster
@@ -55,7 +57,7 @@ import org.mars3142.android.toaster.table.ToasterTable;
  * @author mars3142
  */
 public class MainActivity extends AppCompatActivity
-        implements PackagesFragment.PackagesCallbacks {
+        implements PackagesFragment.PackagesCallbacks, NavDrawerRecyclerViewHolder.OnItemClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String PACKAGE_NAME = "packageName";
@@ -121,6 +123,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPackagesItemSelected(String packageFilter) {
         getFragmentManager().beginTransaction().replace(R.id.container, ToasterFragment.newInstance(packageFilter)).commit();
+    }
+
+    @Override
+    public void onItemClick(String packageName) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, ToasterFragment.newInstance(packageName));
+        transaction.commit();
     }
 
     @Override

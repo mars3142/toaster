@@ -31,38 +31,30 @@ import org.mars3142.android.toaster.R;
  *
  * @author mars3142
  */
-public class PackagesRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-    private static final String TAG = PackagesRecyclerViewHolder.class.getSimpleName();
+public class NavDrawerRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private OnItemClickListener mOnItemClickListener;
-    private ImageView mPackageIcon;
-    private TextView mPackageName;
+    public ImageView mPackageIcon;
+    public TextView mAppName;
+    public String mPackageName;
 
-    public PackagesRecyclerViewHolder(View itemView, OnItemClickListener onItemClickListener) {
+    public NavDrawerRecyclerViewHolder(View itemView, OnItemClickListener onItemClickListener) {
         super(itemView);
 
         mOnItemClickListener = onItemClickListener;
-        mPackageName = (TextView) itemView.findViewById(R.id.package_name);
+        mAppName = (TextView) itemView.findViewById(R.id.app_name);
         mPackageIcon = (ImageView) itemView.findViewById(R.id.package_icon);
-    }
-
-    public TextView getPackageName() {
-        return mPackageName;
-    }
-
-    public ImageView getPackageIcon() {
-        return mPackageIcon;
+        itemView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         if (mOnItemClickListener != null) {
-            mOnItemClickListener.onItemClick(view, getAdapterPosition());
+            mOnItemClickListener.onItemClick(mPackageName);
         }
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View view , int position);
+        void onItemClick(String packageName);
     }
 }

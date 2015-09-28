@@ -43,18 +43,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.activity.SettingsActivity;
-import org.mars3142.android.toaster.adapter.ToastArrayAdapter;
-import org.mars3142.android.toaster.adapter.ToastRecyclerAdapter;
+import org.mars3142.android.toaster.adapter.NavDrawerRecyclerAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.comparator.ToastCardComparator;
 import org.mars3142.android.toaster.table.ToasterTable;
+import org.mars3142.android.toaster.viewholder.NavDrawerRecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,20 +60,17 @@ import java.util.Collections;
  * @author mars3142
  */
 public class PackagesFragment extends Fragment
-        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AbsListView.OnScrollListener, View.OnClickListener {
+        implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener, NavDrawerRecyclerViewHolder.OnItemClickListener {
 
-    private static final String TAG = PackagesFragment.class.getSimpleName();
-    private static final String STATE_SELECTED_POSITION = "selected_packages_position";
+    private static final String STATE_SELECTED_PACKAGE_NAME = "selected_package_name";
     private static final int DATA_LOADER = 0;
 
     private PackagesCallbacks mCallbacks;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerListView;
     private View mFragmentContainerView;
-    private ArrayList<ToastCard> mNavList;
     private RecyclerView mDrawerRecyclerView;
-    private int mCurrentSelectedPosition = 0;
+    private String mCurrentSelectedPackageName = null;
 
     public PackagesFragment() {
     }
@@ -86,7 +80,7 @@ public class PackagesFragment extends Fragment
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
+            mCurrentSelectedPackageName = savedInstanceState.getString(STATE_SELECTED_PACKAGE_NAME);
         }
     }
 
@@ -100,10 +94,6 @@ public class PackagesFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.packages, container, false);
-
-        mDrawerListView = (ListView) layout.findViewById(R.id.list_view);
-        mDrawerListView.setOnItemClickListener(this);
-        mDrawerListView.setOnScrollListener(this);
 
         RelativeLayout settings = (RelativeLayout) layout.findViewById(R.id.setting);
         settings.setOnClickListener(this);
@@ -124,7 +114,7 @@ public class PackagesFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        selectItem(mCurrentSelectedPosition);
+        onItemClick(mCurrentSelectedPackageName);
     }
 
     @Override
@@ -149,7 +139,7 @@ public class PackagesFragment extends Fragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
+        outState.putString(STATE_SELECTED_PACKAGE_NAME, mCurrentSelectedPackageName);
     }
 
     @Override
@@ -188,28 +178,20 @@ public class PackagesFragment extends Fragment
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         switch (loader.getId()) {
             case DATA_LOADER:
-                mNavList = new ArrayList<>();
-
-                ToastCard emptyCard = new ToastCard(getActionBar().getThemedContext());
-                emptyCard.appName = getString(R.string.all_data);
-                mNavList.add(emptyCard);
+                ArrayList<ToastCard> packageList = new ArrayList<>();
 
                 if (data.moveToFirst()) {
                     do {
                         String packageName = data.getString(data.getColumnIndex(ToasterTable.PACKAGE));
                         ToastCard packageCard = new ToastCard(getActionBar().getThemedContext(), packageName);
                         if (packageCard.packageName != null) {
-                            mNavList.add(packageCard);
+                            packageList.add(packageCard);
                         }
                     } while (data.moveToNext());
                 }
-                Collections.sort(mNavList, new ToastCardComparator());
-                Collections.swap(mNavList, mNavList.indexOf(emptyCard), 0);
+                Collections.sort(packageList, new ToastCardComparator());
+                mDrawerRecyclerView.setAdapter(new NavDrawerRecyclerAdapter(getActivity(), packageList, this));
 
-                mDrawerRecyclerView.setAdapter(new ToastRecyclerAdapter(mNavList));
-
-                mDrawerListView.setAdapter(new ToastArrayAdapter(getActionBar().getThemedContext(), mNavList));
-                mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
                 break;
 
             default:
@@ -222,7 +204,6 @@ public class PackagesFragment extends Fragment
         switch (loader.getId()) {
             case DATA_LOADER:
                 mDrawerRecyclerView.setAdapter(null);
-                mDrawerListView.setAdapter(null);
                 break;
 
             default:
@@ -252,10 +233,6 @@ public class PackagesFragment extends Fragment
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mDrawerListView.setElevation(actionBar.getElevation());
-            }
         }
 
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -297,42 +274,17 @@ public class PackagesFragment extends Fragment
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
-    private void selectItem(int position) {
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
-        }
+    @Override
+    public void onItemClick(String packageName) {
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
-        mCurrentSelectedPosition = position;
-        if (mCallbacks != null && mNavList != null && position < mNavList.size()) {
-            mCallbacks.onPackagesItemSelected(mNavList.get(position).packageName);
+
+        if (mCallbacks != null && !(("" + packageName).equals("" + mCurrentSelectedPackageName))) {
+            mCallbacks.onPackagesItemSelected(packageName);
         }
-    }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        selectItem(position);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            switch (scrollState) {
-                case SCROLL_STATE_FLING:
-                case SCROLL_STATE_TOUCH_SCROLL:
-                    mDrawerListView.setTranslationZ(getResources().getDimension(R.dimen.elevation_toolbar));
-
-                default:
-                    mDrawerListView.setTranslationZ(0);
-            }
-        }
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        // nothing
+        mCurrentSelectedPackageName = packageName;
     }
 
     @Override

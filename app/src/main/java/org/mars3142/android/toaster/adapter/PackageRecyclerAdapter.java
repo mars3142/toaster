@@ -27,14 +27,14 @@ import android.view.ViewGroup;
 
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.data.PackageEntry;
-import org.mars3142.android.toaster.viewholder.PackagesRecyclerViewHolder;
+import org.mars3142.android.toaster.viewholder.NavDrawerRecyclerViewHolder;
 
 /**
  * @author mars3142
  */
 public class PackageRecyclerAdapter
-        extends RecyclerView.Adapter<PackagesRecyclerViewHolder>
-        implements PackagesRecyclerViewHolder.OnItemClickListener {
+        extends RecyclerView.Adapter<NavDrawerRecyclerViewHolder>
+        implements NavDrawerRecyclerViewHolder.OnItemClickListener {
 
     private Context mContext;
     private PackageEntry[] mPackages;
@@ -45,17 +45,17 @@ public class PackageRecyclerAdapter
     }
 
     @Override
-    public PackagesRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NavDrawerRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.packages_row, parent, false);
-        return new PackagesRecyclerViewHolder(view, this);
+        return new NavDrawerRecyclerViewHolder(view, this);
     }
 
     @Override
-    public void onBindViewHolder(PackagesRecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(NavDrawerRecyclerViewHolder holder, int position) {
         PackageEntry item = mPackages[position];
         if (item != null) {
-            holder.getPackageName().setText(item.getLabel(mContext));
-            holder.getPackageIcon().setImageDrawable(item.getIcon(mContext));
+            holder.mAppName.setText(item.getLabel(mContext));
+            holder.mPackageIcon.setImageDrawable(item.getIcon(mContext));
             holder.itemView.setTag(item);
         }
     }
@@ -66,7 +66,7 @@ public class PackageRecyclerAdapter
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(String packageName) {
 
     }
 }
