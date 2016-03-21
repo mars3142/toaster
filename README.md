@@ -1,4 +1,8 @@
-Master: [![Build Status](https://travis-ci.org/mars3142/toaster.svg?branch=master)](https://travis-ci.org/mars3142/toaster) Develop: [![Build Status](https://travis-ci.org/mars3142/toaster.svg?branch=develop)](https://travis-ci.org/mars3142/toaster) Issues: [![Stories in Ready](https://badge.waffle.io/mars3142/toaster.svg?label=ready&title=Ready)](http://waffle.io/mars3142/toaster)
+Master: [![Build Status](https://travis-ci.org/mars3142/toaster.svg?branch=master)](https://travis-ci.org/mars3142/toaster) Develop: [![Build Status](https://travis-ci.org/mars3142/toaster.svg?branch=develop)](https://travis-ci.org/mars3142/toaster) 
+
+Issues: [![Stories in Ready](https://badge.waffle.io/mars3142/toaster.svg?label=ready&title=Ready)](http://waffle.io/mars3142/toaster)
+
+<a target="_blank" href="https://crowdin.com/project/toaster"><img src="https://d322cqt584bo4o.cloudfront.net/toaster/localized.svg"></a>
 
 Toaster
 =======
