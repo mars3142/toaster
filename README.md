@@ -7,6 +7,8 @@ Issues: [![Stories in Ready](https://badge.waffle.io/mars3142/toaster.svg?label=
 Toaster
 =======
 
+[![Join the chat at https://gitter.im/mars3142/toaster](https://badges.gitter.im/mars3142/toaster.svg)](https://gitter.im/mars3142/toaster?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Records every toast message including the sender package. May be helpful if you get messages and don't know, which app sends it.
 It has to be activated as accessibility service.
 
