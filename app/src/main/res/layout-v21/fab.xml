@@ -27,4 +27,4 @@
     android:background="@drawable/ripple"
     android:elevation="@dimen/button_elevation"
     android:src="@drawable/ic_add"
-    android:stateListAnimator="@anim/anim" />
+    android:stateListAnimator="@animator/anim" />
