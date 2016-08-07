@@ -1,4 +1,4 @@
-Speichert jede Toast Nachricht mit "Absender". Das ist hilfreich, wenn man nicht weiﬂ woher diese Toasts stammen.
+Speichert jede Toast Nachricht mit "Absender". Das ist hilfreich, wenn man nicht weiss woher diese Toasts stammen.
 
 Muss als Bedienungshillfe aktiviert sein, damit es auch funktioniert.
 
