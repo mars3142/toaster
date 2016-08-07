@@ -3,7 +3,7 @@
 <!--
   ~ This file is part of Toaster
   ~
-  ~ Copyright (c) 2015 Peter Siegmund
+  ~ Copyright (c) 2014, 2016 Peter Siegmund
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="false"
@@ -36,8 +36,8 @@
         <android.widget.Toolbar
             android:id="@+id/card_toolbar"
             android:layout_width="match_parent"
-            android:title="@string/demo_timestamp"
-            android:layout_height="?android:attr/actionBarSize" />
+            android:layout_height="?android:attr/actionBarSize"
+            android:title="@string/demo_timestamp" />
 
         <FrameLayout
             android:layout_width="match_parent"

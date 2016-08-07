@@ -3,7 +3,7 @@
 <!--
   ~ This file is part of Toaster
   ~
-  ~ Copyright (c) 2015 Peter Siegmund
+  ~ Copyright (c) 2014, 2016 Peter Siegmund
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -26,6 +26,6 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:minHeight="?attr/actionBarSize"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 

@@ -3,7 +3,7 @@
 <!--
   ~ This file is part of Toaster
   ~
-  ~ Copyright (c) 2015 Peter Siegmund
+  ~ Copyright (c) 2014, 2016 Peter Siegmund
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
 
     <string name="toaster_widget">Toaster</string>
     <string name="app_icon">App icon</string>
     <string name="latest_toasts">Latest toasts</string>
-    <string name="loading">Loading&#8230;</string>
+    <string name="loading">Loading<xliff:g id="three_dots">&#8230;</xliff:g></string>
 
     <string name="appwidget_text">Example</string>
     <string name="configure">Configure</string>
