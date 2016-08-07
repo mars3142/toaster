@@ -1,0 +1,14 @@
+---
+project_identifier: toaster
+api_key: 16f0482968dd5add5bb920997a892cdd
+base_url: https://api.crowdin.com
+base_path: /Users/mars3142/GDrive/Coding/github.com/mars3142/toaster
+ 
+files:
+  -
+    source: '/app/src/main/res/values/strings_*.xml'                            #source files filter
+    translation: 'app/src/main/res/values-%android_code%/%original_file_name%'  #where translations live
+
+  -
+    source: '/play/main/en-US/listing/*.txt'
+    translation: 'play/main/%android_code%/listing/%original_file_name%'
