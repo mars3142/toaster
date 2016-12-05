@@ -9,3 +9,5 @@ keystore.properties
 *.iml
 *.cmd
 doc/
+*.p12
+gradle.properties

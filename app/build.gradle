@@ -18,6 +18,7 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.github.triplet.play'
 
 android {
     def versionMajor = 0
@@ -25,23 +26,16 @@ android {
     def versionPatch = 0
     def versionBuild = 0
 
-    buildToolsVersion "24.0.1"
-    compileSdkVersion 24
+    buildToolsVersion '25.0.0'
+    compileSdkVersion 25
 
     signingConfigs {
         mars3142 {
-            File propsFile = file('keystore.properties')
-            if (propsFile.exists()) {
-                Properties keyProps = new Properties()
-                keyProps.load(new FileInputStream(propsFile))
-                storeFile file(keyProps["store"])
-                keyAlias keyProps["alias"]
-                storePassword keyProps["storePass"]
-                keyPassword keyProps["pass"]
-            } else {
-                keyAlias ""
-                storePassword ""
-                keyPassword ""
+            if (project.hasProperty("RELEASE_STORE_FILE")) {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
             }
         }
     }
@@ -49,22 +43,25 @@ android {
     defaultConfig {
         applicationId "org.mars3142.android.toaster"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-        useJack false
     }
 
     buildTypes {
         debug {
             applicationIdSuffix ".dev"
             versionNameSuffix ".debug"
-            signingConfig signingConfigs.mars3142
+            if (project.hasProperty("RELEASE_STORE_FILE")) {
+                signingConfig signingConfigs.mars3142
+            }
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.mars3142
+            if (project.hasProperty("RELEASE_STORE_FILE")) {
+                signingConfig signingConfigs.mars3142
+            }
         }
     }
 }
@@ -73,11 +70,17 @@ dependencies {
     compile project(':apprater')
 
     /* support libraries */
-    compile "com.android.support:appcompat-v7:24.1.1"
-    compile "com.android.support:cardview-v7:24.1.1"
-    compile "com.android.support:palette-v7:24.1.1"
-    compile "com.android.support:recyclerview-v7:24.1.1"
+    compile "com.android.support:appcompat-v7:25.0.1"
+    compile "com.android.support:cardview-v7:25.0.1"
+    compile "com.android.support:palette-v7:25.0.1"
+    compile "com.android.support:recyclerview-v7:25.0.1"
 
     /* card library */
-    compile "com.github.gabrielemariotti.cards:cardslib-core:2.0.1"
+    compile "com.github.gabrielemariotti.cards:cardslib-core:2.1.0"
+}
+
+play {
+    track = "alpha"
+    serviceAccountEmail = PLAY_STORE_ACCOUNT
+    pk12File = file(PLAY_STORE_P12)
 }

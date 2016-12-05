@@ -10,8 +10,8 @@ files:
     translation: '/app/src/main/res/values-%two_letters_code%/%original_file_name%'  # where translations live
 
   -
-    source: '/play/main/en/listing/*.txt'
-    translation: '/play/main/%two_letters_code%/listing/%original_file_name%'
+    source: '/app/src/main/play/en-US/listing/*.txt'
+    translation: '/app/src/main/play/%locale%/listing/%original_file_name%'
   -
-    source: '/play/main/en/*.txt'
-    translation: '/play/main/%two_letters_code%/%original_file_name%'
+    source: '/app/src/main/play/en-US/*.txt'
+    translation: '/app/src/main/play/%locale%/%original_file_name%'
