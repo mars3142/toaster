@@ -11,8 +11,8 @@ env:
   global:
     - GRADLE_VERSION="2.6"
     - ANDROID_SDK_VERSION=r24.3.4
-    - BUILD_TOOLS=23.0.1
-    - TARGET_API=23
+    - BUILD_TOOLS=25.0.2
+    - TARGET_API=25
     - ANDROID_ABI=armeabi-v7a
 
 before_install:
@@ -60,7 +60,11 @@ before_install:
 # Let's try to build...
 install:
   - gradle clean build
+  - pip install codecov
 
 script:
   # - gradle check connectedAndroidTest
   - gradle check
+
+after_success:
+    codecov
