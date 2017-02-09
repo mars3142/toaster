@@ -21,14 +21,13 @@ package org.mars3142.android.toaster.service;
 
 import android.accessibilityservice.AccessibilityService;
 import android.app.Notification;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityNodeInfo;
 
+import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.table.ToasterTable;
 import org.mars3142.android.toaster.task.AsyncInsert;
 
@@ -70,7 +69,7 @@ public class ToasterService extends AccessibilityService {
             cv.put(ToasterTable.TIMESTAMP, timestamp);
             new AsyncInsert(this, ToasterTable.TOASTER_URI, cv).execute();
 
-            Intent intent = new Intent("org.mars3142.android.toaster.APPWIDGET_UPDATE");
+            Intent intent = new Intent(BuildConfig.APPLICATION_ID + ".APPWIDGET_UPDATE");
             sendBroadcast(intent);
         }
     }
