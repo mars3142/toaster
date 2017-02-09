@@ -20,7 +20,7 @@
   -->
 <resources>
   <string name="toaster_service">Toaster</string>
-  <string name="toaster_service_desc">Toaster records every toast message including app name and timestamp.</string>
-  <string name="toaster_service_header">Activate</string>
-  <string name="toaster_service_message">The app has to be activated as an accessibily service. Do you want to activate it now?</string>
+  <string name="toaster_service_desc">Toaster speichert jede Toast Nachricht mit App-Name und Zeitstempel.</string>
+  <string name="toaster_service_header">Aktivieren</string>
+  <string name="toaster_service_message">Die App muss als Bedienungshilfe aktiviert werden. Möchtest du es jetzt aktivieren?</string>
 </resources>
