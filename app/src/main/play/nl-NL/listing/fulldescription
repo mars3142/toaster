@@ -1,5 +1,5 @@
-Records every toast message including the sender package. May be helpful if you get messages and don't know, which app sends it.
+Slaat elk toast bericht op, met de "afzender". Dat is nuttig wanneer je niet weet vanuit welke app de toast gestuurd is.
 
-It has to be activated as accessibility service.
+Om de app te laten werken moet hij eerst geactiveerd worden.
 
-If you want to be a beta tester for new features, join https://plus.google.com/communities/100966515352559133267
+Als je een beta tester wilt zijn voor nieuwe features, kijk naar https://plus.google.com/communities/100966515352559133267

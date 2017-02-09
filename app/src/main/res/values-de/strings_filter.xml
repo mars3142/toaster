@@ -19,6 +19,6 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <resources>
-  <string name="filter_intro">Apps in this list will not be recorded by Toaster</string>
-  <string name="filter_app">Add app</string>
+  <string name="filter_intro">Apps in dieser Liste werden nicht von Toaster erfasst</string>
+  <string name="filter_app">App hinzufügen</string>
 </resources>
