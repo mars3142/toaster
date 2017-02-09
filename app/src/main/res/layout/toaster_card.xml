@@ -58,6 +58,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
+            android:textIsSelectable="true"
             tools:text="@string/demo_message" />
     </RelativeLayout>
 
@@ -72,6 +73,6 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="15dp"
         android:contentDescription="@string/package_icon"
-        tools:src="@drawable/ic_launcher" />
+        tools:src="@mipmap/ic_launcher" />
 
 </RelativeLayout>
