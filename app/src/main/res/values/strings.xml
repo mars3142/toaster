@@ -29,4 +29,7 @@
     <string name="action_help">Help</string>
     <string name="delete_question">Do you want to delete all visible entries?</string>
 
+    <string name="samsung_package" translatable="false">com.samsung.android.sm</string>
+    <string name="samsung_battery_settings" translatable="false">com.samsung.android.sm.ACTION_BATTERY</string>
+
 </resources>
