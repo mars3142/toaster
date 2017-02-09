@@ -20,10 +20,10 @@
   -->
 <resources>
   <string name="app_name">Toaster</string>
-  <string name="all_data">All apps</string>
-  <string name="action_blacklist">App Blacklist</string>
-  <string name="action_delete">Delete</string>
-  <string name="action_settings">Settings</string>
-  <string name="action_help">Help</string>
-  <string name="delete_question">Do you want to delete all visible entries?</string>
+  <string name="all_data">Alle Apps</string>
+  <string name="action_blacklist">Ausnahmeliste</string>
+  <string name="action_delete">Löschen</string>
+  <string name="action_settings">Einstellungen</string>
+  <string name="action_help">Hilfe</string>
+  <string name="delete_question">Möchtest du alle sichtbaren Einträge löschen?</string>
 </resources>
