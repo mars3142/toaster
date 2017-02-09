@@ -19,9 +19,9 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <resources>
-  <string name="section_default">General</string>
-  <string name="blacklist_title">App Blacklist</string>
-  <string name="blacklist_summary">Apps not recorded by Toaster</string>
-  <string name="delete_title">Auto delete entries</string>
-  <string name="delete_summary">Deletes toasts of apps automatically, after the app is uninstalled.</string>
+  <string name="section_default">Algemeen</string>
+  <string name="blacklist_title">Lijst met uitzonderingen</string>
+  <string name="blacklist_summary">Apps die niet in Toaster opgenomen moeten worden</string>
+  <string name="delete_title">Input automatisch verwijderen</string>
+  <string name="delete_summary">Verwijdert toasts van apps automatisch, nadat de app is gedeïnstalleerd.</string>
 </resources>
