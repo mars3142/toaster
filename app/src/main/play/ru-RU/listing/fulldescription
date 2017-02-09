@@ -1,5 +1,5 @@
-Записывает каждое всплывающее сообщение, включая отправителя пакета. Это может быть полезно, если вы получаете сообщения, но не знаете, какое приложение их отправляет.
+Records every toast message including the sender package. May be helpful if you get messages and don't know, which app sends it.
 
-Должен быть включен в качестве помощника.
+It has to be activated as accessibility service.
 
-Если вы хотите присоединиться к бета-тестированию новых функций, посетите https://plus.google.com/communities/100966515352559133267
+If you want to be a beta tester for new features, join https://plus.google.com/communities/100966515352559133267
