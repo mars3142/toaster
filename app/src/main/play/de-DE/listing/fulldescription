@@ -1,5 +1,5 @@
-Records every toast message including the sender package. May be helpful if you get messages and don't know, which app sends it.
+Speichert jede Toast Nachricht mit "Absender". Das ist hilfreich, wenn man nicht weiss woher diese Toasts stammen.
 
-It has to be activated as accessibility service.
+Muss als Bedienungshillfe aktiviert sein, damit es auch funktioniert.
 
-If you want to be a beta tester for new features, join https://plus.google.com/communities/100966515352559133267
+Wenn du beim Betatest von neuen Features mitmachen willst, besuche https://plus.google.com/communities/100966515352559133267
