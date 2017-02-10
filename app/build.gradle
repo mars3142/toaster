@@ -79,8 +79,10 @@ dependencies {
     compile "com.github.gabrielemariotti.cards:cardslib-core:2.1.0"
 }
 
-play {
-    track = "alpha"
-    serviceAccountEmail = PLAY_STORE_ACCOUNT
-    pk12File = file(PLAY_STORE_P12)
+if (project.hasProperty("PLAY_STORE_ACCOUNT")) {
+    play {
+        track = "alpha"
+        serviceAccountEmail = PLAY_STORE_ACCOUNT
+        pk12File = file(PLAY_STORE_P12)
+    }
 }
