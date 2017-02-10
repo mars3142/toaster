@@ -36,7 +36,7 @@ before_script:
 
 # Let's try to build...
 install:
-    - gradle clean build
+    - ./gradlew clean build
     - pip install codecov
 
 script:
