@@ -1,70 +1,46 @@
-language: java
+language: android
+android:
+  components:
+    # The BuildTools version used by your project
+    - build-tools-25.0.2
 
-branches:
-  except:
-    - /^feature.*$/
+    # The SDK version used to compile your project
+    - android-25
 
-jdk: 
-  - oraclejdk7
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-19
 
-env:
-  global:
-    - GRADLE_VERSION="2.6"
-    - ANDROID_SDK_VERSION=r24.3.4
-    - BUILD_TOOLS=25.0.2
-    - TARGET_API=25
-    - ANDROID_ABI=armeabi-v7a
+    # Specify at least one system image,
+    # if you need to run emulator(s) during your tests
+    - sys-img-armeabi-v7a-android-25
+    - sys-img-armeabi-v7a-android-17
 
-before_install:
-  - chmod +x gradlew
-  # environment info
-  - uname -a
+    # additional dependencies
+    - platform-tools
+    - tools
+    - extra
 
-  # required libs for android build tools
-  # Update a system for ia32 libraries
-  - sudo apt-get update -qq
-  - if [ `uname -m` = x86_64 ]; then sudo apt-get update; fi
-  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
+  licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
-  # for gradle output style
-  - export TERM=dumb
-
-  # newer version of gradle
-  - wget http://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip
-  - unzip -qq gradle-${GRADLE_VERSION}-all.zip
-  - export GRADLE_HOME=$PWD/gradle-${GRADLE_VERSION}
-  - export PATH=$GRADLE_HOME/bin:$PATH
-  - gradle -v
-
-  # newest android SDK
-  - wget http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
-  - tar -zxf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
-  - export ANDROID_HOME=`pwd`/android-sdk-linux
-  - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-
-  # Install required components.
-  # For a full list, run `android list sdk -a --extended`
-  - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter build-tools-${BUILD_TOOLS} --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter android-${TARGET_API} --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
-  - echo yes | android update sdk -u -a -t sys-img-${ANDROID_ABI}-android-${TARGET_API} > /dev/null
-
-  # creating emulator for testing
-  # - echo no | android create avd --force -n toaster -t android-${TARGET_API} --abi ${ANDROID_ABI}
-  # - emulator -avd toaster -no-skin -no-audio -no-window &
-  # - adb wait-for-device
-  # - adb shell input keyevent 82 &
+before_script:
+    - echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
+    - emulator -avd test -no-audio -no-window &
+    - android-wait-for-emulator
+    - adb shell input keyevent 82 &
 
 # Let's try to build...
 install:
-  - gradle clean build
-  - pip install codecov
+    - gradle clean build
+    - pip install codecov
 
 script:
-  # - gradle check connectedAndroidTest
-  - gradle check
+   - ./gradlew build connectedCheck
 
 after_success:
     codecov
