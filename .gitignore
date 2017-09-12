@@ -11,3 +11,4 @@ keystore.properties
 doc/
 *.p12
 gradle.properties
+designer
