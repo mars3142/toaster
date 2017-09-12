@@ -40,6 +40,8 @@ import org.mars3142.android.toaster.table.ToasterTable;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import timber.log.Timber;
+
 /**
  * @author mars3142
  */
@@ -95,11 +97,8 @@ public class ToasterProvider extends ContentProvider {
 
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "query: uri=" + uri + " projection=" + Arrays.toString(projection) +
-                    " selection=[" + selection + "] args=" + Arrays.toString(selectionArgs) +
-                    " order=[" + sortOrder + "]");
-        }
+        Timber.v("query: uri=%s projection=%s selection=[%s] args=%s order=[%s]",
+                uri, Arrays.toString(projection), selection, Arrays.toString(selectionArgs), sortOrder);
 
         String id;
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
@@ -159,9 +158,7 @@ public class ToasterProvider extends ContentProvider {
 
     @Override
     public String getType(@NonNull Uri uri) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "getType: uri=" + uri);
-        }
+        Timber.v("getType: uri=%s", uri);
 
         switch (mUriMatcher.match(uri)) {
             case TOASTER:
@@ -183,9 +180,7 @@ public class ToasterProvider extends ContentProvider {
 
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues initialValues) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "insert: uri=" + uri + " initialValues=[" + initialValues.toString() + "]");
-        }
+        Timber.v("insert: uri=%s initialValues=[%s]", uri, initialValues.toString());
 
         String tableName;
         Uri contentUri;
@@ -225,9 +220,7 @@ public class ToasterProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "delete: uri=" + uri + " selection=[" + selection + "] args=" + Arrays.toString(selectionArgs));
-        }
+        Timber.v("delete: uri=%s selection=[%s] args=%s", uri, selection, Arrays.toString(selectionArgs));
 
         int count = 0;
         String id;
@@ -272,10 +265,7 @@ public class ToasterProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "update: uri=" + uri + " values=[" + values.toString() + "] selection=[" + selection + "]" +
-                    " args=" + Arrays.toString(selectionArgs));
-        }
+        Timber.v("update: uri=%s values=[%s] selection=[%s] args=%s", uri, values.toString(), selection, Arrays.toString(selectionArgs));
 
         int count = 0;
         String id;

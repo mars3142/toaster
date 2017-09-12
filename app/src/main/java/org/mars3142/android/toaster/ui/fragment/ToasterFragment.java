@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.fragment;
+package org.mars3142.android.toaster.ui.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -26,8 +26,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +33,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 import org.mars3142.android.toaster.R;
-import org.mars3142.android.toaster.activity.MainActivity;
+import org.mars3142.android.toaster.ui.activity.MainActivity;
 import org.mars3142.android.toaster.adapter.ToastCardAdapter;
 import org.mars3142.android.toaster.table.ToasterTable;
 

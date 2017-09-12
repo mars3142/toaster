@@ -22,14 +22,13 @@ package org.mars3142.android.toaster.task;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
+
+import timber.log.Timber;
 
 /**
  * @author mars3142
  */
 public class AsyncDelete extends AsyncTask<Void, Void, Integer> {
-
-    private final static String TAG = AsyncDelete.class.getSimpleName();
 
     private Context mContext;
     private Uri mUri;
@@ -48,7 +47,7 @@ public class AsyncDelete extends AsyncTask<Void, Void, Integer> {
         try {
             rows = mContext.getContentResolver().delete(mUri, mWhere, mSelectionArgs);
         } catch (Exception ex) {
-            Log.e(TAG, "Error while delete");
+            Timber.e("Error while delete");
         }
 
         return rows;

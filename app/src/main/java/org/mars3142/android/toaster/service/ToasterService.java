@@ -24,7 +24,6 @@ import android.app.Notification;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
 import org.mars3142.android.toaster.BuildConfig;
@@ -32,6 +31,8 @@ import org.mars3142.android.toaster.table.ToasterTable;
 import org.mars3142.android.toaster.task.AsyncInsert;
 
 import java.util.Calendar;
+
+import timber.log.Timber;
 
 /**
  * Accessibility service who fetches the notification
@@ -42,12 +43,12 @@ import java.util.Calendar;
  */
 public class ToasterService extends AccessibilityService {
 
-    private static final String TAG = ToasterService.class.getSimpleName();
-
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
+        Timber.d("Event: %s", event);
+
         if (event.getEventType() != AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
-            Log.d(TAG, "Unexpected event type - ignoring");
+            Timber.d("Unexpected event type - ignoring");
             return; // event is not a notification
         }
 

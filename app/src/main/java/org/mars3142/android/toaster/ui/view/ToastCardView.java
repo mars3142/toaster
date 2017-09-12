@@ -1,7 +1,7 @@
 /*
  * This file is part of Toaster
  *
- * Copyright (c) 2014, 2016 Peter Siegmund
+ * Copyright (c) 2014, 2017 Peter Siegmund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,28 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-apply plugin: 'com.android.library'
+package org.mars3142.android.toaster.ui.view;
 
-android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+import android.content.Context;
+import android.support.v7.widget.CardView;
+import android.util.AttributeSet;
 
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+/**
+ * @author mars3142
+ */
+public class ToastCardView extends CardView {
+
+    private static final String TAG = ToastCardView.class.getSimpleName();
+
+    public ToastCardView(Context context) {
+        super(context);
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    public ToastCardView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public ToastCardView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 }

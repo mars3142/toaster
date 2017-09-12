@@ -86,7 +86,7 @@
                 android:layout_height="@android:dimen/notification_large_icon_height"
                 android:layout_marginTop="15dp"
                 android:contentDescription="@string/package_icon"
-                tools:src="@drawable/ic_launcher" />
+                tools:src="@mipmap/ic_launcher" />
 
         </FrameLayout>
     </android.support.v7.widget.CardView>

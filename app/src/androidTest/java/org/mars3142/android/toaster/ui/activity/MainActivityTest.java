@@ -17,28 +17,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.cardview;
+package org.mars3142.android.toaster.ui.activity;
 
-import android.content.Context;
-import android.support.v7.widget.CardView;
-import android.util.AttributeSet;
+import android.app.Activity;
+import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * @author mars3142
  */
-public class ToastCardView extends CardView {
+public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    private static final String TAG = ToastCardView.class.getSimpleName();
+    private Activity activity = null;
 
-    public ToastCardView(Context context) {
-        super(context);
+    public MainActivityTest() {
+        super(MainActivity.class);
     }
 
-    public ToastCardView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        activity = getActivity();
     }
 
-    public ToastCardView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public void testActivity() {
+        assertTrue(activity instanceof MainActivity);
     }
 }

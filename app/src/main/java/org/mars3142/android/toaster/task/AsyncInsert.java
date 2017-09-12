@@ -23,14 +23,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
+
+import timber.log.Timber;
 
 /**
  * @author mars3142
  */
 public class AsyncInsert extends AsyncTask<Void, Void, Uri>{
-
-    private final static String TAG = AsyncInsert.class.getSimpleName();
 
     private Context mContext;
     private Uri mUri;
@@ -48,7 +47,7 @@ public class AsyncInsert extends AsyncTask<Void, Void, Uri>{
         try {
             result = mContext.getContentResolver().insert(mUri, mValues);
         } catch (Exception ex) {
-            Log.e(TAG, "Error while insert");
+            Timber.e("Error while insert");
         }
 
         return result;

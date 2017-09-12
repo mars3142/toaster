@@ -17,30 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.activity;
+package org.mars3142.android.toaster
 
-import android.app.Activity;
-import android.test.ActivityInstrumentationTestCase2;
+import android.app.Application
+import timber.log.Timber
 
-/**
- * @author mars3142
- */
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+class ToasterApplication : Application() {
 
-    private Activity activity = null;
+    override fun onCreate() {
+        super.onCreate()
 
-    public MainActivityTest() {
-        super(MainActivity.class);
+        if (BuildConfig.DEBUG) { Timber.plant(Timber.DebugTree()) }
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
-        activity = getActivity();
-    }
-
-    public void testActivity() {
-        assertTrue(activity instanceof MainActivity);
-    }
 }

@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/settings_fragment"
-        android:name="org.mars3142.android.toaster.fragment.SettingsFragment"
+        android:name="org.mars3142.android.toaster.ui.fragment.SettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/preference_horizontal_margin"

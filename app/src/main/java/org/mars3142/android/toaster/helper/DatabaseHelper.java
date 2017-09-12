@@ -28,6 +28,8 @@ import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.table.FilterTable;
 import org.mars3142.android.toaster.table.ToasterTable;
 
+import timber.log.Timber;
+
 /**
  * Helper class for database request
  * <p/>
@@ -37,7 +39,6 @@ import org.mars3142.android.toaster.table.ToasterTable;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = DatabaseHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "database.db3";
     private static final int DATABASE_VERSION = 2;
 
@@ -47,9 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, String.format("Create database"));
-        }
+        Timber.v("Create database");
 
         ToasterTable.onCreate(db);
         FilterTable.onCreate(db);
@@ -57,9 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, String.format("Upgrading database from version %s to %s", oldVersion, newVersion));
-        }
+        Timber.v("Upgrading database from version %s to %s", oldVersion, newVersion);
 
         ToasterTable.onUpgrade(db, oldVersion, newVersion);
         FilterTable.onUpgrade(db, oldVersion, newVersion);
@@ -67,9 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, String.format("Downgrading database from version %s to %s", oldVersion, newVersion));
-        }
+        Timber.v("Downgrading database from version %s to %s", oldVersion, newVersion);
 
         ToasterTable.onDowngrade(db, oldVersion, newVersion);
         FilterTable.onDowngrade(db, oldVersion, newVersion);

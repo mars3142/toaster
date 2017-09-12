@@ -23,9 +23,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
-import android.util.Log;
 
-import org.mars3142.android.toaster.BuildConfig;
+import timber.log.Timber;
 
 /**
  * Listener for starting the accessibility settings activity
@@ -35,8 +34,6 @@ import org.mars3142.android.toaster.BuildConfig;
 public class AccessibilityServiceListener
         implements DialogInterface.OnClickListener {
 
-    private static final String TAG = AccessibilityServiceListener.class.getSimpleName();
-
     private final Context mContext;
 
     public AccessibilityServiceListener(Context context) {
@@ -45,9 +42,7 @@ public class AccessibilityServiceListener
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        if (BuildConfig.DEBUG) {
-            Log.e(TAG, "Starting accessibility settings activity...");
-        }
+        Timber.e("Starting accessibility settings activity...");
 
         mContext.startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
     }

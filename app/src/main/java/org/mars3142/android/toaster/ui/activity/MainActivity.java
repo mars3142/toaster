@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.activity;
+package org.mars3142.android.toaster.ui.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -32,7 +32,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.BounceInterpolator;
@@ -40,14 +39,16 @@ import android.view.animation.LinearInterpolator;
 
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
-import org.mars3142.android.toaster.fragment.PackagesFragment;
-import org.mars3142.android.toaster.fragment.ToasterFragment;
 import org.mars3142.android.toaster.helper.PackageHelper;
 import org.mars3142.android.toaster.listener.AccessibilityServiceListener;
 import org.mars3142.android.toaster.listener.DeleteListener;
 import org.mars3142.android.toaster.service.ToasterService;
 import org.mars3142.android.toaster.table.ToasterTable;
+import org.mars3142.android.toaster.ui.fragment.PackagesFragment;
+import org.mars3142.android.toaster.ui.fragment.ToasterFragment;
 import org.mars3142.android.toaster.viewholder.NavDrawerRecyclerViewHolder;
+
+import timber.log.Timber;
 
 /**
  * MainActivity of Toaster
@@ -59,7 +60,6 @@ import org.mars3142.android.toaster.viewholder.NavDrawerRecyclerViewHolder;
 public class MainActivity extends AppCompatActivity
         implements PackagesFragment.PackagesCallbacks, NavDrawerRecyclerViewHolder.OnItemClickListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
     private static final String PACKAGE_NAME = "packageName";
 
     private PackagesFragment mPackagesFragment;
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
 
         mTitle = getTitle();
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         if (drawerLayout != null) {
             mPackagesFragment = (PackagesFragment) getFragmentManager().findFragmentById(R.id.packages);
             mPackagesFragment.setUp(R.id.packages, drawerLayout);
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity
             accessibilityEnabled = Settings.Secure.getInt(context.getApplicationContext().getContentResolver(),
                     android.provider.Settings.Secure.ACCESSIBILITY_ENABLED);
         } catch (Settings.SettingNotFoundException ex) {
-            Log.e(TAG, "Error finding setting, default accessibility to not found: " + ex.getMessage());
+            Timber.e("Error finding setting, default accessibility to not found: " + ex.getMessage());
         }
         TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
 

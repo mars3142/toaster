@@ -21,7 +21,6 @@ package org.mars3142.android.toaster.factory;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -35,13 +34,13 @@ import org.mars3142.android.toaster.table.ToasterTable;
 
 import java.util.ArrayList;
 
+import timber.log.Timber;
+
 /**
  * @author mars3142
  */
 public class WidgetViewsFactory
         implements RemoteViewsService.RemoteViewsFactory {
-
-    private static final String TAG = WidgetViewsFactory.class.getSimpleName();
 
     private Context mContext;
     private ArrayList<String> mPackages;
@@ -83,9 +82,7 @@ public class WidgetViewsFactory
 
     @Override
     public RemoteViews getViewAt(int position) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "getViewAt( " + position + " )");
-        }
+        Timber.v("getViewAt( %d )", position);
 
         RemoteViews row = new RemoteViews(mContext.getPackageName(), R.layout.widget_row);
         ToastCard toastCard = new ToastCard(mContext, mPackages.get(position));
@@ -104,9 +101,7 @@ public class WidgetViewsFactory
 
     @Override
     public RemoteViews getLoadingView() {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "getLoadingView");
-        }
+        Timber.d("getLoadingView");
 
         return new RemoteViews(mContext.getPackageName(), R.layout.widget_loading);
     }

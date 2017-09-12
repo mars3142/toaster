@@ -30,36 +30,28 @@ import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
 import org.mars3142.android.toaster.table.ToasterTable;
 
+import timber.log.Timber;
+
 /**
  * @author mars3142
  */
 public class PackageReceiver extends BroadcastReceiver {
 
-    private static final String TAG = PackageReceiver.class.getSimpleName();
-
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "onReceive");
-        }
+        Timber.d("onReceive");
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (preferences.getBoolean(context.getString(R.string.delete_key), false)) {
             String packageName = intent.getData().getSchemeSpecificPart();
             if (intent.getBooleanExtra(Intent.EXTRA_DATA_REMOVED, false)) {
                 int rows = context.getContentResolver().delete(ToasterTable.TOASTER_URI, ToasterTable.PACKAGE + " = ?", new String[]{packageName});
-                if (BuildConfig.DEBUG) {
-                    Log.v(TAG, "Removed " + rows + " entries for package " + packageName);
-                }
+                Timber.v("Removed %d entries for package %s", rows, packageName);
             } else {
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "Package " + packageName + " is not removed completely");
-                }
+                Timber.d("Package %s is not removed completely", packageName);
             }
         } else {
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, context.getString(R.string.delete_key) + " is false");
-            }
+            Timber.d(context.getString(R.string.delete_key) + " is false");
         }
     }
 }

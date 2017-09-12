@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.activity;
+package org.mars3142.android.toaster.ui.activity;
 
 import android.annotation.TargetApi;
 import android.app.Dialog;
@@ -31,7 +31,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -45,13 +44,13 @@ import org.mars3142.android.toaster.loader.FilterLoader;
 import org.mars3142.android.toaster.loader.PackageLoader;
 import org.mars3142.android.toaster.table.FilterTable;
 
+import timber.log.Timber;
+
 /**
  * @author mars3142
  */
 public class BlacklistActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<PackageEntry[]>, View.OnClickListener {
-
-    private static final String TAG = BlacklistActivity.class.getSimpleName();
 
     private static final int APPS_LOADER = 0;
     private static final int BLACKLIST_LOADER = 1;
@@ -67,7 +66,7 @@ public class BlacklistActivity extends AppCompatActivity
 
         setContentView(R.layout.filter);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
 
@@ -80,14 +79,14 @@ public class BlacklistActivity extends AppCompatActivity
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         if (mRecyclerView != null) {
             mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
             mRecyclerView.setLayoutManager(layoutManager);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         }
 
-        mFab = (ImageButton) findViewById(R.id.fab);
+        mFab = findViewById(R.id.fab);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
 
@@ -139,7 +138,7 @@ public class BlacklistActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<PackageEntry[]> loader, PackageEntry[] data) {
-        Log.d(TAG, "Loader #" + loader.getId() + " size " + data.length);
+        Timber.d("Loader #%d size %d", loader.getId(), data.length);
 
         switch (loader.getId()) {
             case APPS_LOADER:

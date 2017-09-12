@@ -36,7 +36,7 @@
 
         <fragment
             android:id="@+id/packages"
-            android:name="org.mars3142.android.toaster.fragment.PackagesFragment"
+            android:name="org.mars3142.android.toaster.ui.fragment.PackagesFragment"
             android:layout_width="@dimen/navigation_drawer_width"
             android:layout_height="match_parent"
             android:layout_gravity="start"

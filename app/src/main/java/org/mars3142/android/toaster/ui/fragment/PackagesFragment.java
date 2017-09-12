@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.fragment;
+package org.mars3142.android.toaster.ui.fragment;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -46,7 +46,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import org.mars3142.android.toaster.R;
-import org.mars3142.android.toaster.activity.SettingsActivity;
+import org.mars3142.android.toaster.ui.activity.SettingsActivity;
 import org.mars3142.android.toaster.adapter.NavDrawerRecyclerAdapter;
 import org.mars3142.android.toaster.card.ToastCard;
 import org.mars3142.android.toaster.comparator.ToastCardComparator;

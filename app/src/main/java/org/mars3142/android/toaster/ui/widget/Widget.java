@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.widget;
+package org.mars3142.android.toaster.ui.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -34,27 +34,23 @@ import org.mars3142.android.toaster.service.WidgetService;
 
 import java.util.Arrays;
 
+import timber.log.Timber;
+
 /**
  * @author mars3142
  */
 public class Widget extends AppWidgetProvider {
 
-    private static final String TAG = Widget.class.getSimpleName();
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "onUpdate: [ " + Arrays.toString(appWidgetIds) + " ]");
-        }
+        Timber.v("onUpdate: [ %s ]", Arrays.toString(appWidgetIds));
 
         updateWidget(context, appWidgetManager);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "onReceived");
-        }
+        Timber.v("onReceived");
 
         updateWidget(context, AppWidgetManager.getInstance(context));
     }

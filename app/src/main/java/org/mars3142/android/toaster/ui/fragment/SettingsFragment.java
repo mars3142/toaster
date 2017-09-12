@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.fragment;
+package org.mars3142.android.toaster.ui.fragment;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -30,15 +30,15 @@ import android.util.Log;
 
 import org.mars3142.android.toaster.BuildConfig;
 import org.mars3142.android.toaster.R;
-import org.mars3142.android.toaster.activity.BlacklistActivity;
 import org.mars3142.android.toaster.receiver.PackageReceiver;
+import org.mars3142.android.toaster.ui.activity.BlacklistActivity;
+
+import timber.log.Timber;
 
 /**
  * @author mars3142
  */
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
-
-    private static final String TAG = SettingsFragment.class.getSimpleName();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +56,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (isAdded()) {
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "onSharedPreferenceChanged of " + key);
-            }
+            Timber.d("onSharedPreferenceChanged of %s", key);
 
             if (key.equals(getString(R.string.delete_key))) {
                 boolean enabled = sharedPreferences.getBoolean(key, false);
@@ -72,9 +70,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "onPreferenceClick on " + preference.getKey());
-        }
+        Timber.d("onPreferenceClick on %s", preference.getKey());
 
         if (preference.getKey().equals(getString(R.string.blacklist_key))) {
             Intent intent = new Intent(getActivity(), BlacklistActivity.class);

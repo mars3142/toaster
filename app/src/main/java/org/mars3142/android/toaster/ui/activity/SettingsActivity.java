@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.mars3142.android.toaster.activity;
+package org.mars3142.android.toaster.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
