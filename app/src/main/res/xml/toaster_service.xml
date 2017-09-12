@@ -24,4 +24,5 @@
     android:accessibilityFeedbackType="feedbackGeneric"
     android:accessibilityFlags="flagDefault"
     android:canRetrieveWindowContent="false"
-    android:description="@string/toaster_service_desc" /><!--android:settingsActivity="org.mars3142.android.toaster.activity.WidgetConfigureActivity"-->
+    android:description="@string/toaster_service_desc" />
+    <!--android:settingsActivity="org.mars3142.android.toaster.ui.activity.WidgetConfigureActivity"-->
