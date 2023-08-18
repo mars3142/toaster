@@ -12,3 +12,4 @@ doc/
 *.p12
 gradle.properties
 designer
+*.jks
