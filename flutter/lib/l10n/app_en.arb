@@ -1,0 +1,8 @@
+{
+  "appName": "Toaster",
+  "@appName": {
+    "description": "Name of the app"
+  },
+  "toasts": "Toasts",
+  "settings": "Settings"
+}
