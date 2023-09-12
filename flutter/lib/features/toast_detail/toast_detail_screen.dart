@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'toast_detail_provider.dart';
@@ -28,7 +29,7 @@ class ToastDetailScreen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.delete),
+            icon: Icon(Icons.delete),
           ),
         ],
         child: const Center(
@@ -62,6 +63,8 @@ class _DetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
         actions: actions,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: child,
     );

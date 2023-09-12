@@ -18,6 +18,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   hooks_riverpod: ^2.4.0
   intl: ^0.18.1
+  riverpod_context: ^0.3.0
+  dynamic_color: ^1.6.6
 
 dev_dependencies:
   flutter_test:
