@@ -16,6 +16,7 @@ dependencies:
 
   auto_route: ^7.8.3
   cupertino_icons: ^1.0.2
+  go_router: ^11.1.4
   hooks_riverpod: ^2.4.0
   intl: ^0.18.1
   riverpod_context: ^0.3.0
@@ -25,9 +26,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
   auto_route_generator: ^7.3.1
   build_runner: ^2.4.6
+  flutter_lints: ^2.0.0
+  go_router_builder: ^2.3.3
 
 flutter:
   uses-material-design: true
