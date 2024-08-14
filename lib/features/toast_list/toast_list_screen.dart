@@ -21,7 +21,7 @@ class ToastListScreen extends ConsumerWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: ref.watch(toastListProvider).when(
-            loading: () => const Center(child: CircularProgressIndicator()),
+            loading: () => const Center(child: CircularProgressIndicator.adaptive()),
             data: (data) => RefreshIndicator.adaptive(
               onRefresh: () async {
                 final result = ref.refresh(toastListProvider);

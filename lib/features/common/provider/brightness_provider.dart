@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'brightness_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class SystemTheme extends _$SystemTheme {
   @override
   Brightness build() {

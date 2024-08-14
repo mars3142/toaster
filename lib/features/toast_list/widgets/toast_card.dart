@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:toaster/features/common/models/toast.dart';
+import 'package:toaster/routes/routes.dart';
 
 class ToastCard extends ConsumerWidget {
   const ToastCard({
@@ -15,10 +19,12 @@ class ToastCard extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         if (toast.message == 'Toast 1') {
-          //context.push(ToastDetailRoute(id: Random().nextInt(20).toString()));
+          context.go(
+            ToastDetailRoute(id: Random().nextInt(20).toString()).location,
+          );
           return;
         }
-        //context.router.navigate(const SettingsRoute());
+        context.go(const SettingsRoute().location);
       },
       child: Card(
         elevation: 8.0,
