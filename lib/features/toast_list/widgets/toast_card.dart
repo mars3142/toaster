@@ -28,6 +28,7 @@ class ToastCard extends ConsumerWidget {
       },
       child: Card(
         elevation: 8.0,
+        color: Theme.of(context).colorScheme.surface,
         child: Stack(
           children: [
             Positioned(
@@ -44,7 +45,11 @@ class ToastCard extends ConsumerWidget {
                     color: Theme.of(context).colorScheme.primary,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          left: 48.0, right: 8.0, top: 8.0, bottom: 8.0),
+                        left: 48.0,
+                        right: 8.0,
+                        top: 8.0,
+                        bottom: 8.0,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -72,7 +77,11 @@ class ToastCard extends ConsumerWidget {
             ),
             const Padding(
               padding: EdgeInsets.only(
-                  left: 16.0, right: 16.0, bottom: 16.0, top: 32.0 + 16.0),
+                left: 16.0,
+                right: 16.0,
+                bottom: 16.0,
+                top: 32.0 + 16.0,
+              ),
               child: SizedBox(
                 width: 64.0,
                 height: 64.0,

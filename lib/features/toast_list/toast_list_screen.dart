@@ -20,11 +20,18 @@ class ToastListScreen extends ConsumerWidget {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      body: ref.watch(toastListProvider).when(
-            loading: () => const Center(child: CircularProgressIndicator.adaptive()),
+      body: ref
+          .watch(
+            toastListProvider(),
+          )
+          .when(
+            loading: () =>
+                const Center(child: CircularProgressIndicator.adaptive()),
             data: (data) => RefreshIndicator.adaptive(
               onRefresh: () async {
-                final result = ref.refresh(toastListProvider);
+                final result = ref.refresh(
+                  toastListProvider(),
+                );
               },
               child: CustomScrollView(
                 slivers: [
@@ -58,7 +65,9 @@ class ToastListScreen extends ConsumerWidget {
                 children: [
                   Text(error.toString()),
                   TextButton(
-                      onPressed: () => ref.refresh(toastListProvider),
+                      onPressed: () => ref.refresh(
+                            toastListProvider(),
+                          ),
                       child: const Text('Retry')),
                 ],
               ),

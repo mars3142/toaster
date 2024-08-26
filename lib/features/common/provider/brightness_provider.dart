@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,9 +15,11 @@ class SystemTheme extends _$SystemTheme {
 
   void listen(BuildContext context) {
     var window = View.of(context).platformDispatcher;
-    window.onPlatformBrightnessChanged = () {
-      WidgetsBinding.instance.handlePlatformBrightnessChanged();
-      state = window.platformBrightness;
-    };
+    window.onPlatformBrightnessChanged = () => _setState(window);
+  }
+
+  void _setState(PlatformDispatcher window) {
+    WidgetsBinding.instance.handlePlatformBrightnessChanged();
+    state = window.platformBrightness;
   }
 }

@@ -21,6 +21,8 @@ dependencies:
   riverpod_context: ^0.3.0
   riverpod_annotation: ^2.3.3
   dynamic_color: ^1.7.0
+  get_it: ^7.7.0
+  injectable: ^2.4.4
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +33,7 @@ dev_dependencies:
   riverpod_generator: ^2.2.1
   riverpod_lint: ^2.1.1
   go_router_builder: ^2.4.1
+  injectable_generator: ^2.6.2
 
 flutter:
   uses-material-design: true

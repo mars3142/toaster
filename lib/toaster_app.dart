@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toaster/features/common/provider/brightness_provider.dart';
-import 'package:toaster/features/common/provider/theme_color_provider.dart';
 import 'package:toaster/routes/router.dart';
 
 class ToasterApp extends ConsumerWidget {
@@ -14,7 +13,6 @@ class ToasterApp extends ConsumerWidget {
     ref.read(systemThemeProvider.notifier).listen(context);
 
     final routerConfig = ref.watch(routerProvider);
-    final colorScheme = ref.watch(themeColorProvider);
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context)?.appName ?? '',
       localizationsDelegates: const [
@@ -25,7 +23,10 @@ class ToasterApp extends ConsumerWidget {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
-        colorScheme: colorScheme,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue.shade50,
+          brightness: ref.watch(systemThemeProvider),
+        ),
         useMaterial3: true,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

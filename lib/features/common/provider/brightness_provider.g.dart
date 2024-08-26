@@ -6,7 +6,7 @@ part of 'brightness_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$systemThemeHash() => r'be9ec50292c635ba58bd5349e996f14618a5f0e9';
+String _$systemThemeHash() => r'75e881ecbb207527dfd03dcece0afa12cf48df45';
 
 /// See also [SystemTheme].
 @ProviderFor(SystemTheme)

@@ -22,16 +22,6 @@ class ToastListRoute extends GoRouteData {
       const ToastListScreen();
 }
 
-class ToastDetailRoute extends GoRouteData {
-  const ToastDetailRoute({required this.id});
-
-  final String id;
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      ToastDetailScreen(id: id);
-}
-
 @TypedGoRoute<SettingsRoute>(
   path: '/setting',
 )
@@ -41,4 +31,14 @@ class SettingsRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const SettingsScreen();
+}
+
+class ToastDetailRoute extends GoRouteData {
+  const ToastDetailRoute({required this.id});
+
+  final String id;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      ToastDetailScreen(id: id);
 }
